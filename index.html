@@ -42,17 +42,17 @@
       padding: 0 15px;
     }
 
-    .welcome {
+    .welcome,
+    .card {
       background: white;
       border-radius: 16px;
       padding: 22px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     }
 
     .welcome h2 {
       margin-bottom: 8px;
-      font-size: 20px;
     }
 
     .welcome p {
@@ -66,17 +66,13 @@
       gap: 15px;
     }
 
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 25px 20px;
+    .menu .card {
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
       cursor: pointer;
       transition: 0.2s;
     }
 
-    .card:hover {
+    .menu .card:hover {
       transform: translateY(-3px);
     }
 
@@ -85,13 +81,81 @@
       margin-bottom: 12px;
     }
 
-    .card h3 {
+    .menu h3 {
       margin-bottom: 7px;
     }
 
-    .card p {
+    .menu p {
       color: #6b7280;
       font-size: 13px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .back {
+      border: none;
+      background: #e5e7eb;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .location-box {
+      margin-top: 20px;
+    }
+
+    .location-box label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .location-box input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .calculate {
+      width: 100%;
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      background: #eff6ff;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .result h3 {
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+
+    .result .distance {
+      font-size: 28px;
+      font-weight: bold;
     }
 
     @media (max-width: 600px) {
@@ -109,36 +173,152 @@
     <p>Jarak ke Sekolah & Absensi Siswa</p>
   </header>
 
+
   <main class="container">
 
-    <section class="welcome">
-      <h2>Selamat Datang 👋</h2>
-      <p>
-        Pilih fitur yang ingin kamu gunakan.
-      </p>
-    </section>
+    <!-- =========================
+         HALAMAN BERANDA
+    ========================== -->
 
-    <section class="menu">
+    <section id="homePage" class="page active">
 
-      <div class="card" onclick="alert('Fitur Jarak ke Sekolah akan dibuat di tahap berikutnya.')">
-        <div class="icon">📍</div>
-        <h3>Jarak ke Sekolah</h3>
+      <div class="welcome">
+        <h2>Selamat Datang 👋</h2>
         <p>
-          Hitung jarak dan estimasi waktu perjalanan.
+          Pilih fitur yang ingin kamu gunakan.
         </p>
       </div>
 
-      <div class="card" onclick="alert('Fitur Absensi akan dibuat di tahap berikutnya.')">
-        <div class="icon">📝</div>
-        <h3>Absensi Siswa</h3>
-        <p>
-          Kelola dan lihat kehadiran siswa.
+      <div class="menu">
+
+        <div class="card" onclick="openPage('distancePage')">
+          <div class="icon">📍</div>
+          <h3>Jarak ke Sekolah</h3>
+          <p>
+            Hitung jarak dari rumah ke sekolah.
+          </p>
+        </div>
+
+        <div class="card" onclick="alert('Fitur absensi akan dibuat setelah fitur jarak selesai.')">
+          <div class="icon">📝</div>
+          <h3>Absensi Siswa</h3>
+          <p>
+            Kelola dan lihat kehadiran siswa.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         HALAMAN JARAK
+    ========================== -->
+
+    <section id="distancePage" class="page">
+
+      <button class="back" onclick="openPage('homePage')">
+        ← Kembali
+      </button>
+
+      <div class="card">
+
+        <h2>📍 Jarak ke Sekolah</h2>
+
+        <p style="margin-top:8px; color:#6b7280;">
+          Masukkan jarak rumah ke sekolah.
         </p>
+
+        <div class="location-box">
+
+          <label>Jarak Rumah → Sekolah (km)</label>
+
+          <input
+            type="number"
+            id="distanceInput"
+            placeholder="Contoh: 5"
+            min="0"
+            step="0.1"
+          >
+
+          <button
+            class="calculate"
+            onclick="calculateDistance()">
+            HITUNG JARAK
+          </button>
+
+        </div>
+
+
+        <div id="result" class="result">
+
+          <h3>Hasil Perhitungan</h3>
+
+          <div class="distance">
+            <span id="distanceResult">0</span> km
+          </div>
+
+          <p style="margin-top:8px;">
+            Jarak rumah ke sekolah
+          </p>
+
+        </div>
+
       </div>
 
     </section>
 
   </main>
+
+
+  <script>
+
+    function openPage(pageId) {
+
+      document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+      });
+
+      document.getElementById(pageId).classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+
+    function calculateDistance() {
+
+      const input =
+        document.getElementById("distanceInput");
+
+      const result =
+        document.getElementById("result");
+
+      const distanceResult =
+        document.getElementById("distanceResult");
+
+      const distance =
+        parseFloat(input.value);
+
+
+      if (isNaN(distance) || distance < 0) {
+
+        alert("Masukkan jarak yang benar.");
+
+        return;
+      }
+
+
+      distanceResult.textContent =
+        distance.toFixed(1);
+
+      result.style.display = "block";
+    }
+
+  </script>
 
 </body>
 </html>

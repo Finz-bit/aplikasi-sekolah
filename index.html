@@ -3,13 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Aplikasi Sekolah</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .welcome {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .welcome h2 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .welcome p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin-bottom: 7px;
+    }
+
+    .card p {
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .menu {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <h1>Aplikasi Sekolah</h1>
-  <p>Jarak ke Sekolah & Absensi Siswa</p>
+  <header>
+    <h1>Aplikasi Sekolah</h1>
+    <p>Jarak ke Sekolah & Absensi Siswa</p>
+  </header>
+
+  <main class="container">
+
+    <section class="welcome">
+      <h2>Selamat Datang 👋</h2>
+      <p>
+        Pilih fitur yang ingin kamu gunakan.
+      </p>
+    </section>
+
+    <section class="menu">
+
+      <div class="card" onclick="alert('Fitur Jarak ke Sekolah akan dibuat di tahap berikutnya.')">
+        <div class="icon">📍</div>
+        <h3>Jarak ke Sekolah</h3>
+        <p>
+          Hitung jarak dan estimasi waktu perjalanan.
+        </p>
+      </div>
+
+      <div class="card" onclick="alert('Fitur Absensi akan dibuat di tahap berikutnya.')">
+        <div class="icon">📝</div>
+        <h3>Absensi Siswa</h3>
+        <p>
+          Kelola dan lihat kehadiran siswa.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
 
 </body>
 </html>

@@ -926,23 +926,69 @@ function selectTransport(type) {
   document.getElementById("motorBtn").style.background = "white";
   document.getElementById("carBtn").style.background = "white";
 
+
   if (type === "foot") {
 
     document.getElementById("walkBtn").style.background = "#dbeafe";
 
-  } else if (type === "motor") {
+  }
+
+  else if (type === "motor") {
 
     document.getElementById("motorBtn").style.background = "#dbeafe";
 
-  } else if (type === "car") {
+  }
+
+  else if (type === "car") {
 
     document.getElementById("carBtn").style.background = "#dbeafe";
 
   }
 
-  if (homeLocation && schoolLocation) {
 
-    calculateRoute();
+  /* =========================
+     UBAH ESTIMASI LANGSUNG
+  ========================== */
+
+  const distanceText =
+    document.getElementById("distanceResult").textContent;
+
+  const distanceKm =
+    parseFloat(distanceText);
+
+
+  if (!isNaN(distanceKm) && distanceKm > 0) {
+
+    let speed = 30;
+
+
+    if (type === "foot") {
+
+      speed = 4.5;
+
+    }
+
+    else if (type === "motor") {
+
+      speed = 30;
+
+    }
+
+    else if (type === "car") {
+
+      speed = 45;
+
+    }
+
+
+    const timeMinutes =
+      Math.ceil((distanceKm / speed) * 60);
+
+
+    document
+      .getElementById("timeResult")
+      .textContent =
+      timeMinutes;
 
   }
 

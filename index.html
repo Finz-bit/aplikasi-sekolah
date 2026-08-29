@@ -525,6 +525,49 @@
 
         </div>
 
+        <div
+  id="locationInfo"
+  style="
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    background:#f9fafb;
+    border-radius:12px;
+    line-height:1.6;
+  "
+>
+
+  <div style="font-weight:bold;">
+    🏠 Rumah
+  </div>
+
+  <div
+    id="homeAddress"
+    style="
+      color:#6b7280;
+      font-size:13px;
+      margin-bottom:12px;
+    "
+  >
+    Belum dipilih
+  </div>
+
+
+  <div style="font-weight:bold;">
+    🏫 Sekolah
+  </div>
+
+  <div
+    id="schoolAddress"
+    style="
+      color:#6b7280;
+      font-size:13px;
+    "
+  >
+    Belum dipilih
+  </div>
+
+        </div>
 
         <!-- BUTTON -->
 
@@ -796,6 +839,12 @@ function useMyLocation() {
         lat.toFixed(5) +
         ", " +
         lng.toFixed(5);
+      
+      getAddress(
+  lat,
+  lng,
+  "homeAddress"
+);
 
 
       map.setView(
@@ -883,12 +932,17 @@ function useMyLocation() {
 
 
         document
-          .getElementById("schoolStatus")
-          .textContent =
-          lat.toFixed(5) +
-          ", " +
-          lng.toFixed(5);
+  .getElementById("schoolStatus")
+  .textContent =
+  e.latlng.lat.toFixed(5) +
+  ", " +
+  e.latlng.lng.toFixed(5);
 
+getAddress(
+  e.latlng.lat,
+  e.latlng.lng,
+  "schoolAddress"
+);
 
         return;
       }
@@ -899,6 +953,58 @@ function useMyLocation() {
       );
 
     });
+
+    /* =========================
+   INFORMASI ALAMAT
+========================= */
+
+async function getAddress(lat, lng, elementId) {
+
+  try {
+
+    const url =
+      "https://nominatim.openstreetmap.org/reverse" +
+      "?format=json&lat=" +
+      lat +
+      "&lon=" +
+      lng;
+
+
+    const response =
+      await fetch(url);
+
+
+    const data =
+      await response.json();
+
+
+    const address =
+      data.display_name ||
+      "Alamat tidak ditemukan";
+
+
+    document
+      .getElementById(elementId)
+      .textContent =
+      address;
+
+
+    document
+      .getElementById("locationInfo")
+      .style.display =
+      "block";
+
+
+  } catch (error) {
+
+    document
+      .getElementById(elementId)
+      .textContent =
+      "Alamat tidak dapat ditemukan.";
+
+  }
+
+}
 
   /* =========================
    CARI SEKOLAH
@@ -976,7 +1082,12 @@ async function searchSchool() {
       lat.toFixed(5) +
       ", " +
       lng.toFixed(5);
-
+    
+   getAddress(
+  lat,
+  lng,
+  "schoolAddress"
+);
 
     map.setView(
       schoolLocation,

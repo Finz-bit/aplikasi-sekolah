@@ -300,7 +300,33 @@
 
         <!-- PETA -->
 
-        <div id="map"></div>
+<div id="map"></div>
+
+<div style="margin-top:15px;">
+
+  <label style="display:block;font-weight:bold;margin-bottom:8px;">
+    🗺️ Jenis Peta
+  </label>
+
+  <select
+    id="mapType"
+    onchange="changeMapType()"
+    style="
+      width:100%;
+      padding:13px;
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      background:white;
+      font-size:14px;
+    "
+  >
+    <option value="street">Jalan</option>
+    <option value="satellite">Satelit</option>
+    <option value="terrain">Terrain</option>
+    <option value="dark">Dark</option>
+  </select>
+
+</div>
         <button
   class="calculate"
   onclick="useMyLocation()"
@@ -540,13 +566,90 @@
     );
 
 
-    L.tileLayer(
-      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      {
-        attribution:
-          '&copy; OpenStreetMap contributors'
-      }
-    ).addTo(map);
+    /* =========================
+   JENIS PETA
+========================= */
+
+const streetMap = L.tileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    attribution: "&copy; OpenStreetMap contributors"
+  }
+);
+
+const satelliteMap = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  {
+    attribution: "Tiles &copy; Esri"
+  }
+);
+
+const terrainMap = L.tileLayer(
+  "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+  {
+    attribution:
+      "Map data &copy; OpenStreetMap contributors, SRTM | Map style &copy; OpenTopoMap"
+  }
+);
+
+const darkMap = L.tileLayer(
+  "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+  {
+    attribution:
+      "&copy; OpenStreetMap contributors &copy; CARTO"
+  }
+);
+
+
+/* Peta awal */
+
+streetMap.addTo(map);
+
+let currentMapLayer = streetMap;
+
+
+/* =========================
+   GANTI JENIS PETA
+========================= */
+
+function changeMapType() {
+
+  const type =
+    document.getElementById("mapType").value;
+
+
+  map.removeLayer(currentMapLayer);
+
+
+  if (type === "street") {
+
+    streetMap.addTo(map);
+    currentMapLayer = streetMap;
+
+  }
+
+  else if (type === "satellite") {
+
+    satelliteMap.addTo(map);
+    currentMapLayer = satelliteMap;
+
+  }
+
+  else if (type === "terrain") {
+
+    terrainMap.addTo(map);
+    currentMapLayer = terrainMap;
+
+  }
+
+  else if (type === "dark") {
+
+    darkMap.addTo(map);
+    currentMapLayer = darkMap;
+
+  }
+
+}
 
 
     /* =========================
@@ -855,10 +958,17 @@ async function calculateRoute() {
 
   let profile = "driving";
 
+if (selectedTransport === "foot") {
+  profile = "foot";
+}
 
-  if (selectedTransport === "foot") {
-    profile = "foot";
-  }
+if (selectedTransport === "motor") {
+  profile = "driving";
+}
+
+if (selectedTransport === "car") {
+  profile = "driving";
+}
 
 
   const start =

@@ -926,30 +926,19 @@ function selectTransport(type) {
   document.getElementById("motorBtn").style.background = "white";
   document.getElementById("carBtn").style.background = "white";
 
-
   if (type === "foot") {
 
     document.getElementById("walkBtn").style.background = "#dbeafe";
 
-  }
-
-  else if (type === "motor") {
+  } else if (type === "motor") {
 
     document.getElementById("motorBtn").style.background = "#dbeafe";
 
-  }
-
-  else if (type === "car") {
+  } else if (type === "car") {
 
     document.getElementById("carBtn").style.background = "#dbeafe";
 
   }
-
-
-  /*
-    Kalau rumah dan sekolah sudah dipilih,
-    langsung hitung ulang estimasi.
-  */
 
   if (homeLocation && schoolLocation) {
 
@@ -958,26 +947,6 @@ function selectTransport(type) {
   }
 
 }
-
-  selectedTransport = type;
-
-  document.getElementById("walkBtn").style.background = "white";
-  document.getElementById("motorBtn").style.background = "white";
-  document.getElementById("carBtn").style.background = "white";
-
-  if (type === "foot") {
-    document.getElementById("walkBtn").style.background = "#dbeafe";
-  }
-
-  if (type === "motor") {
-    document.getElementById("motorBtn").style.background = "#dbeafe";
-  }
-
-  if (type === "car") {
-    document.getElementById("carBtn").style.background = "#dbeafe";
-  }
-
-    }
 
 /* =========================
    HITUNG RUTE

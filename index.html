@@ -1850,27 +1850,47 @@ function selectTransport(type) {
   selectedTransport = type;
 
   document.getElementById("walkBtn").style.background = "white";
-  document.getElementById("motorBtn").style.background = "white";
-  document.getElementById("carBtn").style.background = "white";
+document.getElementById("motorBtn").style.background = "white";
+document.getElementById("carBtn").style.background = "white";
+
+document.getElementById("walkBtn").style.transform = "scale(1)";
+document.getElementById("motorBtn").style.transform = "scale(1)";
+document.getElementById("carBtn").style.transform = "scale(1)";
+
+document.getElementById("walkBtn").style.borderColor = "#e5e7eb";
+document.getElementById("motorBtn").style.borderColor = "#e5e7eb";
+document.getElementById("carBtn").style.borderColor = "#e5e7eb";
 
 
-  if (type === "foot") {
+if (type === "foot") {
 
-    document.getElementById("walkBtn").style.background = "#dbeafe";
+  const btn = document.getElementById("walkBtn");
 
-  }
+  btn.style.background = "#dbeafe";
+  btn.style.borderColor = "#2563eb";
+  btn.style.transform = "scale(1.03)";
 
-  else if (type === "motor") {
+}
 
-    document.getElementById("motorBtn").style.background = "#dbeafe";
+else if (type === "motor") {
 
-  }
+  const btn = document.getElementById("motorBtn");
 
-  else if (type === "car") {
+  btn.style.background = "#dbeafe";
+  btn.style.borderColor = "#2563eb";
+  btn.style.transform = "scale(1.03)";
 
-    document.getElementById("carBtn").style.background = "#dbeafe";
+}
 
-  }
+else if (type === "car") {
+
+  const btn = document.getElementById("carBtn");
+
+  btn.style.background = "#dbeafe";
+  btn.style.borderColor = "#2563eb";
+  btn.style.transform = "scale(1.03)";
+
+}
 
 
   /* =========================

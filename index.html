@@ -427,6 +427,7 @@
           <button
             class="calculate"
             onclick="calculateRoute()"
+            style="color:white;">
 
             HITUNG JARAK
 
@@ -1022,6 +1023,11 @@ async function calculateRoute() {
     ========================== */
 
     function resetMap() {
+
+      if (routeLine !== null) {
+  map.removeLayer(routeLine);
+  routeLine = null;
+      }
 
       if (homeMarker !== null) {
 

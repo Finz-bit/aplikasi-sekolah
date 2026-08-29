@@ -1080,42 +1080,44 @@
   </button>
 
 </div>
-        <!-- HASIL -->
+<!-- HASIL -->
 
 <div
   id="result"
   class="result"
   style="
+    display:none;
     margin-top:20px;
     padding:20px;
-    border-radius:18px;
+    border-radius:20px;
     background:#ffffff;
     border:1px solid #e5e7eb;
-    box-shadow:0 8px 24px rgba(0,0,0,0.06);
+    box-shadow:0 10px 30px rgba(0,0,0,0.07);
   "
 >
 
-  <!-- JUDUL -->
+  <!-- HEADER -->
 
   <div
     style="
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
       margin-bottom:18px;
     "
   >
 
     <div
       style="
-        width:40px;
-        height:40px;
+        width:44px;
+        height:44px;
         display:flex;
         align-items:center;
         justify-content:center;
         background:#eff6ff;
-        border-radius:12px;
-        font-size:20px;
+        border-radius:14px;
+        font-size:22px;
+        flex-shrink:0;
       "
     >
       📊
@@ -1123,15 +1125,15 @@
 
     <div>
 
-      <h3
+      <div
         style="
-          margin:0;
           font-size:17px;
           font-weight:800;
+          color:#111827;
         "
       >
         Hasil Perjalanan
-      </h3>
+      </div>
 
       <div
         style="
@@ -1140,7 +1142,7 @@
           color:#6b7280;
         "
       >
-        Perkiraan perjalanan kamu
+        Ringkasan perjalanan kamu
       </div>
 
     </div>
@@ -1162,18 +1164,20 @@
 
     <div
       style="
-        padding:15px;
+        padding:18px 10px;
         background:#f8fafc;
-        border-radius:14px;
+        border-radius:16px;
         text-align:center;
+        border:1px solid #f1f5f9;
       "
     >
 
       <div
         style="
-          font-size:11px;
+          font-size:10px;
           color:#6b7280;
-          margin-bottom:6px;
+          font-weight:700;
+          letter-spacing:.5px;
         "
       >
         JARAK
@@ -1181,8 +1185,10 @@
 
       <div
         style="
-          font-size:23px;
-          font-weight:800;
+          margin-top:7px;
+          font-size:25px;
+          font-weight:900;
+          color:#111827;
         "
       >
 
@@ -1190,7 +1196,13 @@
           0
         </span>
 
-        <span style="font-size:13px;font-weight:600;">
+        <span
+          style="
+            font-size:13px;
+            font-weight:700;
+            color:#6b7280;
+          "
+        >
           km
         </span>
 
@@ -1203,18 +1215,20 @@
 
     <div
       style="
-        padding:15px;
+        padding:18px 10px;
         background:#f8fafc;
-        border-radius:14px;
+        border-radius:16px;
         text-align:center;
+        border:1px solid #f1f5f9;
       "
     >
 
       <div
         style="
-          font-size:11px;
+          font-size:10px;
           color:#6b7280;
-          margin-bottom:6px;
+          font-weight:700;
+          letter-spacing:.5px;
         "
       >
         ESTIMASI WAKTU
@@ -1222,8 +1236,10 @@
 
       <div
         style="
-          font-size:23px;
-          font-weight:800;
+          margin-top:7px;
+          font-size:25px;
+          font-weight:900;
+          color:#111827;
         "
       >
 
@@ -1231,7 +1247,13 @@
           0
         </span>
 
-        <span style="font-size:13px;font-weight:600;">
+        <span
+          style="
+            font-size:13px;
+            font-weight:700;
+            color:#6b7280;
+          "
+        >
           menit
         </span>
 
@@ -1242,48 +1264,49 @@
   </div>
 
 
-  <!-- KETERANGAN -->
+  <!-- INFO -->
 
   <div
     style="
       margin-top:12px;
-      padding:11px 13px;
+      padding:12px 13px;
       background:#f8fafc;
-      border-radius:11px;
+      border-radius:13px;
       color:#6b7280;
       font-size:11px;
       line-height:1.5;
     "
   >
-    ℹ️ Waktu merupakan estimasi perjalanan dan dapat
-    berbeda tergantung kondisi jalan.
+    ℹ️ Estimasi waktu dapat berbeda tergantung kondisi
+    dan kepadatan jalan.
   </div>
 
-    <!-- GOOGLE MAPS -->
+
+  <!-- GOOGLE MAPS -->
 
   <button
     type="button"
     onclick="openGoogleMaps()"
     style="
       width:100%;
-      margin-top:12px;
-      padding:14px;
+      margin-top:13px;
+      padding:15px;
       border:none;
-      border-radius:14px;
+      border-radius:15px;
       background:#2563eb;
       color:white;
       font-size:14px;
       font-weight:800;
       cursor:pointer;
-      box-shadow:0 5px 14px rgba(37,99,235,0.20);
+      box-shadow:0 6px 16px rgba(37,99,235,0.22);
     "
   >
     🧭 Buka di Google Maps
   </button>
-  
+
 </div>
 
-        
+
       </div>
 
     </section>

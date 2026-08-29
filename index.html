@@ -463,45 +463,117 @@
 <div id="map"></div>
 
 
-<!-- JENIS PETA -->
+<!-- =========================
+     JENIS PETA
+========================= -->
 
-<div style="margin-top:15px;">
+<div style="margin-top:18px;">
 
   <label
     style="
       display:block;
-      font-weight:800;
       font-size:14px;
-      margin-bottom:9px;
+      font-weight:800;
+      margin-bottom:10px;
     "
   >
     🗺️ Jenis Peta
   </label>
 
-  <select
-  <select
-  id="mapType"
-  onchange="changeMapType()"
-  style="
-    width:100%;
-    padding:14px 15px;
-    border:1px solid #dbe3ef;
-    border-radius:14px;
-    background:#ffffff;
-    color:#1f2937;
-    font-size:14px;
-    font-weight:600;
-    outline:none;
-    box-sizing:border-box;
-    cursor:pointer;
-    box-shadow:0 4px 12px rgba(0,0,0,0.04);
-  "
->
-  <option value="street">Jalan</option>
-  <option value="satellite">Satelit</option>
-  <option value="terrain">Terrain</option>
-  <option value="dark">Dark</option>
-  </select>
+
+  <div
+    style="
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    "
+  >
+
+    <!-- JALAN -->
+
+    <button
+      type="button"
+      onclick="selectMapType('street')"
+      id="mapStreetBtn"
+      style="
+        padding:13px;
+        border:1px solid #dbe3ef;
+        border-radius:14px;
+        background:#eff6ff;
+        color:#2563eb;
+        font-weight:800;
+        font-size:13px;
+        cursor:pointer;
+        box-shadow:0 4px 12px rgba(0,0,0,.04);
+      "
+    >
+      🗺️ Jalan
+    </button>
+
+
+    <!-- SATELIT -->
+
+    <button
+      type="button"
+      onclick="selectMapType('satellite')"
+      id="mapSatelliteBtn"
+      style="
+        padding:13px;
+        border:1px solid #e5e7eb;
+        border-radius:14px;
+        background:white;
+        color:#374151;
+        font-weight:800;
+        font-size:13px;
+        cursor:pointer;
+      "
+    >
+      🛰️ Satelit
+    </button>
+
+
+    <!-- TERRAIN -->
+
+    <button
+      type="button"
+      onclick="selectMapType('terrain')"
+      id="mapTerrainBtn"
+      style="
+        padding:13px;
+        border:1px solid #e5e7eb;
+        border-radius:14px;
+        background:white;
+        color:#374151;
+        font-weight:800;
+        font-size:13px;
+        cursor:pointer;
+      "
+    >
+      ⛰️ Terrain
+    </button>
+
+
+    <!-- DARK -->
+
+    <button
+      type="button"
+      onclick="selectMapType('dark')"
+      id="mapDarkBtn"
+      style="
+        padding:13px;
+        border:1px solid #e5e7eb;
+        border-radius:14px;
+        background:white;
+        color:#374151;
+        font-weight:800;
+        font-size:13px;
+        cursor:pointer;
+      "
+    >
+      🌙 Dark
+    </button>
+
+  </div>
 
 </div>
 
@@ -1249,14 +1321,16 @@ let currentMapLayer = streetMap;
    GANTI JENIS PETA
 ========================= */
 
-function changeMapType() {
+function selectMapType(type) {
 
-  const type =
-    document.getElementById("mapType").value;
+  /* Hapus peta yang sedang aktif */
+
+  if (currentMapLayer) {
+    map.removeLayer(currentMapLayer);
+  }
 
 
-  map.removeLayer(currentMapLayer);
-
+  /* Pilih jenis peta */
 
   if (type === "street") {
 
@@ -1283,6 +1357,50 @@ function changeMapType() {
 
     darkMap.addTo(map);
     currentMapLayer = darkMap;
+
+  }
+
+
+  /* Semua tombol kembali normal */
+
+  document.getElementById("mapStreetBtn").style.background = "white";
+  document.getElementById("mapStreetBtn").style.color = "#374151";
+
+  document.getElementById("mapSatelliteBtn").style.background = "white";
+  document.getElementById("mapSatelliteBtn").style.color = "#374151";
+
+  document.getElementById("mapTerrainBtn").style.background = "white";
+  document.getElementById("mapTerrainBtn").style.color = "#374151";
+
+  document.getElementById("mapDarkBtn").style.background = "white";
+  document.getElementById("mapDarkBtn").style.color = "#374151";
+
+
+  /* Tombol yang dipilih menjadi aktif */
+
+  let activeButton = null;
+
+  if (type === "street") {
+    activeButton = document.getElementById("mapStreetBtn");
+  }
+
+  else if (type === "satellite") {
+    activeButton = document.getElementById("mapSatelliteBtn");
+  }
+
+  else if (type === "terrain") {
+    activeButton = document.getElementById("mapTerrainBtn");
+  }
+
+  else if (type === "dark") {
+    activeButton = document.getElementById("mapDarkBtn");
+  }
+
+
+  if (activeButton) {
+
+    activeButton.style.background = "#eff6ff";
+    activeButton.style.color = "#2563eb";
 
   }
 

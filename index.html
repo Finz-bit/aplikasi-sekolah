@@ -301,6 +301,14 @@
         <!-- PETA -->
 
         <div id="map"></div>
+        <button
+  class="calculate"
+  onclick="useMyLocation()"
+  style="margin-top:15px;">
+
+  📍 GUNAKAN LOKASI SAYA
+
+        </button>
 
 
         <!-- STATUS -->
@@ -454,7 +462,95 @@
     let homeLocation = null;
     let schoolLocation = null;
 
+/* =========================
+   GPS LOKASI SAYA
+========================= */
 
+function useMyLocation() {
+
+  if (!navigator.geolocation) {
+
+    alert("GPS tidak didukung oleh browser ini.");
+
+    return;
+  }
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position) {
+
+      const lat =
+        position.coords.latitude;
+
+      const lng =
+        position.coords.longitude;
+
+
+      /* Kalau rumah sudah dipilih */
+
+      if (homeMarker !== null) {
+
+        map.removeLayer(homeMarker);
+
+      }
+
+
+      homeLocation =
+        L.latLng(lat, lng);
+
+
+      homeMarker =
+        L.marker(homeLocation)
+          .addTo(map)
+          .bindPopup("🏠 Lokasi Saya")
+          .openPopup();
+
+
+      document
+        .getElementById("homeStatus")
+        .textContent =
+        lat.toFixed(5) +
+        ", " +
+        lng.toFixed(5);
+
+
+      map.setView(
+        homeLocation,
+        17
+      );
+
+    },
+
+
+    function(error) {
+
+      if (error.code === 1) {
+
+        alert(
+          "Izin lokasi ditolak. Silakan izinkan lokasi untuk website ini."
+        );
+
+      } else {
+
+        alert(
+          "Lokasi tidak dapat ditemukan."
+        );
+
+      }
+
+    },
+
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+
+  );
+
+    }
+    
     /* =========================
        KLIK PETA
     ========================== */

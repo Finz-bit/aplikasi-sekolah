@@ -309,7 +309,44 @@
   📍 GUNAKAN LOKASI SAYA
 
         </button>
+<div style="margin-top:15px;">
 
+  <label style="display:block;font-weight:bold;margin-bottom:7px;">
+    🏫 Cari Sekolah
+  </label>
+
+  <div style="display:flex;gap:8px;">
+
+    <input
+      type="text"
+      id="schoolSearch"
+      placeholder="Contoh: SMA Negeri 1 Jepara"
+      style="
+        flex:1;
+        padding:13px;
+        border:1px solid #d1d5db;
+        border-radius:10px;
+        font-size:14px;
+      "
+    >
+
+    <button
+      onclick="searchSchool()"
+      style="
+        border:none;
+        background:#2563eb;
+        color:white;
+        padding:0 16px;
+        border-radius:10px;
+        font-weight:bold;
+      "
+    >
+      CARI
+    </button>
+
+  </div>
+
+</div>
 
         <!-- STATUS -->
 
@@ -617,7 +654,100 @@ function useMyLocation() {
 
     });
 
+  /* =========================
+   CARI SEKOLAH
+========================= */
 
+async function searchSchool() {
+
+  const input =
+    document.getElementById("schoolSearch");
+
+  const query =
+    input.value.trim();
+
+  if (!query) {
+
+    alert("Masukkan nama sekolah terlebih dahulu.");
+
+    return;
+  }
+
+
+  try {
+
+    const url =
+      "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
+      encodeURIComponent(query);
+
+
+    const response =
+      await fetch(url);
+
+
+    const data =
+      await response.json();
+
+
+    if (data.length === 0) {
+
+      alert("Sekolah tidak ditemukan.");
+
+      return;
+    }
+
+
+    const lat =
+      parseFloat(data[0].lat);
+
+    const lng =
+      parseFloat(data[0].lon);
+
+
+    /* Hapus marker sekolah lama */
+
+    if (schoolMarker !== null) {
+
+      map.removeLayer(schoolMarker);
+
+    }
+
+
+    schoolLocation =
+      L.latLng(lat, lng);
+
+
+    schoolMarker =
+      L.marker(schoolLocation)
+        .addTo(map)
+        .bindPopup("🏫 Sekolah")
+        .openPopup();
+
+
+    document
+      .getElementById("schoolStatus")
+      .textContent =
+      lat.toFixed(5) +
+      ", " +
+      lng.toFixed(5);
+
+
+    map.setView(
+      schoolLocation,
+      16
+    );
+
+
+  } catch (error) {
+
+    alert(
+      "Gagal mencari lokasi sekolah. Periksa koneksi internet."
+    );
+
+  }
+
+}  
+    
     /* =========================
        HITUNG JARAK
     ========================== */

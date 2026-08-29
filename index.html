@@ -348,6 +348,59 @@
 
 </div>
 
+      <!-- TRANSPORTASI -->
+
+<div style="margin-top:18px;">
+
+  <label style="display:block;font-weight:bold;margin-bottom:10px;">
+    Pilih Transportasi
+  </label>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+
+    <button
+      id="walkBtn"
+      onclick="selectTransport('foot')"
+      style="
+        padding:12px 5px;
+        border:1px solid #d1d5db;
+        background:white;
+        border-radius:10px;
+        font-weight:bold;
+      ">
+      🚶<br>Jalan
+    </button>
+
+    <button
+      id="motorBtn"
+      onclick="selectTransport('motor')"
+      style="
+        padding:12px 5px;
+        border:1px solid #d1d5db;
+        background:white;
+        border-radius:10px;
+        font-weight:bold;
+      ">
+      🛵<br>Motor
+    </button>
+
+    <button
+      id="carBtn"
+      onclick="selectTransport('car')"
+      style="
+        padding:12px 5px;
+        border:1px solid #d1d5db;
+        background:white;
+        border-radius:10px;
+        font-weight:bold;
+      ">
+      🚗<br>Mobil
+    </button>
+
+  </div>
+
+</div>
+        
         <!-- STATUS -->
 
         <div class="status">
@@ -373,7 +426,7 @@
 
           <button
             class="calculate"
-            onclick="calculateDistance()">
+            onclick="calculateRoute()"
 
             HITUNG JARAK
 
@@ -406,6 +459,12 @@
             </span>
 
             km
+            <p style="margin-top:10px;">
+  ⏱️ Estimasi waktu:
+  <strong>
+    <span id="timeResult">0</span> menit
+  </strong>
+            </p>
 
           </div>
 
@@ -498,6 +557,9 @@
 
     let homeLocation = null;
     let schoolLocation = null;
+
+    let selectedTransport = "car";
+let routeLine = null;
 
 /* =========================
    GPS LOKASI SAYA
@@ -747,6 +809,169 @@ async function searchSchool() {
   }
 
 }  
+
+/* =========================
+   TRANSPORTASI
+========================= */
+
+function selectTransport(type) {
+
+  selectedTransport = type;
+
+  document.getElementById("walkBtn").style.background = "white";
+  document.getElementById("motorBtn").style.background = "white";
+  document.getElementById("carBtn").style.background = "white";
+
+  if (type === "foot") {
+    document.getElementById("walkBtn").style.background = "#dbeafe";
+  }
+
+  if (type === "motor") {
+    document.getElementById("motorBtn").style.background = "#dbeafe";
+  }
+
+  if (type === "car") {
+    document.getElementById("carBtn").style.background = "#dbeafe";
+}
+
+
+/* =========================
+   HITUNG RUTE
+========================= */
+
+async function calculateRoute() {
+
+  if (!homeLocation || !schoolLocation) {
+
+    alert(
+      "Pilih lokasi rumah dan sekolah terlebih dahulu."
+    );
+
+    return;
+  }
+
+
+  let profile = "driving";
+
+
+  if (selectedTransport === "foot") {
+    profile = "foot";
+  }
+
+
+  const start =
+    homeLocation.lng + "," +
+    homeLocation.lat;
+
+  const end =
+    schoolLocation.lng + "," +
+    schoolLocation.lat;
+
+
+  const url =
+    "https://router.project-osrm.org/route/v1/" +
+    profile + "/" +
+    start + ";" +
+    end +
+    "?overview=full&geometries=geojson";
+
+
+  try {
+
+    const response =
+      await fetch(url);
+
+    const data =
+      await response.json();
+
+
+    if (
+      !data.routes ||
+      data.routes.length === 0
+    ) {
+
+      alert("Rute tidak ditemukan.");
+
+      return;
+    }
+
+
+    const route =
+      data.routes[0];
+
+
+    /* Hapus rute lama */
+
+    if (routeLine !== null) {
+
+      map.removeLayer(routeLine);
+
+    }
+
+
+    /* Gambar rute */
+
+    routeLine =
+      L.geoJSON(
+        route.geometry,
+        {
+          style: {
+            weight: 6,
+            opacity: 0.8
+          }
+        }
+      ).addTo(map);
+
+
+    /* Jarak */
+
+    const distanceKm =
+      route.distance / 1000;
+
+
+    /* Waktu dari OSRM */
+
+    const timeMinutes =
+      Math.round(
+        route.duration / 60
+      );
+
+
+    document
+      .getElementById("distanceResult")
+      .textContent =
+      distanceKm.toFixed(2);
+
+
+    document
+      .getElementById("timeResult")
+      .textContent =
+      timeMinutes;
+
+
+    document
+      .getElementById("result")
+      .style.display =
+      "block";
+
+
+    map.fitBounds(
+      routeLine.getBounds(),
+      {
+        padding: [30, 30]
+      }
+    );
+
+
+  } catch (error) {
+
+    alert(
+      "Gagal mengambil rute. Periksa koneksi internet."
+    );
+
+  }
+
+}
     
     /* =========================
        HITUNG JARAK

@@ -174,13 +174,20 @@
     }
 
     .result {
-      display: none;
-      margin-top: 18px;
-      background: #eff6ff;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-    }
+  display: none;
+  margin-top: 20px;
+  border-radius: 20px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.result.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
     .result h3 {
       color: #2563eb;
@@ -1992,10 +1999,14 @@ async function calculateRoute() {
       .textContent =
       timeMinutes;
 
-    document
-      .getElementById("result")
-      .style.display =
-      "block";
+    const resultBox =
+  document.getElementById("result");
+
+resultBox.style.display = "block";
+
+setTimeout(function() {
+  resultBox.classList.add("show");
+}, 10);
 
     map.fitBounds(
       routeLine.getBounds(),

@@ -6,6 +6,12 @@
 
   <title>Aplikasi Sekolah</title>
 
+  <!-- LEAFLET -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
   <style>
     * {
       box-sizing: border-box;
@@ -108,43 +114,69 @@
       font-weight: bold;
     }
 
-    .location-box {
-      margin-top: 20px;
-    }
-
-    .location-box label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
-
-    .location-box input {
+    #map {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      margin-bottom: 15px;
+      height: 400px;
+      border-radius: 14px;
+      margin-top: 18px;
+      overflow: hidden;
+    }
+
+    .instruction {
+      background: #eff6ff;
+      padding: 14px;
+      border-radius: 12px;
+      margin-top: 15px;
       font-size: 14px;
+      line-height: 1.5;
     }
 
-    .calculate {
-      width: 100%;
+    .status {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #f9fafb;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .status strong {
+      color: #2563eb;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .calculate,
+    .reset {
+      flex: 1;
       border: none;
-      background: #2563eb;
-      color: white;
       padding: 14px;
       border-radius: 10px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       cursor: pointer;
     }
 
+    .calculate {
+      background: #2563eb;
+      color: white;
+    }
+
+    .reset {
+      background: #e5e7eb;
+      color: #1f2937;
+    }
+
     .result {
       display: none;
-      margin-top: 20px;
+      margin-top: 18px;
       background: #eff6ff;
       border-radius: 12px;
-      padding: 18px;
+      padding: 20px;
       text-align: center;
     }
 
@@ -153,14 +185,23 @@
       margin-bottom: 8px;
     }
 
-    .result .distance {
-      font-size: 28px;
+    .distance {
+      font-size: 30px;
       font-weight: bold;
     }
 
     @media (max-width: 600px) {
+
       .menu {
         grid-template-columns: 1fr;
+      }
+
+      #map {
+        height: 350px;
+      }
+
+      .buttons {
+        flex-direction: column;
       }
     }
   </style>
@@ -177,34 +218,49 @@
   <main class="container">
 
     <!-- =========================
-         HALAMAN BERANDA
+         BERANDA
     ========================== -->
 
     <section id="homePage" class="page active">
 
       <div class="welcome">
         <h2>Selamat Datang 👋</h2>
+
         <p>
           Pilih fitur yang ingin kamu gunakan.
         </p>
       </div>
 
+
       <div class="menu">
 
-        <div class="card" onclick="openPage('distancePage')">
+        <div
+          class="card"
+          onclick="openPage('distancePage')">
+
           <div class="icon">📍</div>
+
           <h3>Jarak ke Sekolah</h3>
+
           <p>
-            Hitung jarak dari rumah ke sekolah.
+            Hitung jarak rumah ke sekolah menggunakan peta.
           </p>
+
         </div>
 
-        <div class="card" onclick="alert('Fitur absensi akan dibuat setelah fitur jarak selesai.')">
+
+        <div
+          class="card"
+          onclick="alert('Fitur absensi akan dibuat setelah fitur jarak selesai.')">
+
           <div class="icon">📝</div>
+
           <h3>Absensi Siswa</h3>
+
           <p>
             Kelola dan lihat kehadiran siswa.
           </p>
+
         </div>
 
       </div>
@@ -213,54 +269,103 @@
 
 
     <!-- =========================
-         HALAMAN JARAK
+         JARAK KE SEKOLAH
     ========================== -->
 
     <section id="distancePage" class="page">
 
-      <button class="back" onclick="openPage('homePage')">
+      <button
+        class="back"
+        onclick="openPage('homePage')">
+
         ← Kembali
+
       </button>
+
 
       <div class="card">
 
         <h2>📍 Jarak ke Sekolah</h2>
 
-        <p style="margin-top:8px; color:#6b7280;">
-          Masukkan jarak rumah ke sekolah.
-        </p>
+        <div class="instruction">
 
-        <div class="location-box">
+          <strong>Cara menggunakan:</strong><br>
 
-          <label>Jarak Rumah → Sekolah (km)</label>
+          1. Klik lokasi rumah pada peta.<br>
+          2. Klik lokasi sekolah pada peta.<br>
+          3. Tekan tombol <b>HITUNG JARAK</b>.
 
-          <input
-            type="number"
-            id="distanceInput"
-            placeholder="Contoh: 5"
-            min="0"
-            step="0.1"
-          >
+        </div>
+
+
+        <!-- PETA -->
+
+        <div id="map"></div>
+
+
+        <!-- STATUS -->
+
+        <div class="status">
+
+          🏠 Rumah:
+          <strong id="homeStatus">
+            Belum dipilih
+          </strong>
+
+          <br>
+
+          🏫 Sekolah:
+          <strong id="schoolStatus">
+            Belum dipilih
+          </strong>
+
+        </div>
+
+
+        <!-- BUTTON -->
+
+        <div class="buttons">
 
           <button
             class="calculate"
             onclick="calculateDistance()">
+
             HITUNG JARAK
+
+          </button>
+
+
+          <button
+            class="reset"
+            onclick="resetMap()">
+
+            RESET
+
           </button>
 
         </div>
 
 
-        <div id="result" class="result">
+        <!-- HASIL -->
+
+        <div
+          id="result"
+          class="result">
 
           <h3>Hasil Perhitungan</h3>
 
           <div class="distance">
-            <span id="distanceResult">0</span> km
+
+            <span id="distanceResult">
+              0
+            </span>
+
+            km
+
           </div>
 
           <p style="margin-top:8px;">
-            Jarak rumah ke sekolah
+            Jarak garis lurus rumah ke sekolah
           </p>
 
         </div>
@@ -272,50 +377,238 @@
   </main>
 
 
+  <!-- LEAFLET JS -->
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+
+
   <script>
+
+    /* =========================
+       NAVIGASI
+    ========================== */
 
     function openPage(pageId) {
 
-      document.querySelectorAll(".page").forEach(function(page) {
-        page.classList.remove("active");
-      });
+      document
+        .querySelectorAll(".page")
+        .forEach(function(page) {
 
-      document.getElementById(pageId).classList.add("active");
+          page.classList.remove("active");
+
+        });
+
+
+      document
+        .getElementById(pageId)
+        .classList.add("active");
+
 
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
+
+
+      if (pageId === "distancePage") {
+
+        setTimeout(function() {
+
+          map.invalidateSize();
+
+        }, 200);
+
+      }
+
     }
 
 
-    function calculateDistance() {
+    /* =========================
+       PETA
+    ========================== */
 
-      const input =
-        document.getElementById("distanceInput");
-
-      const result =
-        document.getElementById("result");
-
-      const distanceResult =
-        document.getElementById("distanceResult");
-
-      const distance =
-        parseFloat(input.value);
+    const map = L.map("map").setView(
+      [-6.5891, 110.6677],
+      15
+    );
 
 
-      if (isNaN(distance) || distance < 0) {
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution:
+          '&copy; OpenStreetMap contributors'
+      }
+    ).addTo(map);
 
-        alert("Masukkan jarak yang benar.");
+
+    /* =========================
+       VARIABEL
+    ========================== */
+
+    let homeMarker = null;
+    let schoolMarker = null;
+
+    let homeLocation = null;
+    let schoolLocation = null;
+
+
+    /* =========================
+       KLIK PETA
+    ========================== */
+
+    map.on("click", function(e) {
+
+      const lat = e.latlng.lat;
+      const lng = e.latlng.lng;
+
+
+      /* RUMAH */
+
+      if (homeMarker === null) {
+
+        homeLocation = e.latlng;
+
+
+        homeMarker = L.marker(e.latlng)
+          .addTo(map)
+          .bindPopup("🏠 Rumah")
+          .openPopup();
+
+
+        document
+          .getElementById("homeStatus")
+          .textContent =
+          lat.toFixed(5) +
+          ", " +
+          lng.toFixed(5);
+
 
         return;
       }
 
 
-      distanceResult.textContent =
-        distance.toFixed(1);
+      /* SEKOLAH */
 
-      result.style.display = "block";
+      if (schoolMarker === null) {
+
+        schoolLocation = e.latlng;
+
+
+        schoolMarker = L.marker(e.latlng)
+          .addTo(map)
+          .bindPopup("🏫 Sekolah")
+          .openPopup();
+
+
+        document
+          .getElementById("schoolStatus")
+          .textContent =
+          lat.toFixed(5) +
+          ", " +
+          lng.toFixed(5);
+
+
+        return;
+      }
+
+
+      alert(
+        "Rumah dan sekolah sudah dipilih. Tekan RESET jika ingin memilih lokasi baru."
+      );
+
+    });
+
+
+    /* =========================
+       HITUNG JARAK
+    ========================== */
+
+    function calculateDistance() {
+
+      if (
+        homeLocation === null ||
+        schoolLocation === null
+      ) {
+
+        alert(
+          "Silakan pilih lokasi rumah dan sekolah terlebih dahulu."
+        );
+
+        return;
+      }
+
+
+      const distanceMeters =
+        map.distance(
+          homeLocation,
+          schoolLocation
+        );
+
+
+      const distanceKm =
+        distanceMeters / 1000;
+
+
+      document
+        .getElementById("distanceResult")
+        .textContent =
+        distanceKm.toFixed(2);
+
+
+      document
+        .getElementById("result")
+        .style.display = "block";
+
+    }
+
+
+    /* =========================
+       RESET
+    ========================== */
+
+    function resetMap() {
+
+      if (homeMarker !== null) {
+
+        map.removeLayer(homeMarker);
+
+      }
+
+
+      if (schoolMarker !== null) {
+
+        map.removeLayer(schoolMarker);
+
+      }
+
+
+      homeMarker = null;
+      schoolMarker = null;
+
+      homeLocation = null;
+      schoolLocation = null;
+
+
+      document
+        .getElementById("homeStatus")
+        .textContent =
+        "Belum dipilih";
+
+
+      document
+        .getElementById("schoolStatus")
+        .textContent =
+        "Belum dipilih";
+
+
+      document
+        .getElementById("result")
+        .style.display =
+        "none";
+
     }
 
   </script>

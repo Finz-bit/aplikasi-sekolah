@@ -1207,6 +1207,28 @@
     berbeda tergantung kondisi jalan.
   </div>
 
+    <!-- GOOGLE MAPS -->
+
+  <button
+    type="button"
+    onclick="openGoogleMaps()"
+    style="
+      width:100%;
+      margin-top:12px;
+      padding:14px;
+      border:none;
+      border-radius:14px;
+      background:#2563eb;
+      color:white;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 5px 14px rgba(37,99,235,0.20);
+    "
+  >
+    🧭 Buka di Google Maps
+  </button>
+  
 </div>
 
         
@@ -2013,7 +2035,34 @@ async function calculateRoute() {
         "none";
 
     }
+/* =========================
+   GOOGLE MAPS
+========================= */
 
+function openGoogleMaps() {
+
+  if (!homeLocation || !schoolLocation) {
+
+    alert(
+      "Pilih lokasi rumah dan sekolah terlebih dahulu."
+    );
+
+    return;
+  }
+
+  const googleMapsUrl =
+    "https://www.google.com/maps/dir/?api=1" +
+    "&origin=" +
+    homeLocation.lat + "," + homeLocation.lng +
+    "&destination=" +
+    schoolLocation.lat + "," + schoolLocation.lng;
+
+  window.open(
+    googleMapsUrl,
+    "_blank"
+  );
+
+    }
   </script>
 
 </body>

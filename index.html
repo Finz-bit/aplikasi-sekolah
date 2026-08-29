@@ -947,125 +947,81 @@ function selectTransport(type) {
 async function calculateRoute() {
 
   if (!homeLocation || !schoolLocation) {
-
-    alert(
-      "Pilih lokasi rumah dan sekolah terlebih dahulu."
-    );
-
+    alert("Pilih lokasi rumah dan sekolah terlebih dahulu.");
     return;
   }
 
-
-  let profile = "driving";
-
-if (selectedTransport === "foot") {
-  profile = "foot";
-}
-
-if (selectedTransport === "motor") {
-  profile = "driving";
-}
-
-if (selectedTransport === "car") {
-  profile = "driving";
-}
-
-
   const start =
-    homeLocation.lng + "," +
-    homeLocation.lat;
+    homeLocation.lng + "," + homeLocation.lat;
 
   const end =
-    schoolLocation.lng + "," +
-    schoolLocation.lat;
-
+    schoolLocation.lng + "," + schoolLocation.lat;
 
   const url =
-    "https://router.project-osrm.org/route/v1/" +
-    profile + "/" +
-    start + ";" +
-    end +
+    "https://router.project-osrm.org/route/v1/driving/" +
+    start + ";" + end +
     "?overview=full&geometries=geojson";
-
 
   try {
 
-    const response =
-      await fetch(url);
+    const response = await fetch(url);
+    const data = await response.json();
 
-    const data =
-      await response.json();
-
-
-    if (
-      !data.routes ||
-      data.routes.length === 0
-    ) {
-
+    if (!data.routes || data.routes.length === 0) {
       alert("Rute tidak ditemukan.");
-
       return;
     }
 
-
-    const route =
-      data.routes[0];
-
-
-    /* Hapus rute lama */
+    const route = data.routes[0];
 
     if (routeLine !== null) {
-
       map.removeLayer(routeLine);
-
     }
 
-
-    /* Gambar rute */
-
-    routeLine =
-      L.geoJSON(
-        route.geometry,
-        {
-          style: {
-            weight: 6,
-            opacity: 0.8
-          }
+    routeLine = L.geoJSON(
+      route.geometry,
+      {
+        style: {
+          weight: 6,
+          opacity: 0.8
         }
-      ).addTo(map);
-
-
-    /* Jarak */
+      }
+    ).addTo(map);
 
     const distanceKm =
       route.distance / 1000;
 
+    let speed = 30;
 
-    /* Waktu dari OSRM */
+    if (selectedTransport === "foot") {
+      speed = 4.5;
+    }
+
+    else if (selectedTransport === "motor") {
+      speed = 30;
+    }
+
+    else if (selectedTransport === "car") {
+      speed = 45;
+    }
 
     const timeMinutes =
-      Math.round(
-        route.duration / 60
-      );
-
+      Math.ceil((distanceKm / speed) * 60);
 
     document
       .getElementById("distanceResult")
       .textContent =
       distanceKm.toFixed(2);
 
-
     document
       .getElementById("timeResult")
       .textContent =
       timeMinutes;
 
-
     document
       .getElementById("result")
       .style.display =
       "block";
-
 
     map.fitBounds(
       routeLine.getBounds(),
@@ -1074,8 +1030,9 @@ if (selectedTransport === "car") {
       }
     );
 
-
   } catch (error) {
+
+    console.error(error);
 
     alert(
       "Gagal mengambil rute. Periksa koneksi internet."
@@ -1084,6 +1041,7 @@ if (selectedTransport === "car") {
   }
 
 }
+
     
     /* =========================
        HITUNG JARAK

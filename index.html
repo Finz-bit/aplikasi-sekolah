@@ -1816,6 +1816,13 @@ function useMyLocation() {
     ========================== */
 
     map.on("click", function(e) {
+      if (fullscreenActive) {
+
+  fullscreenLocation = e.latlng;
+
+  return;
+
+      }
 
       const lat = e.latlng.lat;
       const lng = e.latlng.lng;
@@ -2362,14 +2369,15 @@ function openGoogleMaps() {
 
     }
 
-    /* =========================
+/* =========================
    FULLSCREEN MAP
 ========================= */
 
-let fullscreenMap = null;
-let fullscreenMarker = null;
 let fullscreenLocation = null;
 let fullscreenTarget = null;
+let fullscreenMapParent = null;
+let fullscreenMapNext = null;
+let fullscreenActive = false;
 
 
 function openFullscreenMap() {
@@ -2377,115 +2385,182 @@ function openFullscreenMap() {
   fullscreenTarget =
     homeMarker === null ? "home" : "school";
 
+  const mapContainer =
+    map.getContainer();
+
+  fullscreenMapParent =
+    mapContainer.parentNode;
+
+  fullscreenMapNext =
+    mapContainer.nextSibling;
+
+
   document
     .getElementById("fullscreenMap")
     .style.display = "block";
 
 
+  const fullscreenContainer =
+    document.getElementById(
+      "fullscreenMapContainer"
+    );
+
+
+  fullscreenContainer.appendChild(
+    mapContainer
+  );
+
+
+  mapContainer.style.width = "100%";
+  mapContainer.style.height = "100%";
+
+
+  fullscreenActive = true;
+
+
   setTimeout(function() {
 
-    if (fullscreenMap === null) {
-      const selectedMap =
-  document.getElementById("mapType").value;
+    map.invalidateSize();
 
-      fullscreenMap = L.map(
-        "fullscreenMapContainer"
-      ).setView(
-        map.getCenter(),
-        map.getZoom()
-      );
-
-
-      L.tileLayer(
-  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  {
-    maxZoom: 19,
-    attribution: "&copy; OpenStreetMap"
-  }
-).addTo(fullscreenMap);
-
-
-      /* KLIK PETA FULLSCREEN */
-
-      fullscreenMap.on("click", function(e) {
-
-        fullscreenLocation = e.latlng;
-
-
-        if (fullscreenMarker) {
-
-          fullscreenMap.removeLayer(
-            fullscreenMarker
-          );
-
-        }
-
-
-        fullscreenMarker = L.marker(
-          e.latlng
-        )
-          .addTo(fullscreenMap)
-          .bindPopup(
-            "📍 Lokasi yang dipilih"
-          )
-          .openPopup();
-
-      });
-
-    }
-
-
-    fullscreenMap.invalidateSize();
-
-
-    if (
-      fullscreenTarget === "home" &&
-      homeLocation
-    ) {
-
-      fullscreenMap.setView(
-        homeLocation,
-        17
-      );
-
-    }
-
-    else if (
-      fullscreenTarget === "school" &&
-      schoolLocation
-    ) {
-
-      fullscreenMap.setView(
-        schoolLocation,
-        17
-      );
-
-    }
-
-
-  }, 300);
+  }, 100);
 
 }
 
 
 function closeFullscreenMap() {
 
+  const mapContainer =
+    map.getContainer();
+
+
+  fullscreenActive = false;
+
+
+  if (
+    fullscreenMapParent
+  ) {
+
+    if (
+      fullscreenMapNext &&
+      fullscreenMapNext.parentNode ===
+        fullscreenMapParent
+    ) {
+
+      fullscreenMapParent.insertBefore(
+        mapContainer,
+        fullscreenMapNext
+      );
+
+    }
+
+    else {
+
+      fullscreenMapParent.appendChild(
+        mapContainer
+      );
+
+    }
+
+  }
+
+
+  mapContainer.style.width = "";
+  mapContainer.style.height = "";
+
+
   document
     .getElementById("fullscreenMap")
     .style.display = "none";
 
 
-  if (fullscreenMap !== null) {
+  setTimeout(function() {
 
-    fullscreenMap.remove();
+    map.invalidateSize();
 
-    fullscreenMap = null;
+  }, 100);
+
+}
+
+
+function confirmFullscreenLocation() {
+
+  if (!fullscreenLocation) {
+
+    alert(
+      "Klik salah satu titik pada peta terlebih dahulu."
+    );
+
+    return;
 
   }
 
 
-  fullscreenMarker = null;
+  if (fullscreenTarget === "home") {
+
+    homeLocation =
+      fullscreenLocation;
+
+    if (homeMarker) {
+
+      map.removeLayer(
+        homeMarker
+      );
+
+    }
+
+    homeMarker =
+      L.marker(
+        homeLocation
+      )
+      .addTo(map)
+      .bindPopup("🏠 Rumah")
+      .openPopup();
+
+
+    document
+      .getElementById("homeStatus")
+      .textContent =
+      homeLocation.lat.toFixed(5) +
+      ", " +
+      homeLocation.lng.toFixed(5);
+
+  }
+
+  else {
+
+    schoolLocation =
+      fullscreenLocation;
+
+    if (schoolMarker) {
+
+      map.removeLayer(
+        schoolMarker
+      );
+
+    }
+
+    schoolMarker =
+      L.marker(
+        schoolLocation
+      )
+      .addTo(map)
+      .bindPopup("🏫 Sekolah")
+      .openPopup();
+
+
+    document
+      .getElementById("schoolStatus")
+      .textContent =
+      schoolLocation.lat.toFixed(5) +
+      ", " +
+      schoolLocation.lng.toFixed(5);
+
+  }
+
+
   fullscreenLocation = null;
+
+  closeFullscreenMap();
 
 }
     

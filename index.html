@@ -1414,7 +1414,105 @@
 
   </main>
 
+<!-- =========================
+     FULLSCREEN MAP
+========================= -->
 
+<div
+  id="fullscreenMap"
+  style="
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:white;
+  "
+>
+
+  <!-- HEADER -->
+
+  <div
+    style="
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      z-index:10000;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px;
+      background:white;
+      box-shadow:0 3px 12px rgba(0,0,0,0.12);
+    "
+  >
+
+    <div
+      style="
+        font-size:15px;
+        font-weight:800;
+      "
+    >
+      📍 Pilih Lokasi
+    </div>
+
+    <button
+      type="button"
+      onclick="closeFullscreenMap()"
+      style="
+        width:38px;
+        height:38px;
+        border:none;
+        border-radius:12px;
+        background:#f3f4f6;
+        font-size:20px;
+        cursor:pointer;
+      "
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <!-- PETA FULLSCREEN -->
+
+  <div
+    id="fullscreenMapContainer"
+    style="
+      width:100%;
+      height:100%;
+    "
+  ></div>
+
+
+  <!-- TOMBOL PILIH -->
+
+  <button
+    type="button"
+    onclick="confirmFullscreenLocation()"
+    style="
+      position:absolute;
+      left:16px;
+      right:16px;
+      bottom:20px;
+      z-index:10000;
+      padding:15px;
+      border:none;
+      border-radius:15px;
+      background:#2563eb;
+      color:white;
+      font-size:14px;
+      font-weight:800;
+      box-shadow:0 6px 18px rgba(37,99,235,0.3);
+      cursor:pointer;
+    "
+  >
+    ✓ Gunakan Lokasi Ini
+  </button>
+
+</div>
+  
   <!-- LEAFLET JS -->
 
   <script
@@ -2263,6 +2361,87 @@ function openGoogleMaps() {
   );
 
     }
+
+    /* =========================
+   FULLSCREEN MAP
+========================= */
+
+let fullscreenMap = null;
+let fullscreenMarker = null;
+let fullscreenLocation = null;
+let fullscreenTarget = null;
+
+
+function openFullscreenMap() {
+
+  fullscreenTarget =
+    homeMarker === null ? "home" : "school";
+
+  document
+    .getElementById("fullscreenMap")
+    .style.display = "block";
+
+
+  setTimeout(function() {
+
+    if (fullscreenMap === null) {
+
+      fullscreenMap = L.map(
+        "fullscreenMapContainer"
+      ).setView(
+        map.getCenter(),
+        map.getZoom()
+      );
+
+
+      L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap"
+        }
+      ).addTo(fullscreenMap);
+
+    }
+
+
+    fullscreenMap.invalidateSize();
+
+
+    if (fullscreenTarget === "home" && homeLocation) {
+
+      fullscreenMap.setView(
+        homeLocation,
+        17
+      );
+
+    }
+
+    else if (
+      fullscreenTarget === "school" &&
+      schoolLocation
+    ) {
+
+      fullscreenMap.setView(
+        schoolLocation,
+        17
+      );
+
+    }
+
+
+  }, 100);
+
+}
+
+
+function closeFullscreenMap() {
+
+  document
+    .getElementById("fullscreenMap")
+    .style.display = "none";
+
+}
   </script>
 
 </body>

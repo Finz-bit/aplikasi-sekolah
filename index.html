@@ -2385,6 +2385,8 @@ function openFullscreenMap() {
   setTimeout(function() {
 
     if (fullscreenMap === null) {
+      const selectedMap =
+  document.getElementById("mapType").value;
 
       fullscreenMap = L.map(
         "fullscreenMapContainer"
@@ -2394,13 +2396,61 @@ function openFullscreenMap() {
       );
 
 
-      L.tileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-          maxZoom: 19,
-          attribution: "&copy; OpenStreetMap"
-        }
-      ).addTo(fullscreenMap);
+      /* =========================
+   JENIS PETA FULLSCREEN
+========================= */
+
+let fullscreenMapLayer = null;
+
+if (selectedMap === "street") {
+
+  fullscreenMapLayer = L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution: "&copy; OpenStreetMap contributors"
+    }
+  );
+
+}
+
+else if (selectedMap === "satellite") {
+
+  fullscreenMapLayer = L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    {
+      attribution: "Tiles &copy; Esri"
+    }
+  );
+
+}
+
+else if (selectedMap === "terrain") {
+
+  fullscreenMapLayer = L.tileLayer(
+    "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    {
+      attribution:
+        "Map data &copy; OpenStreetMap contributors, SRTM | Map style &copy; OpenTopoMap"
+    }
+  );
+
+}
+
+else if (selectedMap === "dark") {
+
+  fullscreenMapLayer = L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    {
+      attribution:
+        "&copy; OpenStreetMap contributors &copy; CARTO"
+    }
+  );
+
+}
+
+if (fullscreenMapLayer) {
+  fullscreenMapLayer.addTo(fullscreenMap);
+}
 
 
       /* KLIK PETA FULLSCREEN */

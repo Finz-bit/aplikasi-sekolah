@@ -6,6 +6,7 @@
 
   <title>Aplikasi Sekolah</title>
 
+  <!-- LEAFLET -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -216,6 +217,10 @@
 
 <body>
 
+<!-- =========================
+     HALAMAN LOGIN
+========================= -->
+
 <div id="loginPage" style="
   position:fixed;
   inset:0;
@@ -341,14 +346,19 @@
 
   <main class="container">
 
+    <!-- =========================
+         BERANDA
+    ========================== -->
+
     <section id="homePage" class="page">
 
       <div class="welcome">
-        <h2>Selamat Datang 👋</h2>
+        <h2 id="welcomeUserText">Selamat Datang 👋</h2>
 
         <p>
           Pilih fitur yang ingin kamu gunakan.
         </p>
+        <button onclick="logoutUser()" style="margin-top:12px; padding:8px 14px; background:#dc2626; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">Keluar (Logout)</button>
       </div>
 
 
@@ -401,15 +411,15 @@
         
         <div
           class="card"
-          onclick="openPage('scanQRPage')"
+          onclick="checkTeacherAccess()"
         >
 
-          <div class="icon">▣</div>
+          <div class="icon">📷</div>
 
-          <h3>Scan QR</h3>
+          <h3>Scan QR (Khusus Guru)</h3>
 
           <p>
-            Scan QR siswa untuk melakukan absensi.
+            Scan QR siswa untuk validasi hadir atau alpha/bolos.
           </p>
 
         </div>
@@ -417,6 +427,10 @@
 
     </section>
 
+
+    <!-- =========================
+         JARAK KE SEKOLAH
+    ========================== -->
 
     <section id="distancePage" class="page">
 
@@ -489,6 +503,8 @@
           "
         >
 
+        <!-- CARA MENGGUNAKAN -->
+
         <div
           style="
             margin-bottom:18px;
@@ -551,6 +567,8 @@
           </div>
 
 
+          <!-- LANGKAH 1 -->
+
           <div
             style="
               display:flex;
@@ -591,6 +609,8 @@
           </div>
 
 
+          <!-- LANGKAH 2 -->
+
           <div
             style="
               display:flex;
@@ -630,6 +650,8 @@
 
           </div>
 
+
+          <!-- LANGKAH 3 -->
 
           <div
             style="
@@ -672,8 +694,12 @@
         </div>
 
 
+        <!-- PETA -->
+
         <div id="map"></div>
             
+        <!-- PILIH LOKASI FULLSCREEN -->
+
         <button
           type="button"
           onclick="openFullscreenMap()"
@@ -693,6 +719,10 @@
         >
           📍 Pilih Lokasi di Peta
         </button>
+
+        <!-- =========================
+             JENIS PETA
+        ========================= -->
 
         <div style="margin-top:18px;">
 
@@ -716,6 +746,8 @@
             "
           >
 
+            <!-- JALAN -->
+
             <button
               type="button"
               onclick="selectMapType('street')"
@@ -736,6 +768,8 @@
             </button>
 
 
+            <!-- SATELIT -->
+
             <button
               type="button"
               onclick="selectMapType('satellite')"
@@ -755,6 +789,8 @@
             </button>
 
 
+            <!-- TERRAIN -->
+
             <button
               type="button"
               onclick="selectMapType('terrain')"
@@ -773,6 +809,8 @@
               ⛰️ Terrain
             </button>
 
+
+            <!-- DARK -->
 
             <button
               type="button"
@@ -797,6 +835,8 @@
         </div>
 
 
+        <!-- LOKASI SAYA -->
+
         <button
           class="calculate"
           onclick="useMyLocation()"
@@ -817,6 +857,8 @@
           📍 Gunakan Lokasi Saya
         </button>
 
+
+        <!-- CARI SEKOLAH -->
 
         <div
           style="
@@ -891,6 +933,10 @@
 
         </div>
 
+        <!-- =========================
+             TRANSPORTASI
+        ========================= -->
+
         <div style="margin-top:20px;">
 
           <label
@@ -913,6 +959,8 @@
             "
           >
 
+
+            <!-- JALAN KAKI -->
 
             <button
               id="walkBtn"
@@ -955,6 +1003,8 @@
             </button>
 
 
+            <!-- MOTOR -->
+
             <button
               id="motorBtn"
               onclick="selectTransport('motor')"
@@ -995,6 +1045,8 @@
 
             </button>
 
+
+            <!-- MOBIL -->
 
             <button
               id="carBtn"
@@ -1041,6 +1093,8 @@
 
         </div>
                 
+        <!-- STATUS LOKASI -->
+
         <div
           style="
             margin-top:20px;
@@ -1048,6 +1102,8 @@
             gap:12px;
           "
         >
+
+          <!-- RUMAH -->
 
           <div
             style="
@@ -1113,6 +1169,8 @@
 
           </div>
 
+
+          <!-- SEKOLAH -->
 
           <div
             style="
@@ -1224,6 +1282,8 @@
 
         </div>
 
+        <!-- BUTTON -->
+
         <div
           style="
             display:grid;
@@ -1232,6 +1292,8 @@
             margin-top:18px;
           "
         >
+
+          <!-- HITUNG -->
 
           <button
             class="calculate"
@@ -1253,6 +1315,8 @@
           </button>
 
 
+          <!-- RESET -->
+
           <button
             class="reset"
             onclick="resetMap()"
@@ -1273,6 +1337,8 @@
 
         </div>
 
+        <!-- HASIL -->
+
         <div
           id="result"
           class="result"
@@ -1286,6 +1352,8 @@
             box-shadow:0 10px 30px rgba(0,0,0,0.07);
           "
         >
+
+          <!-- HEADER -->
 
           <div
             style="
@@ -1339,6 +1407,8 @@
           </div>
 
 
+          <!-- JARAK & WAKTU -->
+
           <div
             style="
               display:grid;
@@ -1346,6 +1416,8 @@
               gap:10px;
             "
           >
+
+            <!-- JARAK -->
 
             <div
               style="
@@ -1395,6 +1467,8 @@
 
             </div>
 
+
+            <!-- WAKTU -->
 
             <div
               style="
@@ -1447,6 +1521,8 @@
           </div>
 
 
+          <!-- INFO -->
+
           <div
             style="
               margin-top:12px;
@@ -1462,6 +1538,8 @@
             dan kepadatan jalan.
           </div>
 
+
+          <!-- GOOGLE MAPS -->
 
           <button
             type="button"
@@ -1491,6 +1569,10 @@
 
   </main>
 
+<!-- =========================
+     FULLSCREEN MAP
+========================= -->
+
 <div
   id="fullscreenMap"
   style="
@@ -1501,6 +1583,8 @@
     background:white;
   "
 >
+
+  <!-- HEADER -->
 
   <div
     style="
@@ -1546,6 +1630,8 @@
   </div>
 
 
+  <!-- PETA FULLSCREEN -->
+
   <div
     id="fullscreenMapContainer"
     style="
@@ -1554,6 +1640,8 @@
     "
   ></div>
 
+
+  <!-- TOMBOL PILIH -->
 
   <button
     type="button"
@@ -1580,7 +1668,11 @@
 
 </div>
 
-  <section id="attendancePage" class="page">
+  <!-- =========================
+     ABSENSI SISWA
+========================== -->
+
+<section id="attendancePage" class="page">
   <button
     class="back"
     onclick="openPage('homePage')"
@@ -1641,6 +1733,8 @@
     </div>
 
 
+    <!-- STATUS HARI INI -->
+
     <div
       style="
         padding:18px;
@@ -1684,102 +1778,7 @@
 
     </div>
 
-
-    <div
-      style="
-        margin-top:14px;
-        padding:16px;
-        border:1px solid #e5e7eb;
-        border-radius:16px;
-        background:#f8fafc;
-      "
-    >
-
-      <div
-        style="
-          font-size:12px;
-          color:#6b7280;
-          margin-bottom:8px;
-        "
-      >
-        PILIH STATUS KEHADIRAN
-      </div>
-
-
-      <div
-        style="
-          display:grid;
-          grid-template-columns:1fr 1fr;
-          gap:10px;
-        "
-      >
-
-        <button
-          type="button"
-          onclick="setAttendanceStatus('Hadir')"
-          style="
-            padding:13px;
-            border:1px solid #e5e7eb;
-            border-radius:12px;
-            background:white;
-            font-weight:700;
-            cursor:pointer;
-          "
-        >
-          ✓ Hadir
-        </button>
-
-
-        <button
-          type="button"
-          onclick="setAttendanceStatus('Terlambat')"
-          style="
-            padding:13px;
-            border:1px solid #e5e7eb;
-            border-radius:12px;
-            background:white;
-            font-weight:700;
-            cursor:pointer;
-          "
-        >
-          ⏱ Terlambat
-        </button>
-
-
-        <button
-          type="button"
-          onclick="setAttendanceStatus('Sakit')"
-          style="
-            padding:13px;
-            border:1px solid #e5e7eb;
-            border-radius:12px;
-            background:white;
-            font-weight:700;
-            cursor:pointer;
-          "
-        >
-          + Sakit
-        </button>
-
-
-        <button
-          type="button"
-          onclick="setAttendanceStatus('Alpha')"
-          style="
-            padding:13px;
-            border:1px solid #e5e7eb;
-            border-radius:12px;
-            background:white;
-            font-weight:700;
-            cursor:pointer;
-          "
-        >
-          ! Alpha
-        </button>
-
-      </div>
-
-    </div>
+    <!-- RIWAYAT -->
 
     <div
       style="
@@ -1796,7 +1795,7 @@
           margin-bottom:12px;
         "
       >
-        Riwayat Absensi
+        Riwayat Kehadiran
       </div>
 
       <div id="attendanceHistory">
@@ -1809,7 +1808,7 @@
             font-size:13px;
           "
         >
-          Belum ada riwayat absensi.
+          Memuat riwayat...
         </div>
 
       </div>
@@ -1820,7 +1819,11 @@
 
 </section>
 
-  <section id="qrPage" class="page">
+  <!-- =========================
+     QR SAYA
+========================== -->
+
+<section id="qrPage" class="page">
 
   <button
     class="back"
@@ -1882,6 +1885,8 @@
     </div>
 
 
+    <!-- QR CODE -->
+
     <div
       style="
         display:flex;
@@ -1923,17 +1928,22 @@
         line-height:1.5;
       "
     >
-      Tunjukkan QR Code ini kepada guru
-      saat melakukan absensi.
+      Tunjukkan QR Code ini langsung kepada guru menggunakan HP guru untuk melakukan absensi.
     </div>
 
   </div>
 
 </section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- QR CODE LIBRARY -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://unpkg.com/html5-qrcode"></script>
   
+<!-- =========================
+     SCAN QR (KHUSUS GURU)
+========================== -->
+
 <section id="scanQRPage" class="page">
 
   <button
@@ -1966,7 +1976,7 @@
           font-size:24px;
         "
       >
-        ▣
+        📷
       </div>
 
       <div>
@@ -1978,7 +1988,7 @@
             font-weight:800;
           "
         >
-          Scan QR Siswa
+          Scan QR Siswa (Guru)
         </h2>
 
         <p
@@ -1988,13 +1998,15 @@
             font-size:13px;
           "
         >
-          Arahkan kamera ke QR Code siswa
+          Gunakan HP Guru untuk memindai QR siswa dan menentukan kehadiran/bolos (Alpha)
         </p>
 
       </div>
 
     </div>
 
+
+    <!-- AREA SCANNER -->
 
     <div
       id="qrScanner"
@@ -2042,13 +2054,15 @@
         cursor:pointer;
       "
     >
-      📷 Mulai Scan
+      📷 Mulai Kamera Guru
     </button>
 
   </div>
 
 </section>
   
+  <!-- LEAFLET JS -->
+
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
   </script>
@@ -2057,8 +2071,10 @@
   <script>
 
     /* =========================
-       LOGIN FIREBASE
+       LOGIN FIREBASE & ROLE
     ========================= */
+
+    let currentUserRole = "student";
 
     async function loginUser() {
 
@@ -2129,6 +2145,20 @@
 
       }
 
+    }
+
+    async function logoutUser() {
+      if (window.firebaseSignOut && window.firebaseAuth) {
+        await window.firebaseSignOut(window.firebaseAuth);
+      }
+    }
+
+    function checkTeacherAccess() {
+      if (currentUserRole !== "teacher" && currentUserRole !== "guru") {
+        alert("Akses Ditolak: Menu ini khusus untuk akun Guru!");
+        return;
+      }
+      openPage('scanQRPage');
     }
 
 
@@ -2803,27 +2833,7 @@
     }
 
     /* =========================
-       PILIH STATUS ABSENSI
-    ========================= */
-
-    function setAttendanceStatus(status) {
-
-      const statusElement = document.getElementById("todayAttendanceStatus");
-      const timeElement = document.getElementById("todayAttendanceTime");
-
-      const now = new Date();
-      const jam = now.toLocaleTimeString("id-ID", {
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-
-      statusElement.textContent = status;
-      timeElement.textContent = "Status dipilih pada pukul " + jam;
-
-    }
-
-    /* =========================
-       QR SAYA
+       QR SAYA (IDENTITAS SISWA)
     ========================= */
 
     function generateStudentQR() {
@@ -2833,11 +2843,12 @@
 
       qrBox.innerHTML = "";
 
-      const studentId =
-        localStorage.getItem("studentQRId") ||
-        ("STUDENT-" + Date.now());
-
-      localStorage.setItem("studentQRId", studentId);
+      // Membuat atau mengambil ID unik siswa dari perangkatnya sendiri
+      let studentId = localStorage.getItem("studentQRId");
+      if (!studentId) {
+        studentId = "SISWA-" + Math.floor(100000 + Math.random() * 900000);
+        localStorage.setItem("studentQRId", studentId);
+      }
 
       new QRCode(qrBox, {
         text: studentId,
@@ -2853,7 +2864,7 @@
     });
 
     /* =========================
-       SCAN QR SISWA
+       SCAN QR OLEH GURU
     ========================= */
 
     let qrScanner = null;
@@ -2881,7 +2892,7 @@
           }
         },
         function(decodedText) {
-          result.textContent = "QR terdeteksi.";
+          result.textContent = "QR Siswa Berhasil Dipindai!";
 
           qrScanner.stop().then(function() {
             qrScanner = null;
@@ -2892,12 +2903,12 @@
           });
         },
         function(errorMessage) {
-          // Error scan sementara diabaikan
+          // Error scan frame diabaikan sampai QR ditemukan
         }
       ).catch(function(error) {
         console.error(error);
         qrScanner = null;
-        result.textContent = "Kamera tidak dapat digunakan. Pastikan izin kamera diberikan.";
+        result.textContent = "Kamera gagal diaktifkan. Pastikan izin kamera diberikan.";
       });
 
     }
@@ -2910,9 +2921,9 @@
         <div style="
           font-weight:800;
           font-size:16px;
-          color:#16a34a;
+          color:#2563eb;
         ">
-          ✓ QR Siswa Berhasil Dibaca
+          🔍 Validasi Kehadiran Siswa
         </div>
 
         <div style="
@@ -2920,7 +2931,7 @@
           font-size:13px;
           color:#374151;
         ">
-          ID Siswa
+          ID Siswa Terdeteksi:
         </div>
 
         <div style="
@@ -2931,6 +2942,7 @@
           border-radius:10px;
           font-weight:800;
           word-break:break-all;
+          color:#1f2937;
         ">
           ${studentId}
         </div>
@@ -2942,7 +2954,7 @@
           color:#374151;
           text-align:left;
         ">
-          Pilih Status Kehadiran
+          Tentukan Status (Hadir / Bolos / Alpha / Sakit):
         </div>
 
         <div style="
@@ -3002,7 +3014,7 @@
 
           <button
             type="button"
-            onclick="recordAttendance('${studentId}', 'Alpha')"
+            onclick="recordAttendance('${studentId}', 'Alpha / Bolos')"
             style="
               padding:13px;
               border:1px solid #fecaca;
@@ -3013,7 +3025,7 @@
               cursor:pointer;
             "
           >
-            ! Alpha
+            ! Alpha / Bolos
           </button>
 
         </div>
@@ -3059,7 +3071,7 @@
             color:#166534;
             font-weight:800;
           ">
-            ✓ Kehadiran Berhasil Dicatat
+            ✓ Berhasil Mencatat: ${status}
           </div>
 
           <div style="
@@ -3069,7 +3081,27 @@
           ">
             ID Siswa: <strong>${studentId}</strong>
           </div>
+          
+          <button
+            type="button"
+            onclick="startQRScanner()"
+            style="
+              width:100%;
+              margin-top:14px;
+              padding:12px;
+              border:none;
+              border-radius:12px;
+              background:#2563eb;
+              color:white;
+              font-weight:800;
+              cursor:pointer;
+            "
+          >
+            📷 Scan Siswa Lain
+          </button>
         `;
+
+        loadAttendanceHistory();
 
       } catch (error) {
         console.error(error);
@@ -3081,14 +3113,102 @@
             color:#991b1b;
             font-weight:800;
           ">
-            ✕ Gagal mencatat kehadiran
+            ✕ Gagal mencatat kehadiran ke database
           </div>
         `;
       }
 
     }
+
+    /* =========================
+       AMBIL RIWAYAT ABSENSI
+    ========================= */
+
+    async function loadAttendanceHistory() {
+      const historyContainer = document.getElementById("attendanceHistory");
+      if (!historyContainer || !window.firebaseDB) return;
+
+      try {
+        const querySnapshot = await window.firebaseGetDocs(
+          window.firebaseCollection(window.firebaseDB, "attendance")
+        );
+
+        if (querySnapshot.empty) {
+          historyContainer.innerHTML = `
+            <div style="padding:15px; text-align:center; color:#6b7280; font-size:13px;">
+              Belum ada riwayat absensi tercatat.
+            </div>
+          `;
+          return;
+        }
+
+        let html = "";
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          let badgeColor = "#166534";
+          let badgeBg = "#f0fdf4";
+
+          if (data.status === "Alpha / Bolos") {
+            badgeColor = "#b91c1c";
+            badgeBg = "#fef2f2";
+          } else if (data.status === "Terlambat") {
+            badgeColor = "#92400e";
+            badgeBg = "#fffbeb";
+          } else if (data.status === "Sakit") {
+            badgeColor = "#1d4ed8";
+            badgeBg = "#eff6ff";
+          }
+
+          html += `
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              align-items:center;
+              padding:12px;
+              margin-bottom:8px;
+              background:#f9fafb;
+              border:1px solid #e5e7eb;
+              border-radius:12px;
+            ">
+              <div>
+                <div style="font-weight:800; font-size:13px; color:#1f2937;">
+                  ${data.studentId}
+                </div>
+                <div style="font-size:11px; color:#6b7280; margin-top:2px;">
+                  Tercatat oleh sistem guru
+                </div>
+              </div>
+              <div style="
+                padding:6px 12px;
+                background:${badgeBg};
+                color:${badgeColor};
+                border-radius:8px;
+                font-size:12px;
+                font-weight:800;
+              ">
+                ${data.status}
+              </div>
+            </div>
+          `;
+        });
+
+        historyContainer.innerHTML = html;
+
+      } catch (error) {
+        console.error("Gagal memuat riwayat:", error);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(loadAttendanceHistory, 1000);
+    });
+
   </script>
     
+<!-- =========================
+     FIREBASE & AUTH LISTENER
+========================= -->
+
 <script type="module">
 
   import { initializeApp }
@@ -3097,13 +3217,17 @@
   import {
     getAuth,
     signInWithEmailAndPassword,
+    signOut,
     onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
   import {
     getFirestore,
+    doc,
+    getDoc,
     collection,
     addDoc,
+    getDocs,
     serverTimestamp
   }
     from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -3126,15 +3250,17 @@
 
   window.firebaseAuth = auth;
   window.firebaseSignIn = signInWithEmailAndPassword;
+  window.firebaseSignOut = signOut;
   window.firebaseOnAuthStateChanged = onAuthStateChanged;
   window.firebaseDB = db;
   window.firebaseCollection = collection;
   window.firebaseAddDoc = addDoc;
+  window.firebaseGetDocs = getDocs;
   window.firebaseServerTimestamp = serverTimestamp;
 
 
-  // PENGATUR TAMPILAN BERDASARKAN STATUS LOGIN FIREBASE
-  onAuthStateChanged(auth, function(user) {
+  // PENGATUR TAMPILAN BERDASARKAN STATUS LOGIN FIREBASE DAN CEK ROLE GURU
+  onAuthStateChanged(auth, async function(user) {
     const loginPage = document.getElementById("loginPage");
     const homePage = document.getElementById("homePage");
 
@@ -3143,9 +3269,28 @@
     if (user) {
       loginPage.style.display = "none";
       if (homePage) homePage.classList.add("active");
+
+      // Cek role user dari Firestore agar proteksi scan guru akurat
+      try {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          window.currentUserRole = userDoc.data().role || "student";
+        } else {
+          window.currentUserRole = "student";
+        }
+      } catch (e) {
+        console.error("Gagal mengambil role:", e);
+        window.currentUserRole = "student";
+      }
+
+      const welcomeText = document.getElementById("welcomeUserText");
+      if (welcomeText) {
+        welcomeText.textContent = `Selamat Datang (${window.currentUserRole.toUpperCase()}) 👋`;
+      }
     } else {
       loginPage.style.display = "flex";
       if (homePage) homePage.classList.remove("active");
+      window.currentUserRole = "student";
     }
   });
 

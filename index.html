@@ -3259,7 +3259,7 @@
   window.firebaseServerTimestamp = serverTimestamp;
 
 
-  // PENGATUR TAMPILAN BERDASARKAN STATUS LOGIN FIREBASE DAN CEK ROLE GURU
+    // PENGATUR TAMPILAN BERDASARKAN STATUS LOGIN FIREBASE DAN CEK ROLE GURU
   onAuthStateChanged(auth, async function(user) {
     const loginPage = document.getElementById("loginPage");
     const homePage = document.getElementById("homePage");
@@ -3270,13 +3270,22 @@
       loginPage.style.display = "none";
       if (homePage) homePage.classList.add("active");
 
-      // Cek role user dari Firestore agar proteksi scan guru akurat
+      window.currentUserRole = "student";
+
       try {
+        // Cek pertama: Cari berdasarkan UID dokumen
         const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists()) {
-          window.currentUserRole = userDoc.data().role || "student";
+        if (userDoc.exists() && userDoc.data().role) {
+          window.currentUserRole = userDoc.data().role;
         } else {
-          window.currentUserRole = "student";
+          // Cek kedua: Kalau pakai email, cari dokumen yang punya field email yang sama
+          const querySnapshot = await window.firebaseGetDocs(window.firebaseCollection(db, "users"));
+          querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            if (data.email === user.email && data.role) {
+              window.currentUserRole = data.role;
+            }
+          });
         }
       } catch (e) {
         console.error("Gagal mengambil role:", e);
@@ -3293,6 +3302,7 @@
       window.currentUserRole = "student";
     }
   });
+
 
   console.log("Firebase Auth + Firestore berhasil terhubung.");
 

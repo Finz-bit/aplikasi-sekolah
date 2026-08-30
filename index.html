@@ -216,24 +216,7 @@
   </style>
 </head>
 
-<script>
-document.getElementById("loginButton").addEventListener("click", function () {
 
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value;
-  const message = document.getElementById("loginMessage");
-
-  if (!email || !password) {
-    message.textContent = "Email dan password wajib diisi.";
-    return;
-  }
-
-  message.style.color = "#2563eb";
-  message.textContent = "Tombol login berhasil ditekan.";
-
-});
-</script>
-  
 <body>
 
 <!-- =========================
@@ -4023,5 +4006,23 @@ window.firebaseOnAuthStateChanged =
 
   </script>
 
+<script>
+document.getElementById("loginButton").addEventListener("click", function () {
+
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const message = document.getElementById("loginMessage");
+
+  if (!email || !password) {
+    message.textContent = "Email dan password wajib diisi.";
+    return;
+  }
+
+  message.style.color = "#2563eb";
+  message.textContent = "Tombol login berhasil ditekan.";
+
+});
+</script>
+  
 </body>
 </html>

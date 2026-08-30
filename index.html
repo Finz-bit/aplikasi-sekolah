@@ -3218,8 +3218,10 @@ function startQRScanner() {
     document.getElementById("scanResult");
 
   if (qrScanner) {
+
     result.textContent =
       "Scanner sudah berjalan.";
+
     return;
   }
 
@@ -3230,6 +3232,7 @@ function startQRScanner() {
     new Html5Qrcode("qrScanner");
 
   qrScanner.start(
+
     { facingMode: "environment" },
 
     {
@@ -3242,33 +3245,52 @@ function startQRScanner() {
 
     function(decodedText) {
 
-  result.textContent =
-    "QR terdeteksi: " + decodedText;
+      /* QR BERHASIL DIBACA */
 
-  qrScanner
-    .stop()
-    .then(function() {
-      qrScanner = null;
-    })
-    .catch(function() {
-      qrScanner = null;
-    });
+      result.textContent =
+        "QR terdeteksi.";
 
-    }
+      qrScanner
+        .stop()
+        .then(function() {
+
+          qrScanner = null;
+
+          /* Konfirmasi siswa */
+
+          confirmScannedStudent(decodedText);
+
+        })
+        .catch(function() {
+
+          qrScanner = null;
+
+          confirmScannedStudent(decodedText);
+
+        });
+
+    },
+
     function(errorMessage) {
-      // Abaikan error scan sementara
+
+      /* Error scan sementara
+         sengaja diabaikan */
+
     }
 
   ).catch(function(error) {
 
+    console.error(error);
+
     qrScanner = null;
 
     result.textContent =
-      "Kamera tidak dapat digunakan.";
+      "Kamera tidak dapat digunakan. Pastikan izin kamera diberikan.";
+
   });
 
 }
-
+    
 function confirmScannedStudent(studentId) {
 
   const result =

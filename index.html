@@ -3297,22 +3297,55 @@ function confirmScannedStudent(studentId) {
     document.getElementById("scanResult");
 
   result.innerHTML = `
-    <div style="font-weight:800;font-size:16px;">
-      ✓ Siswa Dikonfirmasi
+    <div style="
+      font-weight:800;
+      font-size:16px;
+      color:#16a34a;
+    ">
+      ✓ QR Siswa Berhasil Dibaca
     </div>
 
-    <div style="margin-top:8px;font-size:13px;">
-      ID Siswa:<br>
-      <strong>${studentId}</strong>
+    <div style="
+      margin-top:10px;
+      font-size:13px;
+      color:#374151;
+    ">
+      ID Siswa
     </div>
 
-    <div style="margin-top:10px;font-size:12px;color:#6b7280;">
-      Data nama dan kelas akan diambil dari database
-      setelah sistem siswa terhubung ke Firebase.
+    <div style="
+      margin-top:5px;
+      padding:10px;
+      background:white;
+      border:1px solid #e5e7eb;
+      border-radius:10px;
+      font-weight:800;
+      word-break:break-all;
+    ">
+      ${studentId}
     </div>
+
+    <button
+      type="button"
+      onclick="recordAttendance('${studentId}')"
+      style="
+        width:100%;
+        margin-top:14px;
+        padding:14px;
+        border:none;
+        border-radius:14px;
+        background:#2563eb;
+        color:white;
+        font-size:14px;
+        font-weight:800;
+        cursor:pointer;
+      "
+    >
+      ✓ Catat Kehadiran
+    </button>
   `;
 
-}
+    }
     
   </script>
 

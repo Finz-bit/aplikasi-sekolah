@@ -2381,6 +2381,7 @@ function openFullscreenMap() {
     .getElementById("fullscreenMap")
     .style.display = "block";
 
+
   setTimeout(function() {
 
     if (fullscreenMap === null) {
@@ -2392,19 +2393,72 @@ function openFullscreenMap() {
         map.getZoom()
       );
 
-      L.tileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-          maxZoom: 19,
-          attribution: "&copy; OpenStreetMap"
-        }
-      ).addTo(fullscreenMap);
 
-      /* KLIK PETA FULLSCREEN */
+      /* =========================
+         IKUTI JENIS PETA UTAMA
+      ========================== */
+
+      const selectedMap =
+        document.getElementById("mapType").value;
+
+
+      if (selectedMap === "street") {
+
+        L.tileLayer(
+          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          {
+            maxZoom: 19,
+            attribution: "&copy; OpenStreetMap"
+          }
+        ).addTo(fullscreenMap);
+
+      }
+
+      else if (selectedMap === "satellite") {
+
+        L.tileLayer(
+          "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+          {
+            maxZoom: 20,
+            attribution: "Google"
+          }
+        ).addTo(fullscreenMap);
+
+      }
+
+      else if (selectedMap === "terrain") {
+
+        L.tileLayer(
+          "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+          {
+            maxZoom: 17,
+            attribution: "&copy; OpenTopoMap"
+          }
+        ).addTo(fullscreenMap);
+
+      }
+
+      else if (selectedMap === "dark") {
+
+        L.tileLayer(
+          "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+          {
+            maxZoom: 20,
+            attribution: "&copy; CARTO"
+          }
+        ).addTo(fullscreenMap);
+
+      }
+
+
+      /* =========================
+         KLIK PETA FULLSCREEN
+      ========================== */
 
       fullscreenMap.on("click", function(e) {
 
         fullscreenLocation = e.latlng;
+
 
         if (fullscreenMarker) {
 
@@ -2414,18 +2468,23 @@ function openFullscreenMap() {
 
         }
 
+
         fullscreenMarker = L.marker(
           e.latlng
         )
           .addTo(fullscreenMap)
-          .bindPopup("📍 Lokasi yang dipilih")
+          .bindPopup(
+            "📍 Lokasi yang dipilih"
+          )
           .openPopup();
 
       });
 
     }
 
+
     fullscreenMap.invalidateSize();
+
 
     if (
       fullscreenTarget === "home" &&

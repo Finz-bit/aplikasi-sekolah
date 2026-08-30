@@ -273,6 +273,21 @@
 
         </div>
 
+                <div
+          class="card"
+          onclick="openPage('qrPage')"
+        >
+
+          <div class="icon">▣</div>
+
+          <h3>QR Saya</h3>
+
+          <p>
+            Tampilkan QR Code pribadi untuk absensi.
+          </p>
+
+                </div>
+
     </section>
 
 
@@ -1765,6 +1780,127 @@
   </div>
 
 </section>
+
+  <!-- =========================
+     QR SAYA
+========================== -->
+
+<section id="qrPage" class="page">
+
+  <button
+    class="back"
+    onclick="openPage('homePage')"
+  >
+    ← Kembali
+  </button>
+
+  <div class="card">
+
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        gap:14px;
+        margin-bottom:20px;
+      "
+    >
+
+      <div
+        style="
+          width:48px;
+          height:48px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background:#eff6ff;
+          border-radius:14px;
+          font-size:24px;
+        "
+      >
+        ▣
+      </div>
+
+      <div>
+
+        <h2
+          style="
+            margin:0;
+            font-size:22px;
+            font-weight:800;
+          "
+        >
+          QR Saya
+        </h2>
+
+        <p
+          style="
+            margin:4px 0 0;
+            color:#6b7280;
+            font-size:13px;
+          "
+        >
+          QR Code pribadi untuk absensi
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- QR CODE -->
+
+    <div
+      style="
+        display:flex;
+        justify-content:center;
+        padding:20px 0;
+      "
+    >
+
+      <div
+        id="studentQRCode"
+        style="
+          width:220px;
+          min-height:220px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background:#f8fafc;
+          border:1px solid #e5e7eb;
+          border-radius:18px;
+          color:#6b7280;
+          font-size:13px;
+          text-align:center;
+        "
+      >
+        QR Code belum dibuat
+      </div>
+
+    </div>
+
+
+    <div
+      style="
+        padding:14px;
+        background:#f8fafc;
+        border-radius:14px;
+        text-align:center;
+        color:#6b7280;
+        font-size:12px;
+        line-height:1.5;
+      "
+    >
+      Tunjukkan QR Code ini kepada guru
+      saat melakukan absensi.
+    </div>
+
+  </div>
+
+</section>
+
+  <!-- QR CODE LIBRARY -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   
   <!-- LEAFLET JS -->
 
@@ -2889,6 +3025,48 @@ function setAttendanceStatus(status) {
 
 }
 
+/* =========================
+   QR SAYA
+========================= */
+
+function generateStudentQR() {
+
+  const qrBox =
+    document.getElementById("studentQRCode");
+
+  if (!qrBox) return;
+
+  qrBox.innerHTML = "";
+
+  const studentId =
+    localStorage.getItem("studentQRId") ||
+    ("STUDENT-" + Date.now());
+
+  localStorage.setItem(
+    "studentQRId",
+    studentId
+  );
+
+  new QRCode(
+    qrBox,
+    {
+      text: studentId,
+      width: 200,
+      height: 200,
+      correctLevel: QRCode.CorrectLevel.M
+    }
+  );
+
+}
+
+    document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    generateStudentQR();
+
+  }
+);
     
   </script>
 

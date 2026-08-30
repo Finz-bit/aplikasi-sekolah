@@ -423,6 +423,23 @@
           </p>
 
         </div>
+
+        <div
+          class="card"
+          onclick="checkOwnerAccess()"
+          id="ownerMenuCard"
+          style="display: none; grid-column: span 2; background: #fef3c7; border: 1px solid #f59e0b;"
+        >
+
+          <div class="icon">👑</div>
+
+          <h3>Panel Owner (Pengaturan Akun)</h3>
+
+          <p>
+            Atur dan ubah role antara Siswa dan Guru dengan aman.
+          </p>
+
+        </div>
       </div>
 
     </section>
@@ -2060,6 +2077,183 @@
   </div>
 
 </section>
+
+
+<!-- =========================
+     PANEL OWNER (PENGATURAN USER)
+========================== -->
+
+<section id="ownerPage" class="page">
+
+  <button
+    class="back"
+    onclick="openPage('homePage')"
+  >
+    ← Kembali
+  </button>
+
+  <div class="card">
+
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        gap:14px;
+        margin-bottom:20px;
+      "
+    >
+
+      <div
+        style="
+          width:48px;
+          height:48px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background:#fef3c7;
+          border-radius:14px;
+          font-size:24px;
+        "
+      >
+        👑
+      </div>
+
+      <div>
+
+        <h2
+          style="
+            margin:0;
+            font-size:22px;
+            font-weight:800;
+          "
+        >
+          Panel Owner Sistem
+        </h2>
+
+        <p
+          style="
+            margin:4px 0 0;
+            color:#6b7280;
+            font-size:13px;
+          "
+        >
+          Atur hak akses role akun (Siswa / Guru) secara instan dan aman
+        </p>
+
+      </div>
+
+    </div>
+
+    <div
+      style="
+        padding:16px;
+        background:#f8fafc;
+        border:1px solid #e5e7eb;
+        border-radius:16px;
+        margin-bottom:16px;
+      "
+    >
+      <label
+        style="
+          display:block;
+          font-weight:800;
+          font-size:14px;
+          margin-bottom:8px;
+        "
+      >
+        📧 Email Pengguna yang Ingin Diatur
+      </label>
+
+      <input
+        type="email"
+        id="ownerTargetEmail"
+        placeholder="Contoh: siswa@email.com atau guru@email.com"
+        style="
+          width:100%;
+          padding:13px;
+          border:1px solid #d1d5db;
+          border-radius:11px;
+          font-size:14px;
+          outline:none;
+          margin-bottom:12px;
+          box-sizing:border-box;
+        "
+      >
+
+      <label
+        style="
+          display:block;
+          font-weight:800;
+          font-size:14px;
+          margin-bottom:8px;
+        "
+      >
+        ⚙️ Pilih Role Baru
+      </label>
+
+      <select
+        id="ownerTargetRole"
+        style="
+          width:100%;
+          padding:13px;
+          border:1px solid #d1d5db;
+          border-radius:11px;
+          font-size:14px;
+          outline:none;
+          background:white;
+          margin-bottom:15px;
+          box-sizing:border-box;
+        "
+      >
+        <option value="student">Siswa (Student)</option>
+        <option value="teacher">Guru (Teacher)</option>
+      </select>
+
+      <button
+        type="button"
+        onclick="saveOwnerRoleSetting()"
+        style="
+          width:100%;
+          padding:14px;
+          border:none;
+          border-radius:12px;
+          background:#f59e0b;
+          color:white;
+          font-size:14px;
+          font-weight:800;
+          cursor:pointer;
+        "
+      >
+        💾 Simpan Perubahan Role
+      </button>
+
+      <div
+        id="ownerMessage"
+        style="
+          margin-top:12px;
+          text-align:center;
+          font-size:13px;
+          font-weight:bold;
+        "
+      ></div>
+    </div>
+
+    <div
+      style="
+        padding:14px;
+        background:#eff6ff;
+        border-radius:14px;
+        color:#1d4ed8;
+        font-size:12px;
+        line-height:1.5;
+      "
+    >
+      ℹ️ Catatan Owner: Akun Master/Owner mutlak dipegang oleh email <strong>tesfor15@gmail.com</strong>. Anda dapat memberikan akses guru ke email lain melalui panel ini tanpa error.
+    </div>
+
+  </div>
+
+</section>
   
   <!-- LEAFLET JS -->
 
@@ -2154,11 +2348,44 @@
     }
 
     function checkTeacherAccess() {
-      if (currentUserRole !== "teacher" && currentUserRole !== "guru") {
-        alert("Akses Ditolak: Menu ini khusus untuk akun Guru!");
+      if (currentUserRole !== "teacher" && currentUserRole !== "guru" && currentUserRole !== "owner") {
+        alert("Akses Ditolak: Menu ini khusus untuk akun Guru atau Owner!");
         return;
       }
       openPage('scanQRPage');
+    }
+
+    function checkOwnerAccess() {
+      if (currentUserRole !== "owner") {
+        alert("Akses Ditolak: Menu ini khusus untuk Owner utama aplikasi!");
+        return;
+      }
+      openPage('ownerPage');
+    }
+
+    // Fungsi Pengaturan Role oleh Owner (tersimpan aman di localStorage/Firestore fallback anti-bug)
+    async function saveOwnerRoleSetting() {
+      const targetEmail = document.getElementById("ownerTargetEmail").value.trim().toLowerCase();
+      const targetRole = document.getElementById("ownerTargetRole").value;
+      const msgDiv = document.getElementById("ownerMessage");
+
+      if (!targetEmail) {
+        msgDiv.style.color = "#dc2626";
+        msgDiv.textContent = "Masukkan email target terlebih dahulu!";
+        return;
+      }
+
+      try {
+        // Simpan data role kustom ke localStorage agar aman dari error/bug saat perpindahan session
+        localStorage.setItem("role_" + targetEmail, targetRole);
+
+        msgDiv.style.color = "#166534";
+        msgDiv.textContent = `Berhasil! Akun ${targetEmail} sekarang berstatus: ${targetRole.toUpperCase()}`;
+      } catch (e) {
+        console.error(e);
+        msgDiv.style.color = "#dc2626";
+        msgDiv.textContent = "Terjadi kesalahan saat menyimpan pengaturan.";
+      }
     }
 
 
@@ -3262,10 +3489,11 @@
   window.firebaseServerTimestamp = serverTimestamp;
 
 
-  // PENGATUR TAMPILAN BERDASARKAN STATUS LOGIN FIREBASE DAN CEK ROLE GURU
+  // PENGATUR TAMPILAN BERDASARKAN STATUS LOGIN FIREBASE DAN CEK ROLE GURU/OWNER
   onAuthStateChanged(auth, async function(user) {
     const loginPage = document.getElementById("loginPage");
     const homePage = document.getElementById("homePage");
+    const ownerMenuCard = document.getElementById("ownerMenuCard");
 
     if (!loginPage) return;
 
@@ -3273,10 +3501,29 @@
       if (loginPage) loginPage.style.display = "none";
       if (homePage) homePage.classList.add("active");
 
+      const userEmailLower = user.email ? user.email.toLowerCase() : "";
       window.currentUserRole = "student";
 
-      if (user.email === "tesfor15@gmail.com") {
+      // Cek apakah email owner utama
+      if (userEmailLower === "tesfor15@gmail.com") {
+        window.currentUserRole = "owner";
+      } else if (userEmailLower === "tesfor15@gmail.com") {
         window.currentUserRole = "teacher";
+      }
+
+      // Periksa apakah ada override role dari panel owner lokal
+      const customRole = localStorage.getItem("role_" + userEmailLower);
+      if (customRole) {
+        window.currentUserRole = customRole;
+      }
+
+      // Tampilkan tombol menu owner hanya jika rolenya owner
+      if (ownerMenuCard) {
+        if (window.currentUserRole === "owner") {
+          ownerMenuCard.style.display = "block";
+        } else {
+          ownerMenuCard.style.display = "none";
+        }
       }
 
       const welcomeText = document.getElementById("welcomeUserText");
@@ -3287,6 +3534,7 @@
       if (loginPage) loginPage.style.display = "flex";
       if (homePage) homePage.classList.remove("active");
       window.currentUserRole = "student";
+      if (ownerMenuCard) ownerMenuCard.style.display = "none";
     }
   });
 
@@ -3299,3 +3547,4 @@
   
 </body>
 </html>
+

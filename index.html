@@ -2381,6 +2381,109 @@ window.addEventListener("DOMContentLoaded", function () {
   );
 
 });
+
+<script>
+/* =========================
+   LOGIN FIREBASE
+========================= */
+
+async function loginUser() {
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  const message =
+    document.getElementById("loginMessage");
+
+  if (!email || !password) {
+
+    message.textContent =
+      "Email dan password wajib diisi.";
+
+    return;
+  }
+
+  message.textContent = "Memproses login...";
+
+  try {
+
+    await window.firebaseSignIn(
+      window.firebaseAuth,
+      email,
+      password
+    );
+
+    message.textContent = "";
+
+  } catch (error) {
+
+    console.error(error);
+
+    if (error.code === "auth/invalid-credential") {
+
+      message.textContent =
+        "Email atau password salah.";
+
+    } else if (error.code === "auth/user-not-found") {
+
+      message.textContent =
+        "Akun tidak ditemukan.";
+
+    } else if (error.code === "auth/wrong-password") {
+
+      message.textContent =
+        "Password salah.";
+
+    } else {
+
+      message.textContent =
+        "Login gagal: " + error.message;
+
+    }
+
+  }
+
+}
+
+
+/* =========================
+   CEK STATUS LOGIN
+========================= */
+
+window.firebaseOnAuthStateChanged(
+  window.firebaseAuth,
+
+  function(user) {
+
+    const loginPage =
+      document.getElementById("loginPage");
+
+    const homePage =
+      document.getElementById("homePage");
+
+    if (user) {
+
+      // SUDAH LOGIN
+      loginPage.style.display = "none";
+
+      homePage.classList.add("active");
+
+    } else {
+
+      // BELUM LOGIN
+      loginPage.style.display = "flex";
+
+      homePage.classList.remove("active");
+
+    }
+
+  }
+
+);
+</script>
     
     /* =========================
        NAVIGASI

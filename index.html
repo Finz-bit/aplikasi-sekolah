@@ -2381,7 +2381,6 @@ function openFullscreenMap() {
     .getElementById("fullscreenMap")
     .style.display = "block";
 
-
   setTimeout(function() {
 
     if (fullscreenMap === null) {
@@ -2393,7 +2392,6 @@ function openFullscreenMap() {
         map.getZoom()
       );
 
-
       L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
@@ -2402,13 +2400,37 @@ function openFullscreenMap() {
         }
       ).addTo(fullscreenMap);
 
-    }
+      /* KLIK PETA FULLSCREEN */
 
+      fullscreenMap.on("click", function(e) {
+
+        fullscreenLocation = e.latlng;
+
+        if (fullscreenMarker) {
+
+          fullscreenMap.removeLayer(
+            fullscreenMarker
+          );
+
+        }
+
+        fullscreenMarker = L.marker(
+          e.latlng
+        )
+          .addTo(fullscreenMap)
+          .bindPopup("📍 Lokasi yang dipilih")
+          .openPopup();
+
+      });
+
+    }
 
     fullscreenMap.invalidateSize();
 
-
-    if (fullscreenTarget === "home" && homeLocation) {
+    if (
+      fullscreenTarget === "home" &&
+      homeLocation
+    ) {
 
       fullscreenMap.setView(
         homeLocation,
@@ -2429,7 +2451,6 @@ function openFullscreenMap() {
 
     }
 
-
   }, 100);
 
 }
@@ -2442,6 +2463,7 @@ function closeFullscreenMap() {
     .style.display = "none";
 
 }
+    
   </script>
 
 </body>

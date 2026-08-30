@@ -2474,6 +2474,19 @@ function closeFullscreenMap() {
     .getElementById("fullscreenMap")
     .style.display = "none";
 
+
+  if (fullscreenMap !== null) {
+
+    fullscreenMap.remove();
+
+    fullscreenMap = null;
+
+  }
+
+
+  fullscreenMarker = null;
+  fullscreenLocation = null;
+
 }
     
   </script>

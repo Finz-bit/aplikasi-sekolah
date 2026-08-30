@@ -3346,6 +3346,66 @@ function confirmScannedStudent(studentId) {
   `;
 
     }
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+  } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyDUASGhLLOOH4SGFNTqvqFC9H1ym7Ry9S0",
+
+    authDomain:
+      "aplikasi-kelas-xi-final.firebaseapp.com",
+
+    projectId:
+      "aplikasi-kelas-xi-final",
+
+    storageBucket:
+      "aplikasi-kelas-xi-final.firebasestorage.app",
+
+    messagingSenderId:
+      "586744561278",
+
+    appId:
+      "1:586744561278:web:ab5f13341eedba93dde22f"
+
+  };
+
+
+  const app =
+    initializeApp(firebaseConfig);
+
+
+  const db =
+    getFirestore(app);
+
+
+  window.firebaseDB = db;
+
+  window.firebaseCollection = collection;
+
+  window.firebaseAddDoc = addDoc;
+
+  window.firebaseServerTimestamp =
+    serverTimestamp;
+
+
+  console.log("Firebase berhasil terhubung.");
     
   </script>
 

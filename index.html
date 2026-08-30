@@ -218,6 +218,234 @@
 
 <body>
 
+<!-- =========================
+     HALAMAN LOGIN
+========================= -->
+
+<section
+  id="loginPage"
+  style="
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:#f4f6f8;
+  "
+>
+
+  <div
+    style="
+      width:100%;
+      max-width:400px;
+      background:white;
+      padding:25px;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    "
+  >
+
+    <h2
+      style="
+        font-size:24px;
+        margin-bottom:8px;
+      "
+    >
+      Login
+    </h2>
+
+    <p
+      style="
+        color:#6b7280;
+        font-size:13px;
+        margin-bottom:20px;
+      "
+    >
+      Masuk ke Aplikasi Sekolah
+    </p>
+
+    <input
+      id="loginEmail"
+      type="email"
+      placeholder="Email"
+      style="
+        width:100%;
+        padding:14px;
+        margin-bottom:10px;
+        border:1px solid #d1d5db;
+        border-radius:12px;
+        font-size:14px;
+        outline:none;
+      "
+    >
+
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="Password"
+      style="
+        width:100%;
+        padding:14px;
+        margin-bottom:12px;
+        border:1px solid #d1d5db;
+        border-radius:12px;
+        font-size:14px;
+        outline:none;
+      "
+    >
+
+    <div
+      id="loginMessage"
+      style="
+        min-height:20px;
+        margin-bottom:10px;
+        color:#dc2626;
+        font-size:13px;
+      "
+    ></div>
+
+    <button
+      type="button"
+      onclick="loginUser()"
+      style="
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:12px;
+        background:#2563eb;
+        color:white;
+        font-size:14px;
+        font-weight:800;
+        cursor:pointer;
+      "
+    >
+      MASUK
+    </button>
+
+  </div>
+
+</section>
+  
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div id="loginPage" style="
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:#f4f6f8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+">
+
+  <div style="
+    width:100%;
+    max-width:400px;
+    background:white;
+    padding:28px 22px;
+    border-radius:22px;
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+  ">
+
+    <div style="
+      width:58px;
+      height:58px;
+      margin:0 auto 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#eff6ff;
+      border-radius:17px;
+      font-size:28px;
+    ">
+      🎓
+    </div>
+
+    <h2 style="
+      text-align:center;
+      font-size:24px;
+      margin-bottom:6px;
+    ">
+      Aplikasi Sekolah
+    </h2>
+
+    <p style="
+      text-align:center;
+      color:#6b7280;
+      font-size:13px;
+      margin-bottom:24px;
+    ">
+      Silakan masuk ke akun kamu
+    </p>
+
+    <input
+      id="loginEmail"
+      type="email"
+      placeholder="Email"
+      autocomplete="email"
+      style="
+        width:100%;
+        padding:14px;
+        border:1px solid #d1d5db;
+        border-radius:12px;
+        font-size:14px;
+        outline:none;
+        margin-bottom:12px;
+      "
+    >
+
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+      style="
+        width:100%;
+        padding:14px;
+        border:1px solid #d1d5db;
+        border-radius:12px;
+        font-size:14px;
+        outline:none;
+        margin-bottom:14px;
+      "
+    >
+
+    <button
+      type="button"
+      onclick="loginUser()"
+      style="
+        width:100%;
+        padding:15px;
+        border:none;
+        border-radius:13px;
+        background:#2563eb;
+        color:white;
+        font-size:14px;
+        font-weight:800;
+        cursor:pointer;
+      "
+    >
+      MASUK
+    </button>
+
+    <div
+      id="loginMessage"
+      style="
+        margin-top:14px;
+        text-align:center;
+        font-size:13px;
+        color:#dc2626;
+        min-height:20px;
+      "
+    ></div>
+
+  </div>
+
+</div>
+  
   <header>
     <h1>Aplikasi Sekolah</h1>
     <p>Jarak ke Sekolah & Absensi Siswa</p>
@@ -2049,6 +2277,111 @@
 
   <script>
 
+/* =========================
+   LOGIN
+========================= */
+
+async function loginUser() {
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  const message =
+    document.getElementById("loginMessage");
+
+  if (!email || !password) {
+
+    message.textContent =
+      "Email dan password wajib diisi.";
+
+    return;
+  }
+
+  if (!window.firebaseAuth || !window.firebaseSignIn) {
+
+    message.textContent =
+      "Firebase Auth belum siap. Tunggu sebentar lalu coba lagi.";
+
+    return;
+  }
+
+  message.textContent =
+    "Sedang masuk...";
+
+  try {
+
+    await window.firebaseSignIn(
+      window.firebaseAuth,
+      email,
+      password
+    );
+
+    message.textContent =
+      "";
+
+  } catch (error) {
+
+    console.error(error);
+
+    if (error.code === "auth/invalid-credential") {
+
+      message.textContent =
+        "Email atau password salah.";
+
+    } else if (error.code === "auth/user-not-found") {
+
+      message.textContent =
+        "Akun tidak ditemukan.";
+
+    } else if (error.code === "auth/wrong-password") {
+
+      message.textContent =
+        "Password salah.";
+
+    } else {
+
+      message.textContent =
+        "Gagal masuk. Silakan coba lagi.";
+
+    }
+
+  }
+
+}
+
+window.addEventListener("DOMContentLoaded", function () {
+
+  if (!window.firebaseOnAuthStateChanged) {
+    return;
+  }
+
+  window.firebaseOnAuthStateChanged(
+    window.firebaseAuth,
+    function (user) {
+
+      const loginPage =
+        document.getElementById("loginPage");
+
+      if (!loginPage) return;
+
+      if (user) {
+
+        loginPage.style.display = "none";
+
+      } else {
+
+        loginPage.style.display = "flex";
+
+      }
+
+    }
+  );
+
+});
+    
     /* =========================
        NAVIGASI
     ========================== */
@@ -3497,9 +3830,10 @@ async function recordAttendance(studentId, status) {
     from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
   import {
-    getAuth
-  }
-    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
   import {
     getFirestore,
@@ -3547,6 +3881,12 @@ async function recordAttendance(studentId, status) {
   // DIPAKAI OLEH FILE LAIN
   window.firebaseAuth = auth;
 
+  window.firebaseSignIn =
+  signInWithEmailAndPassword;
+
+window.firebaseOnAuthStateChanged =
+  onAuthStateChanged;
+  
   window.firebaseDB = db;
 
   window.firebaseCollection = collection;

@@ -3242,19 +3242,45 @@ function startQRScanner() {
 
     function(decodedText) {
 
-      result.textContent =
-        "QR terdeteksi: " + decodedText;
+  result.innerHTML = `
+    <div style="font-weight:800;font-size:16px;margin-bottom:8px;">
+      ✓ QR Siswa Terdeteksi
+    </div>
 
-      qrScanner
-        .stop()
-        .then(function() {
-          qrScanner = null;
-        })
-        .catch(function() {
-          qrScanner = null;
-        });
+    <div style="font-size:13px;line-height:1.7;">
+      ID Siswa:<br>
+      <strong>${decodedText}</strong>
+    </div>
 
-    },
+    <button
+      type="button"
+      onclick="confirmScannedStudent('${decodedText}')"
+      style="
+        width:100%;
+        margin-top:14px;
+        padding:13px;
+        border:none;
+        border-radius:12px;
+        background:#2563eb;
+        color:white;
+        font-weight:800;
+        cursor:pointer;
+      "
+    >
+      ✓ Konfirmasi Siswa
+    </button>
+  `;
+
+  qrScanner
+    .stop()
+    .then(function() {
+      qrScanner = null;
+    })
+    .catch(function() {
+      qrScanner = null;
+    });
+
+    }
 
     function(errorMessage) {
       // Abaikan error scan sementara
@@ -3267,6 +3293,29 @@ function startQRScanner() {
     result.textContent =
       "Kamera tidak dapat digunakan.";
   });
+
+}
+
+function confirmScannedStudent(studentId) {
+
+  const result =
+    document.getElementById("scanResult");
+
+  result.innerHTML = `
+    <div style="font-weight:800;font-size:16px;">
+      ✓ Siswa Dikonfirmasi
+    </div>
+
+    <div style="margin-top:8px;font-size:13px;">
+      ID Siswa:<br>
+      <strong>${studentId}</strong>
+    </div>
+
+    <div style="margin-top:10px;font-size:12px;color:#6b7280;">
+      Data nama dan kelas akan diambil dari database
+      setelah sistem siswa terhubung ke Firebase.
+    </div>
+  `;
 
 }
     

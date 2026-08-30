@@ -3493,16 +3493,21 @@ async function recordAttendance(studentId, status) {
 
 <script type="module">
 
-  import { initializeApp } from
-    "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+  import {
+    getAuth
+  }
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
   import {
     getFirestore,
     collection,
     addDoc,
     serverTimestamp
-  } from
-    "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+  }
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
   const firebaseConfig = {
@@ -3527,13 +3532,20 @@ async function recordAttendance(studentId, status) {
   };
 
 
-  const app =
-    initializeApp(firebaseConfig);
+  // FIREBASE APP
+  const app = initializeApp(firebaseConfig);
 
 
-  const db =
-    getFirestore(app);
+  // AUTHENTICATION
+  const auth = getAuth(app);
 
+
+  // FIRESTORE
+  const db = getFirestore(app);
+
+
+  // DIPAKAI OLEH FILE LAIN
+  window.firebaseAuth = auth;
 
   window.firebaseDB = db;
 
@@ -3545,8 +3557,9 @@ async function recordAttendance(studentId, status) {
     serverTimestamp;
 
 
-  console.log("Firebase berhasil terhubung.");
-    
+  console.log("Firebase Auth + Firestore berhasil terhubung.");
+
+
   </script>
 
 </body>

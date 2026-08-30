@@ -3347,6 +3347,81 @@ function confirmScannedStudent(studentId) {
 
     }
 
+/* =========================
+   CATAT KEHADIRAN KE FIREBASE
+========================= */
+
+async function recordAttendance(studentId) {
+
+  const result =
+    document.getElementById("scanResult");
+
+  if (!window.firebaseDB) {
+
+    result.innerHTML = `
+      <div style="color:#dc2626;font-weight:800;">
+        Firebase belum terhubung.
+      </div>
+    `;
+
+    return;
+  }
+
+  try {
+
+    await window.firebaseAddDoc(
+      window.firebaseCollection(
+        window.firebaseDB,
+        "attendance"
+      ),
+      {
+        studentId: studentId,
+        status: "Hadir",
+        timestamp:
+          window.firebaseServerTimestamp()
+      }
+    );
+
+    result.innerHTML = `
+      <div style="
+        padding:15px;
+        background:#dcfce7;
+        border-radius:14px;
+        color:#166534;
+        font-weight:800;
+      ">
+        ✓ Kehadiran Berhasil Dicatat
+      </div>
+
+      <div style="
+        margin-top:8px;
+        font-size:13px;
+        color:#374151;
+      ">
+        ID Siswa: <strong>${studentId}</strong>
+      </div>
+    `;
+
+  } catch (error) {
+
+    console.error(error);
+
+    result.innerHTML = `
+      <div style="
+        padding:15px;
+        background:#fee2e2;
+        border-radius:14px;
+        color:#991b1b;
+        font-weight:800;
+      ">
+        ✕ Gagal mencatat kehadiran
+      </div>
+    `;
+
+  }
+
+}
+    
 <!-- =========================
      FIREBASE
 ========================= -->

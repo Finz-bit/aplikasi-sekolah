@@ -6,7 +6,6 @@
 
   <title>Aplikasi Sekolah</title>
 
-  <!-- LEAFLET -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -115,13 +114,13 @@
     }
 
     #map {
-  width: 100%;
-  height: 400px;
-  border-radius: 18px;
-  margin-top: 18px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e5e7eb;
+      width: 100%;
+      height: 400px;
+      border-radius: 18px;
+      margin-top: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e7eb;
     }
 
     .instruction {
@@ -174,20 +173,20 @@
     }
 
     .result {
-  display: none;
-  margin-top: 20px;
-  border-radius: 20px;
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
-}
+      display: none;
+      margin-top: 20px;
+      border-radius: 20px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+    }
 
-.result.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+    .result.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .result h3 {
       color: #2563eb;
@@ -200,13 +199,12 @@
     }
 
     @media (max-width: 600px) {
-
       .menu {
         grid-template-columns: 1fr;
       }
 
       #map {
-  height: 380px;
+        height: 380px;
       }
 
       .buttons {
@@ -216,121 +214,7 @@
   </style>
 </head>
 
-
 <body>
-
-<!-- =========================
-     HALAMAN LOGIN
-========================= -->
-
-<section
-  id="loginPage"
-  style="
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:#f4f6f8;
-  "
->
-
-  <div
-    style="
-      width:100%;
-      max-width:400px;
-      background:white;
-      padding:25px;
-      border-radius:20px;
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-    "
-  >
-
-    <h2
-      style="
-        font-size:24px;
-        margin-bottom:8px;
-      "
-    >
-      Login
-    </h2>
-
-    <p
-      style="
-        color:#6b7280;
-        font-size:13px;
-        margin-bottom:20px;
-      "
-    >
-      Masuk ke Aplikasi Sekolah
-    </p>
-
-    <input
-      id="loginEmail"
-      type="email"
-      placeholder="Email"
-      style="
-        width:100%;
-        padding:14px;
-        margin-bottom:10px;
-        border:1px solid #d1d5db;
-        border-radius:12px;
-        font-size:14px;
-        outline:none;
-      "
-    >
-
-    <input
-      id="loginPassword"
-      type="password"
-      placeholder="Password"
-      style="
-        width:100%;
-        padding:14px;
-        margin-bottom:12px;
-        border:1px solid #d1d5db;
-        border-radius:12px;
-        font-size:14px;
-        outline:none;
-      "
-    >
-
-    <div
-      id="loginMessage"
-      style="
-        min-height:20px;
-        margin-bottom:10px;
-        color:#dc2626;
-        font-size:13px;
-      "
-    ></div>
-
-    <button
-  type="button"
-  id="loginButton"
-  onclick="alert('TOMBOL BERFUNGSI')"
-      style="
-        width:100%;
-        padding:14px;
-        border:none;
-        border-radius:12px;
-        background:#2563eb;
-        color:white;
-        font-size:14px;
-        font-weight:800;
-        cursor:pointer;
-      "
-    >
-      MASUK
-    </button>
-
-  </div>
-
-</section>
-  
-<!-- =========================
-     LOGIN
-========================= -->
 
 <div id="loginPage" style="
   position:fixed;
@@ -417,6 +301,7 @@
 
     <button
       type="button"
+      id="loginButton"
       onclick="loginUser()"
       style="
         width:100%;
@@ -456,11 +341,7 @@
 
   <main class="container">
 
-    <!-- =========================
-         BERANDA
-    ========================== -->
-
-    <section id="homePage" class="page active">
+    <section id="homePage" class="page">
 
       <div class="welcome">
         <h2>Selamat Datang 👋</h2>
@@ -489,21 +370,21 @@
 
 
         <div
-  class="card"
-  onclick="openPage('attendancePage')"
->
+          class="card"
+          onclick="openPage('attendancePage')"
+        >
 
-  <div class="icon">📝</div>
+          <div class="icon">📝</div>
 
-  <h3>Absensi Siswa</h3>
+          <h3>Absensi Siswa</h3>
 
-  <p>
-    Kelola dan lihat kehadiran siswa.
-  </p>
+          <p>
+            Kelola dan lihat kehadiran siswa.
+          </p>
 
         </div>
 
-                <div
+        <div
           class="card"
           onclick="openPage('qrPage')"
         >
@@ -516,20 +397,20 @@
             Tampilkan QR Code pribadi untuk absensi.
           </p>
 
-                </div>
+        </div>
         
         <div
-  class="card"
-  onclick="openPage('scanQRPage')"
->
+          class="card"
+          onclick="openPage('scanQRPage')"
+        >
 
-  <div class="icon">▣</div>
+          <div class="icon">▣</div>
 
-  <h3>Scan QR</h3>
+          <h3>Scan QR</h3>
 
-  <p>
-    Scan QR siswa untuk melakukan absensi.
-  </p>
+          <p>
+            Scan QR siswa untuk melakukan absensi.
+          </p>
 
         </div>
       </div>
@@ -537,1151 +418,1078 @@
     </section>
 
 
-    <!-- =========================
-         JARAK KE SEKOLAH
-    ========================== -->
-
     <section id="distancePage" class="page">
 
-<button
-  class="back"
-  onclick="openPage('homePage')"
->
-  ← Kembali
-</button>
+      <button
+        class="back"
+        onclick="openPage('homePage')"
+      >
+        ← Kembali
+      </button>
 
       <div class="card">
 
-  <div
-    style="
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:18px;
-    "
-  >
-
-    <div
-      style="
-        width:48px;
-        height:48px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:#eff6ff;
-        border-radius:14px;
-        font-size:24px;
-      "
-    >
-      📍
-    </div>
-
-    <div>
-
-      <h2
-        style="
-          margin:0;
-          font-size:22px;
-          font-weight:800;
-        "
-      >
-        Jarak ke Sekolah
-      </h2>
-
-      <p
-        style="
-          margin:4px 0 0;
-          color:#6b7280;
-          font-size:13px;
-        "
-      >
-        Hitung perjalanan dari rumah ke sekolah
-      </p>
-
-    </div>
-
-  </div>
-
-  <div
-  style="
-    margin-bottom:18px;
-    padding:16px;
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-  "
->
-
-<!-- CARA MENGGUNAKAN -->
-
-<div
-  style="
-    margin-bottom:18px;
-    padding:17px;
-    background:#ffffff;
-    border:1px solid #e5e7eb;
-    border-radius:18px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.04);
-  "
->
-
-  <div
-    style="
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:16px;
-    "
-  >
-
-    <div
-      style="
-        width:38px;
-        height:38px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:#eff6ff;
-        border-radius:12px;
-        font-size:19px;
-      "
-    >
-      💡
-    </div>
-
-    <div>
-
-      <div
-        style="
-          font-size:15px;
-          font-weight:800;
-          color:#111827;
-        "
-      >
-        Cara menggunakan
-      </div>
-
-      <div
-        style="
-          margin-top:3px;
-          font-size:11px;
-          color:#6b7280;
-        "
-      >
-        Ikuti 3 langkah sederhana
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- LANGKAH 1 -->
-
-  <div
-    style="
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:12px;
-    "
-  >
-
-    <div
-      style="
-        width:32px;
-        height:32px;
-        min-width:32px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:#2563eb;
-        color:white;
-        border-radius:10px;
-        font-size:12px;
-        font-weight:800;
-      "
-    >
-      1
-    </div>
-
-    <div
-      style="
-        font-size:13px;
-        font-weight:600;
-        color:#374151;
-      "
-    >
-      Tentukan lokasi rumah
-    </div>
-
-  </div>
-
-
-  <!-- LANGKAH 2 -->
-
-  <div
-    style="
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:12px;
-    "
-  >
-
-    <div
-      style="
-        width:32px;
-        height:32px;
-        min-width:32px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:#2563eb;
-        color:white;
-        border-radius:10px;
-        font-size:12px;
-        font-weight:800;
-      "
-    >
-      2
-    </div>
-
-    <div
-      style="
-        font-size:13px;
-        font-weight:600;
-        color:#374151;
-      "
-    >
-      Tentukan lokasi sekolah
-    </div>
-
-  </div>
-
-
-  <!-- LANGKAH 3 -->
-
-  <div
-    style="
-      display:flex;
-      align-items:center;
-      gap:12px;
-    "
-  >
-
-    <div
-      style="
-        width:32px;
-        height:32px;
-        min-width:32px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:#2563eb;
-        color:white;
-        border-radius:10px;
-        font-size:12px;
-        font-weight:800;
-      "
-    >
-      3
-    </div>
-
-    <div
-      style="
-        font-size:13px;
-        font-weight:600;
-        color:#374151;
-      "
-    >
-      Tekan HITUNG JARAK
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- PETA -->
-
-<div id="map"></div>
-    
-<!-- PILIH LOKASI FULLSCREEN -->
-
-<button
-  type="button"
-  onclick="openFullscreenMap()"
-  style="
-    width:100%;
-    margin-top:12px;
-    padding:14px;
-    border:none;
-    border-radius:14px;
-    background:#111827;
-    color:white;
-    font-size:14px;
-    font-weight:800;
-    cursor:pointer;
-    box-shadow:0 5px 14px rgba(0,0,0,0.12);
-  "
->
-  📍 Pilih Lokasi di Peta
-</button>
-
-<!-- =========================
-     JENIS PETA
-========================= -->
-
-<div style="margin-top:18px;">
-
-  <label
-    style="
-      display:block;
-      font-size:14px;
-      font-weight:800;
-      margin-bottom:10px;
-    "
-  >
-    🗺️ Jenis Peta
-  </label>
-
-
-  <div
-    style="
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    "
-  >
-
-    <!-- JALAN -->
-
-    <button
-      type="button"
-      onclick="selectMapType('street')"
-      id="mapStreetBtn"
-      style="
-        padding:13px;
-        border:1px solid #dbe3ef;
-        border-radius:14px;
-        background:#eff6ff;
-        color:#2563eb;
-        font-weight:800;
-        font-size:13px;
-        cursor:pointer;
-        box-shadow:0 4px 12px rgba(0,0,0,.04);
-      "
-    >
-      🗺️ Jalan
-    </button>
-
-
-    <!-- SATELIT -->
-
-    <button
-      type="button"
-      onclick="selectMapType('satellite')"
-      id="mapSatelliteBtn"
-      style="
-        padding:13px;
-        border:1px solid #e5e7eb;
-        border-radius:14px;
-        background:white;
-        color:#374151;
-        font-weight:800;
-        font-size:13px;
-        cursor:pointer;
-      "
-    >
-      🛰️ Satelit
-    </button>
-
-
-    <!-- TERRAIN -->
-
-    <button
-      type="button"
-      onclick="selectMapType('terrain')"
-      id="mapTerrainBtn"
-      style="
-        padding:13px;
-        border:1px solid #e5e7eb;
-        border-radius:14px;
-        background:white;
-        color:#374151;
-        font-weight:800;
-        font-size:13px;
-        cursor:pointer;
-      "
-    >
-      ⛰️ Terrain
-    </button>
-
-
-    <!-- DARK -->
-
-    <button
-      type="button"
-      onclick="selectMapType('dark')"
-      id="mapDarkBtn"
-      style="
-        padding:13px;
-        border:1px solid #e5e7eb;
-        border-radius:14px;
-        background:white;
-        color:#374151;
-        font-weight:800;
-        font-size:13px;
-        cursor:pointer;
-      "
-    >
-      🌙 Dark
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- LOKASI SAYA -->
-
-<button
-  class="calculate"
-  onclick="useMyLocation()"
-  style="
-    width:100%;
-    margin-top:15px;
-    padding:14px;
-    border:none;
-    border-radius:14px;
-    background:#2563eb;
-    color:white;
-    font-size:14px;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow:0 4px 12px rgba(37,99,235,0.20);
-  "
->
-  📍 Gunakan Lokasi Saya
-</button>
-
-
-<!-- CARI SEKOLAH -->
-
-<div
-  style="
-    margin-top:15px;
-    padding:16px;
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-  "
->
-
-  <label
-    style="
-      display:block;
-      font-weight:800;
-      font-size:14px;
-      margin-bottom:10px;
-    "
-  >
-    🏫 Cari Sekolah
-  </label>
-
-  <div
-    style="
-      display:flex;
-      gap:8px;
-    "
-  >
-
-    <input
-      type="text"
-      id="schoolSearch"
-      placeholder="Contoh: SMA Negeri 1 Jepara"
-      style="
-        flex:1;
-        min-width:0;
-        padding:13px;
-        border:1px solid #d1d5db;
-        border-radius:11px;
-        font-size:14px;
-        outline:none;
-        box-sizing:border-box;
-      "
-    >
-
-    <button
-      onclick="searchSchool()"
-      style="
-        border:none;
-        background:#2563eb;
-        color:white;
-        padding:0 17px;
-        border-radius:11px;
-        font-weight:700;
-        cursor:pointer;
-      "
-    >
-      CARI
-    </button>
-
-  </div>
-
-  <div
-    style="
-      margin-top:8px;
-      color:#6b7280;
-      font-size:11px;
-    "
-  >
-    Ketik nama sekolah untuk menemukan lokasinya.
-  </div>
-
-</div>
-
-<!-- =========================
-     TRANSPORTASI
-========================= -->
-
-<div style="margin-top:20px;">
-
-  <label
-    style="
-      display:block;
-      font-size:14px;
-      font-weight:800;
-      margin-bottom:10px;
-    "
-  >
-    Pilih Transportasi
-  </label>
-
-
-  <div
-    style="
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-    "
-  >
-
-
-    <!-- JALAN KAKI -->
-
-    <button
-      id="walkBtn"
-      onclick="selectTransport('foot')"
-      style="
-        border:1px solid #e5e7eb;
-        background:#ffffff;
-        border-radius:16px;
-        padding:15px 5px;
-        cursor:pointer;
-        transition:all .2s ease;
-        box-shadow:0 3px 10px rgba(0,0,0,.04);
-      "
-    >
-
-      <div style="font-size:26px;">
-        🚶
-      </div>
-
-      <div
-        style="
-          margin-top:7px;
-          font-size:13px;
-          font-weight:800;
-        "
-      >
-        Jalan
-      </div>
-
-      <div
-        style="
-          font-size:10px;
-          color:#6b7280;
-          margin-top:4px;
-        "
-      >
-        4,5 km/jam
-      </div>
-
-    </button>
-
-
-    <!-- MOTOR -->
-
-    <button
-      id="motorBtn"
-      onclick="selectTransport('motor')"
-      style="
-        border:1px solid #e5e7eb;
-        background:#ffffff;
-        border-radius:16px;
-        padding:15px 5px;
-        cursor:pointer;
-        transition:all .2s ease;
-        box-shadow:0 3px 10px rgba(0,0,0,.04);
-      "
-    >
-
-      <div style="font-size:26px;">
-        🛵
-      </div>
-
-      <div
-        style="
-          margin-top:7px;
-          font-size:13px;
-          font-weight:800;
-        "
-      >
-        Motor
-      </div>
-
-      <div
-        style="
-          font-size:10px;
-          color:#6b7280;
-          margin-top:4px;
-        "
-      >
-        30 km/jam
-      </div>
-
-    </button>
-
-
-    <!-- MOBIL -->
-
-    <button
-      id="carBtn"
-      onclick="selectTransport('car')"
-      style="
-        border:1px solid #e5e7eb;
-        background:#ffffff;
-        border-radius:16px;
-        padding:15px 5px;
-        cursor:pointer;
-        transition:all .2s ease;
-        box-shadow:0 3px 10px rgba(0,0,0,.04);
-      "
-    >
-
-      <div style="font-size:26px;">
-        🚗
-      </div>
-
-      <div
-        style="
-          margin-top:7px;
-          font-size:13px;
-          font-weight:800;
-        "
-      >
-        Mobil
-      </div>
-
-      <div
-        style="
-          font-size:10px;
-          color:#6b7280;
-          margin-top:4px;
-        "
-      >
-        45 km/jam
-      </div>
-
-    </button>
-
-
-  </div>
-
-</div>
-
-        
-<!-- STATUS LOKASI -->
-
-<div
-  style="
-    margin-top:20px;
-    display:grid;
-    gap:12px;
-  "
->
-
-  <!-- RUMAH -->
-
-  <div
-    style="
-      padding:16px;
-      border:1px solid #e5e7eb;
-      border-radius:16px;
-      background:#ffffff;
-      box-shadow:0 5px 16px rgba(0,0,0,0.04);
-    "
-  >
-
-    <div
-      style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-      "
-    >
-
-      <div
-        style="
-          width:42px;
-          height:42px;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          background:#eff6ff;
-          border-radius:13px;
-          font-size:21px;
-          flex-shrink:0;
-        "
-      >
-        🏠
-      </div>
-
-      <div style="min-width:0;">
-
         <div
           style="
-            font-size:11px;
-            color:#6b7280;
-            font-weight:700;
-            margin-bottom:4px;
+            display:flex;
+            align-items:center;
+            gap:14px;
+            margin-bottom:18px;
           "
         >
-          LOKASI RUMAH
-        </div>
 
-        <strong
-          id="homeStatus"
-          style="
-            display:block;
-            font-size:13px;
-            color:#1f2937;
-          "
-        >
-          Belum dipilih
-        </strong>
+          <div
+            style="
+              width:48px;
+              height:48px;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              background:#eff6ff;
+              border-radius:14px;
+              font-size:24px;
+            "
+          >
+            📍
+          </div>
 
-      </div>
+          <div>
 
-    </div>
+            <h2
+              style="
+                margin:0;
+                font-size:22px;
+                font-weight:800;
+              "
+            >
+              Jarak ke Sekolah
+            </h2>
 
-  </div>
+            <p
+              style="
+                margin:4px 0 0;
+                color:#6b7280;
+                font-size:13px;
+              "
+            >
+              Hitung perjalanan dari rumah ke sekolah
+            </p>
 
-
-  <!-- SEKOLAH -->
-
-  <div
-    style="
-      padding:16px;
-      border:1px solid #e5e7eb;
-      border-radius:16px;
-      background:#ffffff;
-      box-shadow:0 5px 16px rgba(0,0,0,0.04);
-    "
-  >
-
-    <div
-      style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-      "
-    >
-
-      <div
-        style="
-          width:42px;
-          height:42px;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          background:#eff6ff;
-          border-radius:13px;
-          font-size:21px;
-          flex-shrink:0;
-        "
-      >
-        🏫
-      </div>
-
-      <div style="min-width:0;">
-
-        <div
-          style="
-            font-size:11px;
-            color:#6b7280;
-            font-weight:700;
-            margin-bottom:4px;
-          "
-        >
-          LOKASI SEKOLAH
-        </div>
-
-        <strong
-          id="schoolStatus"
-          style="
-            display:block;
-            font-size:13px;
-            color:#1f2937;
-          "
-        >
-          Belum dipilih
-        </strong>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-        <div
-  id="locationInfo"
-  style="
-    display:none;
-    margin-top:15px;
-    padding:15px;
-    background:#f9fafb;
-    border-radius:12px;
-    line-height:1.6;
-  "
->
-
-  <div style="font-weight:bold;">
-    🏠 Rumah
-  </div>
-
-  <div
-    id="homeAddress"
-    style="
-      color:#6b7280;
-      font-size:13px;
-      margin-bottom:12px;
-    "
-  >
-    Belum dipilih
-  </div>
-
-
-  <div style="font-weight:bold;">
-    🏫 Sekolah
-  </div>
-
-  <div
-    id="schoolAddress"
-    style="
-      color:#6b7280;
-      font-size:13px;
-    "
-  >
-    Belum dipilih
-  </div>
+          </div>
 
         </div>
 
-        <!-- BUTTON -->
-
-<div
-  style="
-    display:grid;
-    grid-template-columns:1.5fr 1fr;
-    gap:10px;
-    margin-top:18px;
-  "
->
-
-  <!-- HITUNG -->
-
-  <button
-    class="calculate"
-    onclick="calculateRoute()"
-    style="
-      width:100%;
-      padding:14px;
-      border:none;
-      border-radius:14px;
-      background:#2563eb;
-      color:white;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow:0 5px 14px rgba(37,99,235,.20);
-    "
-  >
-    HITUNG JARAK
-  </button>
-
-
-  <!-- RESET -->
-
-  <button
-    class="reset"
-    onclick="resetMap()"
-    style="
-      width:100%;
-      padding:14px;
-      border:1px solid #e5e7eb;
-      border-radius:14px;
-      background:#ffffff;
-      color:#374151;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-    "
-  >
-    RESET
-  </button>
-
-</div>
-<!-- HASIL -->
-
-<div
-  id="result"
-  class="result"
-  style="
-    display:none;
-    margin-top:20px;
-    padding:20px;
-    border-radius:20px;
-    background:#ffffff;
-    border:1px solid #e5e7eb;
-    box-shadow:0 10px 30px rgba(0,0,0,0.07);
-  "
->
-
-  <!-- HEADER -->
-
-  <div
-    style="
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:18px;
-    "
-  >
-
-    <div
-      style="
-        width:44px;
-        height:44px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:#eff6ff;
-        border-radius:14px;
-        font-size:22px;
-        flex-shrink:0;
-      "
-    >
-      📊
-    </div>
-
-    <div>
-
-      <div
-        style="
-          font-size:17px;
-          font-weight:800;
-          color:#111827;
-        "
-      >
-        Hasil Perjalanan
-      </div>
-
-      <div
-        style="
-          margin-top:3px;
-          font-size:12px;
-          color:#6b7280;
-        "
-      >
-        Ringkasan perjalanan kamu
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- JARAK & WAKTU -->
-
-  <div
-    style="
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    "
-  >
-
-    <!-- JARAK -->
-
-    <div
-      style="
-        padding:18px 10px;
-        background:#f8fafc;
-        border-radius:16px;
-        text-align:center;
-        border:1px solid #f1f5f9;
-      "
-    >
-
-      <div
-        style="
-          font-size:10px;
-          color:#6b7280;
-          font-weight:700;
-          letter-spacing:.5px;
-        "
-      >
-        JARAK
-      </div>
-
-      <div
-        style="
-          margin-top:7px;
-          font-size:25px;
-          font-weight:900;
-          color:#111827;
-        "
-      >
-
-        <span id="distanceResult">
-          0
-        </span>
-
-        <span
+        <div
           style="
-            font-size:13px;
-            font-weight:700;
-            color:#6b7280;
+            margin-bottom:18px;
+            padding:16px;
+            background:#f8fafc;
+            border:1px solid #e5e7eb;
+            border-radius:16px;
           "
         >
-          km
-        </span>
 
-      </div>
-
-    </div>
-
-
-    <!-- WAKTU -->
-
-    <div
-      style="
-        padding:18px 10px;
-        background:#f8fafc;
-        border-radius:16px;
-        text-align:center;
-        border:1px solid #f1f5f9;
-      "
-    >
-
-      <div
-        style="
-          font-size:10px;
-          color:#6b7280;
-          font-weight:700;
-          letter-spacing:.5px;
-        "
-      >
-        ESTIMASI WAKTU
-      </div>
-
-      <div
-        style="
-          margin-top:7px;
-          font-size:25px;
-          font-weight:900;
-          color:#111827;
-        "
-      >
-
-        <span id="timeResult">
-          0
-        </span>
-
-        <span
+        <div
           style="
-            font-size:13px;
-            font-weight:700;
-            color:#6b7280;
+            margin-bottom:18px;
+            padding:17px;
+            background:#ffffff;
+            border:1px solid #e5e7eb;
+            border-radius:18px;
+            box-shadow:0 6px 18px rgba(0,0,0,0.04);
           "
         >
-          menit
-        </span>
 
-      </div>
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:10px;
+              margin-bottom:16px;
+            "
+          >
 
-    </div>
+            <div
+              style="
+                width:38px;
+                height:38px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#eff6ff;
+                border-radius:12px;
+                font-size:19px;
+              "
+            >
+              💡
+            </div>
 
-  </div>
+            <div>
+
+              <div
+                style="
+                  font-size:15px;
+                  font-weight:800;
+                  color:#111827;
+                "
+              >
+                Cara menggunakan
+              </div>
+
+              <div
+                style="
+                  margin-top:3px;
+                  font-size:11px;
+                  color:#6b7280;
+                "
+              >
+                Ikuti 3 langkah sederhana
+              </div>
+
+            </div>
+
+          </div>
 
 
-  <!-- INFO -->
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:12px;
+              margin-bottom:12px;
+            "
+          >
 
-  <div
-    style="
-      margin-top:12px;
-      padding:12px 13px;
-      background:#f8fafc;
-      border-radius:13px;
-      color:#6b7280;
-      font-size:11px;
-      line-height:1.5;
-    "
-  >
-    ℹ️ Estimasi waktu dapat berbeda tergantung kondisi
-    dan kepadatan jalan.
-  </div>
+            <div
+              style="
+                width:32px;
+                height:32px;
+                min-width:32px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#2563eb;
+                color:white;
+                border-radius:10px;
+                font-size:12px;
+                font-weight:800;
+              "
+            >
+              1
+            </div>
+
+            <div
+              style="
+                font-size:13px;
+                font-weight:600;
+                color:#374151;
+              "
+            >
+              Tentukan lokasi rumah
+            </div>
+
+          </div>
 
 
-  <!-- GOOGLE MAPS -->
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:12px;
+              margin-bottom:12px;
+            "
+          >
 
-  <button
-    type="button"
-    onclick="openGoogleMaps()"
-    style="
-      width:100%;
-      margin-top:13px;
-      padding:15px;
-      border:none;
-      border-radius:15px;
-      background:#2563eb;
-      color:white;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow:0 6px 16px rgba(37,99,235,0.22);
-    "
-  >
-    🧭 Buka di Google Maps
-  </button>
+            <div
+              style="
+                width:32px;
+                height:32px;
+                min-width:32px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#2563eb;
+                color:white;
+                border-radius:10px;
+                font-size:12px;
+                font-weight:800;
+              "
+            >
+              2
+            </div>
 
-</div>
+            <div
+              style="
+                font-size:13px;
+                font-weight:600;
+                color:#374151;
+              "
+            >
+              Tentukan lokasi sekolah
+            </div>
 
+          </div>
+
+
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:12px;
+            "
+          >
+
+            <div
+              style="
+                width:32px;
+                height:32px;
+                min-width:32px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#2563eb;
+                color:white;
+                border-radius:10px;
+                font-size:12px;
+                font-weight:800;
+              "
+            >
+              3
+            </div>
+
+            <div
+              style="
+                font-size:13px;
+                font-weight:600;
+                color:#374151;
+              "
+            >
+              Tekan HITUNG JARAK
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div id="map"></div>
+            
+        <button
+          type="button"
+          onclick="openFullscreenMap()"
+          style="
+            width:100%;
+            margin-top:12px;
+            padding:14px;
+            border:none;
+            border-radius:14px;
+            background:#111827;
+            color:white;
+            font-size:14px;
+            font-weight:800;
+            cursor:pointer;
+            box-shadow:0 5px 14px rgba(0,0,0,0.12);
+          "
+        >
+          📍 Pilih Lokasi di Peta
+        </button>
+
+        <div style="margin-top:18px;">
+
+          <label
+            style="
+              display:block;
+              font-size:14px;
+              font-weight:800;
+              margin-bottom:10px;
+            "
+          >
+            🗺️ Jenis Peta
+          </label>
+
+
+          <div
+            style="
+              display:grid;
+              grid-template-columns:repeat(2,1fr);
+              gap:10px;
+            "
+          >
+
+            <button
+              type="button"
+              onclick="selectMapType('street')"
+              id="mapStreetBtn"
+              style="
+                padding:13px;
+                border:1px solid #dbe3ef;
+                border-radius:14px;
+                background:#eff6ff;
+                color:#2563eb;
+                font-weight:800;
+                font-size:13px;
+                cursor:pointer;
+                box-shadow:0 4px 12px rgba(0,0,0,.04);
+              "
+            >
+              🗺️ Jalan
+            </button>
+
+
+            <button
+              type="button"
+              onclick="selectMapType('satellite')"
+              id="mapSatelliteBtn"
+              style="
+                padding:13px;
+                border:1px solid #e5e7eb;
+                border-radius:14px;
+                background:white;
+                color:#374151;
+                font-weight:800;
+                font-size:13px;
+                cursor:pointer;
+              "
+            >
+              🛰️ Satelit
+            </button>
+
+
+            <button
+              type="button"
+              onclick="selectMapType('terrain')"
+              id="mapTerrainBtn"
+              style="
+                padding:13px;
+                border:1px solid #e5e7eb;
+                border-radius:14px;
+                background:white;
+                color:#374151;
+                font-weight:800;
+                font-size:13px;
+                cursor:pointer;
+              "
+            >
+              ⛰️ Terrain
+            </button>
+
+
+            <button
+              type="button"
+              onclick="selectMapType('dark')"
+              id="mapDarkBtn"
+              style="
+                padding:13px;
+                border:1px solid #e5e7eb;
+                border-radius:14px;
+                background:white;
+                color:#374151;
+                font-weight:800;
+                font-size:13px;
+                cursor:pointer;
+              "
+            >
+              🌙 Dark
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="calculate"
+          onclick="useMyLocation()"
+          style="
+            width:100%;
+            margin-top:15px;
+            padding:14px;
+            border:none;
+            border-radius:14px;
+            background:#2563eb;
+            color:white;
+            font-size:14px;
+            font-weight:700;
+            cursor:pointer;
+            box-shadow:0 4px 12px rgba(37,99,235,0.20);
+          "
+        >
+          📍 Gunakan Lokasi Saya
+        </button>
+
+
+        <div
+          style="
+            margin-top:15px;
+            padding:16px;
+            background:#f8fafc;
+            border:1px solid #e5e7eb;
+            border-radius:16px;
+          "
+        >
+
+          <label
+            style="
+              display:block;
+              font-weight:800;
+              font-size:14px;
+              margin-bottom:10px;
+            "
+          >
+            🏫 Cari Sekolah
+          </label>
+
+          <div
+            style="
+              display:flex;
+              gap:8px;
+            "
+          >
+
+            <input
+              type="text"
+              id="schoolSearch"
+              placeholder="Contoh: SMA Negeri 1 Jepara"
+              style="
+                flex:1;
+                min-width:0;
+                padding:13px;
+                border:1px solid #d1d5db;
+                border-radius:11px;
+                font-size:14px;
+                outline:none;
+                box-sizing:border-box;
+              "
+            >
+
+            <button
+              onclick="searchSchool()"
+              style="
+                border:none;
+                background:#2563eb;
+                color:white;
+                padding:0 17px;
+                border-radius:11px;
+                font-weight:700;
+                cursor:pointer;
+              "
+            >
+              CARI
+            </button>
+
+          </div>
+
+          <div
+            style="
+              margin-top:8px;
+              color:#6b7280;
+              font-size:11px;
+            "
+          >
+            Ketik nama sekolah untuk menemukan lokasinya.
+          </div>
+
+        </div>
+
+        <div style="margin-top:20px;">
+
+          <label
+            style="
+              display:block;
+              font-size:14px;
+              font-weight:800;
+              margin-bottom:10px;
+            "
+          >
+            Pilih Transportasi
+          </label>
+
+
+          <div
+            style="
+              display:grid;
+              grid-template-columns:repeat(3,1fr);
+              gap:10px;
+            "
+          >
+
+
+            <button
+              id="walkBtn"
+              onclick="selectTransport('foot')"
+              style="
+                border:1px solid #e5e7eb;
+                background:#ffffff;
+                border-radius:16px;
+                padding:15px 5px;
+                cursor:pointer;
+                transition:all .2s ease;
+                box-shadow:0 3px 10px rgba(0,0,0,.04);
+              "
+            >
+
+              <div style="font-size:26px;">
+                🚶
+              </div>
+
+              <div
+                style="
+                  margin-top:7px;
+                  font-size:13px;
+                  font-weight:800;
+                "
+              >
+                Jalan
+              </div>
+
+              <div
+                style="
+                  font-size:10px;
+                  color:#6b7280;
+                  margin-top:4px;
+                "
+              >
+                4,5 km/jam
+              </div>
+
+            </button>
+
+
+            <button
+              id="motorBtn"
+              onclick="selectTransport('motor')"
+              style="
+                border:1px solid #e5e7eb;
+                background:#ffffff;
+                border-radius:16px;
+                padding:15px 5px;
+                cursor:pointer;
+                transition:all .2s ease;
+                box-shadow:0 3px 10px rgba(0,0,0,.04);
+              "
+            >
+
+              <div style="font-size:26px;">
+                🛵
+              </div>
+
+              <div
+                style="
+                  margin-top:7px;
+                  font-size:13px;
+                  font-weight:800;
+                "
+              >
+                Motor
+              </div>
+
+              <div
+                style="
+                  font-size:10px;
+                  color:#6b7280;
+                  margin-top:4px;
+                "
+              >
+                30 km/jam
+              </div>
+
+            </button>
+
+
+            <button
+              id="carBtn"
+              onclick="selectTransport('car')"
+              style="
+                border:1px solid #e5e7eb;
+                background:#ffffff;
+                border-radius:16px;
+                padding:15px 5px;
+                cursor:pointer;
+                transition:all .2s ease;
+                box-shadow:0 3px 10px rgba(0,0,0,.04);
+              "
+            >
+
+              <div style="font-size:26px;">
+                🚗
+              </div>
+
+              <div
+                style="
+                  margin-top:7px;
+                  font-size:13px;
+                  font-weight:800;
+                "
+              >
+                Mobil
+              </div>
+
+              <div
+                style="
+                  font-size:10px;
+                  color:#6b7280;
+                  margin-top:4px;
+                "
+              >
+                45 km/jam
+              </div>
+
+            </button>
+
+
+          </div>
+
+        </div>
+                
+        <div
+          style="
+            margin-top:20px;
+            display:grid;
+            gap:12px;
+          "
+        >
+
+          <div
+            style="
+              padding:16px;
+              border:1px solid #e5e7eb;
+              border-radius:16px;
+              background:#ffffff;
+              box-shadow:0 5px 16px rgba(0,0,0,0.04);
+            "
+          >
+
+            <div
+              style="
+                display:flex;
+                align-items:center;
+                gap:12px;
+              "
+            >
+
+              <div
+                style="
+                  width:42px;
+                  height:42px;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  background:#eff6ff;
+                  border-radius:13px;
+                  font-size:21px;
+                  flex-shrink:0;
+                "
+              >
+                🏠
+              </div>
+
+              <div style="min-width:0;">
+
+                <div
+                  style="
+                    font-size:11px;
+                    color:#6b7280;
+                    font-weight:700;
+                    margin-bottom:4px;
+                  "
+                >
+                  LOKASI RUMAH
+                </div>
+
+                <strong
+                  id="homeStatus"
+                  style="
+                    display:block;
+                    font-size:13px;
+                    color:#1f2937;
+                  "
+                >
+                  Belum dipilih
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            style="
+              padding:16px;
+              border:1px solid #e5e7eb;
+              border-radius:16px;
+              background:#ffffff;
+              box-shadow:0 5px 16px rgba(0,0,0,0.04);
+            "
+          >
+
+            <div
+              style="
+                display:flex;
+                align-items:center;
+                gap:12px;
+              "
+            >
+
+              <div
+                style="
+                  width:42px;
+                  height:42px;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  background:#eff6ff;
+                  border-radius:13px;
+                  font-size:21px;
+                  flex-shrink:0;
+                "
+              >
+                🏫
+              </div>
+
+              <div style="min-width:0;">
+
+                <div
+                  style="
+                    font-size:11px;
+                    color:#6b7280;
+                    font-weight:700;
+                    margin-bottom:4px;
+                  "
+                >
+                  LOKASI SEKOLAH
+                </div>
+
+                <strong
+                  id="schoolStatus"
+                  style="
+                    display:block;
+                    font-size:13px;
+                    color:#1f2937;
+                  "
+                >
+                  Belum dipilih
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div
+          id="locationInfo"
+          style="
+            display:none;
+            margin-top:15px;
+            padding:15px;
+            background:#f9fafb;
+            border-radius:12px;
+            line-height:1.6;
+          "
+        >
+
+          <div style="font-weight:bold;">
+            🏠 Rumah
+          </div>
+
+          <div
+            id="homeAddress"
+            style="
+              color:#6b7280;
+              font-size:13px;
+              margin-bottom:12px;
+            "
+          >
+            Belum dipilih
+          </div>
+
+
+          <div style="font-weight:bold;">
+            🏫 Sekolah
+          </div>
+
+          <div
+            id="schoolAddress"
+            style="
+              color:#6b7280;
+              font-size:13px;
+            "
+          >
+            Belum dipilih
+          </div>
+
+        </div>
+
+        <div
+          style="
+            display:grid;
+            grid-template-columns:1.5fr 1fr;
+            gap:10px;
+            margin-top:18px;
+          "
+        >
+
+          <button
+            class="calculate"
+            onclick="calculateRoute()"
+            style="
+              width:100%;
+              padding:14px;
+              border:none;
+              border-radius:14px;
+              background:#2563eb;
+              color:white;
+              font-size:14px;
+              font-weight:800;
+              cursor:pointer;
+              box-shadow:0 5px 14px rgba(37,99,235,.20);
+            "
+          >
+            HITUNG JARAK
+          </button>
+
+
+          <button
+            class="reset"
+            onclick="resetMap()"
+            style="
+              width:100%;
+              padding:14px;
+              border:1px solid #e5e7eb;
+              border-radius:14px;
+              background:#ffffff;
+              color:#374151;
+              font-size:14px;
+              font-weight:800;
+              cursor:pointer;
+            "
+          >
+            RESET
+          </button>
+
+        </div>
+
+        <div
+          id="result"
+          class="result"
+          style="
+            display:none;
+            margin-top:20px;
+            padding:20px;
+            border-radius:20px;
+            background:#ffffff;
+            border:1px solid #e5e7eb;
+            box-shadow:0 10px 30px rgba(0,0,0,0.07);
+          "
+        >
+
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:12px;
+              margin-bottom:18px;
+            "
+          >
+
+            <div
+              style="
+                width:44px;
+                height:44px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#eff6ff;
+                border-radius:14px;
+                font-size:22px;
+                flex-shrink:0;
+              "
+            >
+              📊
+            </div>
+
+            <div>
+
+              <div
+                style="
+                  font-size:17px;
+                  font-weight:800;
+                  color:#111827;
+                "
+              >
+                Hasil Perjalanan
+              </div>
+
+              <div
+                style="
+                  margin-top:3px;
+                  font-size:12px;
+                  color:#6b7280;
+                "
+              >
+                Ringkasan perjalanan kamu
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            style="
+              display:grid;
+              grid-template-columns:1fr 1fr;
+              gap:10px;
+            "
+          >
+
+            <div
+              style="
+                padding:18px 10px;
+                background:#f8fafc;
+                border-radius:16px;
+                text-align:center;
+                border:1px solid #f1f5f9;
+              "
+            >
+
+              <div
+                style="
+                  font-size:10px;
+                  color:#6b7280;
+                  font-weight:700;
+                  letter-spacing:.5px;
+                "
+              >
+                JARAK
+              </div>
+
+              <div
+                style="
+                  margin-top:7px;
+                  font-size:25px;
+                  font-weight:900;
+                  color:#111827;
+                "
+              >
+
+                <span id="distanceResult">
+                  0
+                </span>
+
+                <span
+                  style="
+                    font-size:13px;
+                    font-weight:700;
+                    color:#6b7280;
+                  "
+                >
+                  km
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div
+              style="
+                padding:18px 10px;
+                background:#f8fafc;
+                border-radius:16px;
+                text-align:center;
+                border:1px solid #f1f5f9;
+              "
+            >
+
+              <div
+                style="
+                  font-size:10px;
+                  color:#6b7280;
+                  font-weight:700;
+                  letter-spacing:.5px;
+                "
+              >
+                ESTIMASI WAKTU
+              </div>
+
+              <div
+                style="
+                  margin-top:7px;
+                  font-size:25px;
+                  font-weight:900;
+                  color:#111827;
+                "
+              >
+
+                <span id="timeResult">
+                  0
+                </span>
+
+                <span
+                  style="
+                    font-size:13px;
+                    font-weight:700;
+                    color:#6b7280;
+                  "
+                >
+                  menit
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            style="
+              margin-top:12px;
+              padding:12px 13px;
+              background:#f8fafc;
+              border-radius:13px;
+              color:#6b7280;
+              font-size:11px;
+              line-height:1.5;
+            "
+          >
+            ℹ️ Estimasi waktu dapat berbeda tergantung kondisi
+            dan kepadatan jalan.
+          </div>
+
+
+          <button
+            type="button"
+            onclick="openGoogleMaps()"
+            style="
+              width:100%;
+              margin-top:13px;
+              padding:15px;
+              border:none;
+              border-radius:15px;
+              background:#2563eb;
+              color:white;
+              font-size:14px;
+              font-weight:800;
+              cursor:pointer;
+              box-shadow:0 6px 16px rgba(37,99,235,0.22);
+            "
+          >
+            🧭 Buka di Google Maps
+          </button>
+
+        </div>
 
       </div>
 
     </section>
 
   </main>
-
-<!-- =========================
-     FULLSCREEN MAP
-========================= -->
 
 <div
   id="fullscreenMap"
@@ -1693,8 +1501,6 @@
     background:white;
   "
 >
-
-  <!-- HEADER -->
 
   <div
     style="
@@ -1740,8 +1546,6 @@
   </div>
 
 
-  <!-- PETA FULLSCREEN -->
-
   <div
     id="fullscreenMapContainer"
     style="
@@ -1750,8 +1554,6 @@
     "
   ></div>
 
-
-  <!-- TOMBOL PILIH -->
 
   <button
     type="button"
@@ -1778,16 +1580,12 @@
 
 </div>
 
-  <!-- =========================
-     ABSENSI SISWA
-========================== -->
-
-<section id="attendancePage" class="page">
+  <section id="attendancePage" class="page">
   <button
-  class="back"
-  onclick="openPage('homePage')"
->
-  ← Kembali
+    class="back"
+    onclick="openPage('homePage')"
+  >
+    ← Kembali
   </button>
 
   <div class="card">
@@ -1843,8 +1641,6 @@
     </div>
 
 
-    <!-- STATUS HARI INI -->
-
     <div
       style="
         padding:18px;
@@ -1889,104 +1685,101 @@
     </div>
 
 
-    <!-- STATUS ABSENSI -->
-
-<div
-  style="
-    margin-top:14px;
-    padding:16px;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-    background:#f8fafc;
-  "
->
-
-  <div
-    style="
-      font-size:12px;
-      color:#6b7280;
-      margin-bottom:8px;
-    "
-  >
-    PILIH STATUS KEHADIRAN
-  </div>
-
-
-  <div
-    style="
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    "
-  >
-
-    <button
-      type="button"
-      onclick="setAttendanceStatus('Hadir')"
+    <div
       style="
-        padding:13px;
+        margin-top:14px;
+        padding:16px;
         border:1px solid #e5e7eb;
-        border-radius:12px;
-        background:white;
-        font-weight:700;
-        cursor:pointer;
+        border-radius:16px;
+        background:#f8fafc;
       "
     >
-      ✓ Hadir
-    </button>
+
+      <div
+        style="
+          font-size:12px;
+          color:#6b7280;
+          margin-bottom:8px;
+        "
+      >
+        PILIH STATUS KEHADIRAN
+      </div>
 
 
-    <button
-      type="button"
-      onclick="setAttendanceStatus('Terlambat')"
-      style="
-        padding:13px;
-        border:1px solid #e5e7eb;
-        border-radius:12px;
-        background:white;
-        font-weight:700;
-        cursor:pointer;
-      "
-    >
-      ⏱ Terlambat
-    </button>
+      <div
+        style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:10px;
+        "
+      >
+
+        <button
+          type="button"
+          onclick="setAttendanceStatus('Hadir')"
+          style="
+            padding:13px;
+            border:1px solid #e5e7eb;
+            border-radius:12px;
+            background:white;
+            font-weight:700;
+            cursor:pointer;
+          "
+        >
+          ✓ Hadir
+        </button>
 
 
-    <button
-      type="button"
-      onclick="setAttendanceStatus('Sakit')"
-      style="
-        padding:13px;
-        border:1px solid #e5e7eb;
-        border-radius:12px;
-        background:white;
-        font-weight:700;
-        cursor:pointer;
-      "
-    >
-      + Sakit
-    </button>
+        <button
+          type="button"
+          onclick="setAttendanceStatus('Terlambat')"
+          style="
+            padding:13px;
+            border:1px solid #e5e7eb;
+            border-radius:12px;
+            background:white;
+            font-weight:700;
+            cursor:pointer;
+          "
+        >
+          ⏱ Terlambat
+        </button>
 
 
-    <button
-      type="button"
-      onclick="setAttendanceStatus('Alpha')"
-      style="
-        padding:13px;
-        border:1px solid #e5e7eb;
-        border-radius:12px;
-        background:white;
-        font-weight:700;
-        cursor:pointer;
-      "
-    >
-      ! Alpha
-    </button>
+        <button
+          type="button"
+          onclick="setAttendanceStatus('Sakit')"
+          style="
+            padding:13px;
+            border:1px solid #e5e7eb;
+            border-radius:12px;
+            background:white;
+            font-weight:700;
+            cursor:pointer;
+          "
+        >
+          + Sakit
+        </button>
 
-  </div>
 
-</div>
-    <!-- RIWAYAT -->
+        <button
+          type="button"
+          onclick="setAttendanceStatus('Alpha')"
+          style="
+            padding:13px;
+            border:1px solid #e5e7eb;
+            border-radius:12px;
+            background:white;
+            font-weight:700;
+            cursor:pointer;
+          "
+        >
+          ! Alpha
+        </button>
+
+      </div>
+
+    </div>
 
     <div
       style="
@@ -2027,11 +1820,7 @@
 
 </section>
 
-  <!-- =========================
-     QR SAYA
-========================== -->
-
-<section id="qrPage" class="page">
+  <section id="qrPage" class="page">
 
   <button
     class="back"
@@ -2093,8 +1882,6 @@
     </div>
 
 
-    <!-- QR CODE -->
-
     <div
       style="
         display:flex;
@@ -2144,15 +1931,9 @@
 
 </section>
 
-  <!-- QR CODE LIBRARY -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://unpkg.com/html5-qrcode"></script>
   
-<!-- =========================
-     SCAN QR SISWA
-========================== -->
-
 <section id="scanQRPage" class="page">
 
   <button
@@ -2215,8 +1996,6 @@
     </div>
 
 
-    <!-- AREA SCANNER -->
-
     <div
       id="qrScanner"
       style="
@@ -2270,8 +2049,6 @@
 
 </section>
   
-  <!-- LEAFLET JS -->
-
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
   </script>
@@ -2279,214 +2056,82 @@
 
   <script>
 
-/* =========================
-   LOGIN
-========================= */
+    /* =========================
+       LOGIN FIREBASE
+    ========================= */
 
-async function loginUser() {
+    async function loginUser() {
 
-  const email =
-    document.getElementById("loginEmail").value.trim();
+      const email =
+        document.getElementById("loginEmail").value.trim();
 
-  const password =
-    document.getElementById("loginPassword").value;
+      const password =
+        document.getElementById("loginPassword").value;
 
-  const message =
-    document.getElementById("loginMessage");
+      const message =
+        document.getElementById("loginMessage");
 
-  if (!email || !password) {
+      if (!email || !password) {
 
-    message.textContent =
-      "Email dan password wajib diisi.";
+        message.textContent =
+          "Email dan password wajib diisi.";
 
-    return;
-  }
+        return;
+      }
 
-  if (!window.firebaseAuth || !window.firebaseSignIn) {
+      if (!window.firebaseAuth || !window.firebaseSignIn) {
 
-    message.textContent =
-      "Firebase Auth belum siap. Tunggu sebentar lalu coba lagi.";
+        message.textContent =
+          "Firebase Auth belum siap. Tunggu sebentar lalu coba lagi.";
 
-    return;
-  }
+        return;
+      }
 
-  message.textContent =
-    "Sedang masuk...";
+      message.style.color = "#2563eb";
+      message.textContent = "Memproses login...";
 
-  try {
+      try {
 
-    await window.firebaseSignIn(
-      window.firebaseAuth,
-      email,
-      password
-    );
+        await window.firebaseSignIn(
+          window.firebaseAuth,
+          email,
+          password
+        );
 
-    message.textContent =
-      "";
+        message.textContent = "";
 
-  } catch (error) {
+      } catch (error) {
 
-    console.error(error);
+        console.error(error);
+        message.style.color = "#dc2626";
 
-    if (error.code === "auth/invalid-credential") {
+        if (error.code === "auth/invalid-credential") {
 
-      message.textContent =
-        "Email atau password salah.";
+          message.textContent =
+            "Email atau password salah.";
 
-    } else if (error.code === "auth/user-not-found") {
+        } else if (error.code === "auth/user-not-found") {
 
-      message.textContent =
-        "Akun tidak ditemukan.";
+          message.textContent =
+            "Akun tidak ditemukan.";
 
-    } else if (error.code === "auth/wrong-password") {
+        } else if (error.code === "auth/wrong-password") {
 
-      message.textContent =
-        "Password salah.";
+          message.textContent =
+            "Password salah.";
 
-    } else {
+        } else {
 
-      message.textContent =
-        "Gagal masuk. Silakan coba lagi.";
+          message.textContent =
+            "Login gagal: " + error.message;
 
-    }
-
-  }
-
-}
-
-window.addEventListener("DOMContentLoaded", function () {
-
-  if (!window.firebaseOnAuthStateChanged) {
-    return;
-  }
-
-  window.firebaseOnAuthStateChanged(
-    window.firebaseAuth,
-    function (user) {
-
-      const loginPage =
-        document.getElementById("loginPage");
-
-      if (!loginPage) return;
-
-      if (user) {
-
-        loginPage.style.display = "none";
-
-      } else {
-
-        loginPage.style.display = "flex";
+        }
 
       }
 
     }
-  );
-
-});
-
-<script>
-/* =========================
-   LOGIN FIREBASE
-========================= */
-
-async function loginUser() {
-
-  const email =
-    document.getElementById("loginEmail").value.trim();
-
-  const password =
-    document.getElementById("loginPassword").value;
-
-  const message =
-    document.getElementById("loginMessage");
-
-  if (!email || !password) {
-
-    message.textContent =
-      "Email dan password wajib diisi.";
-
-    return;
-  }
-
-  message.textContent = "Memproses login...";
-
-  try {
-
-    await window.firebaseSignIn(
-      window.firebaseAuth,
-      email,
-      password
-    );
-
-    message.textContent = "";
-
-  } catch (error) {
-
-    console.error(error);
-
-    if (error.code === "auth/invalid-credential") {
-
-      message.textContent =
-        "Email atau password salah.";
-
-    } else if (error.code === "auth/user-not-found") {
-
-      message.textContent =
-        "Akun tidak ditemukan.";
-
-    } else if (error.code === "auth/wrong-password") {
-
-      message.textContent =
-        "Password salah.";
-
-    } else {
-
-      message.textContent =
-        "Login gagal: " + error.message;
-
-    }
-
-  }
-
-}
 
 
-/* =========================
-   CEK STATUS LOGIN
-========================= */
-
-window.firebaseOnAuthStateChanged(
-  window.firebaseAuth,
-
-  function(user) {
-
-    const loginPage =
-      document.getElementById("loginPage");
-
-    const homePage =
-      document.getElementById("homePage");
-
-    if (user) {
-
-      // SUDAH LOGIN
-      loginPage.style.display = "none";
-
-      homePage.classList.add("active");
-
-    } else {
-
-      // BELUM LOGIN
-      loginPage.style.display = "flex";
-
-      homePage.classList.remove("active");
-
-    }
-
-  }
-
-);
-</script>
-    
     /* =========================
        NAVIGASI
     ========================== */
@@ -2537,135 +2182,111 @@ window.firebaseOnAuthStateChanged(
 
 
     /* =========================
-   JENIS PETA
-========================= */
+       JENIS PETA
+    ========================= */
 
-const streetMap = L.tileLayer(
-  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  {
-    attribution: "&copy; OpenStreetMap contributors"
-  }
-);
+    const streetMap = L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution: "© OpenStreetMap contributors"
+      }
+    );
 
-const satelliteMap = L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-  {
-    attribution: "Tiles &copy; Esri"
-  }
-);
+    const satelliteMap = L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution: "Tiles © Esri"
+      }
+    );
 
-const terrainMap = L.tileLayer(
-  "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-  {
-    attribution:
-      "Map data &copy; OpenStreetMap contributors, SRTM | Map style &copy; OpenTopoMap"
-  }
-);
+    const terrainMap = L.tileLayer(
+      "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+      {
+        attribution:
+          "Map data © OpenStreetMap contributors, SRTM | Map style © OpenTopoMap"
+      }
+    );
 
-const darkMap = L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-  {
-    attribution:
-      "&copy; OpenStreetMap contributors &copy; CARTO"
-  }
-);
-
-
-/* Peta awal */
-
-streetMap.addTo(map);
-
-let currentMapLayer = streetMap;
+    const darkMap = L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+      {
+        attribution:
+          "© OpenStreetMap contributors © CARTO"
+      }
+    );
 
 
-/* =========================
-   GANTI JENIS PETA
-========================= */
-
-function selectMapType(type) {
-
-  /* Hapus peta yang sedang aktif */
-
-  if (currentMapLayer) {
-    map.removeLayer(currentMapLayer);
-  }
-
-
-  /* Pilih jenis peta */
-
-  if (type === "street") {
+    /* Peta awal */
 
     streetMap.addTo(map);
-    currentMapLayer = streetMap;
 
-  }
-
-  else if (type === "satellite") {
-
-    satelliteMap.addTo(map);
-    currentMapLayer = satelliteMap;
-
-  }
-
-  else if (type === "terrain") {
-
-    terrainMap.addTo(map);
-    currentMapLayer = terrainMap;
-
-  }
-
-  else if (type === "dark") {
-
-    darkMap.addTo(map);
-    currentMapLayer = darkMap;
-
-  }
+    let currentMapLayer = streetMap;
 
 
-  /* Semua tombol kembali normal */
+    /* =========================
+       GANTI JENIS PETA
+    ========================= */
 
-  document.getElementById("mapStreetBtn").style.background = "white";
-  document.getElementById("mapStreetBtn").style.color = "#374151";
+    function selectMapType(type) {
 
-  document.getElementById("mapSatelliteBtn").style.background = "white";
-  document.getElementById("mapSatelliteBtn").style.color = "#374151";
-
-  document.getElementById("mapTerrainBtn").style.background = "white";
-  document.getElementById("mapTerrainBtn").style.color = "#374151";
-
-  document.getElementById("mapDarkBtn").style.background = "white";
-  document.getElementById("mapDarkBtn").style.color = "#374151";
+      if (currentMapLayer) {
+        map.removeLayer(currentMapLayer);
+      }
 
 
-  /* Tombol yang dipilih menjadi aktif */
-
-  let activeButton = null;
-
-  if (type === "street") {
-    activeButton = document.getElementById("mapStreetBtn");
-  }
-
-  else if (type === "satellite") {
-    activeButton = document.getElementById("mapSatelliteBtn");
-  }
-
-  else if (type === "terrain") {
-    activeButton = document.getElementById("mapTerrainBtn");
-  }
-
-  else if (type === "dark") {
-    activeButton = document.getElementById("mapDarkBtn");
-  }
+      if (type === "street") {
+        streetMap.addTo(map);
+        currentMapLayer = streetMap;
+      }
+      else if (type === "satellite") {
+        satelliteMap.addTo(map);
+        currentMapLayer = satelliteMap;
+      }
+      else if (type === "terrain") {
+        terrainMap.addTo(map);
+        currentMapLayer = terrainMap;
+      }
+      else if (type === "dark") {
+        darkMap.addTo(map);
+        currentMapLayer = darkMap;
+      }
 
 
-  if (activeButton) {
+      document.getElementById("mapStreetBtn").style.background = "white";
+      document.getElementById("mapStreetBtn").style.color = "#374151";
 
-    activeButton.style.background = "#eff6ff";
-    activeButton.style.color = "#2563eb";
+      document.getElementById("mapSatelliteBtn").style.background = "white";
+      document.getElementById("mapSatelliteBtn").style.color = "#374151";
 
-  }
+      document.getElementById("mapTerrainBtn").style.background = "white";
+      document.getElementById("mapTerrainBtn").style.color = "#374151";
 
-}
+      document.getElementById("mapDarkBtn").style.background = "white";
+      document.getElementById("mapDarkBtn").style.color = "#374151";
+
+
+      let activeButton = null;
+
+      if (type === "street") {
+        activeButton = document.getElementById("mapStreetBtn");
+      }
+      else if (type === "satellite") {
+        activeButton = document.getElementById("mapSatelliteBtn");
+      }
+      else if (type === "terrain") {
+        activeButton = document.getElementById("mapTerrainBtn");
+      }
+      else if (type === "dark") {
+        activeButton = document.getElementById("mapDarkBtn");
+      }
+
+
+      if (activeButton) {
+        activeButton.style.background = "#eff6ff";
+        activeButton.style.color = "#2563eb";
+      }
+
+    }
 
 
     /* =========================
@@ -2679,100 +2300,63 @@ function selectMapType(type) {
     let schoolLocation = null;
 
     let selectedTransport = "car";
-let routeLine = null;
+    let routeLine = null;
 
-/* =========================
-   GPS LOKASI SAYA
-========================= */
+    /* =========================
+       GPS LOKASI SAYA
+    ========================= */
 
-function useMyLocation() {
+    function useMyLocation() {
 
-  if (!navigator.geolocation) {
-
-    alert("GPS tidak didukung oleh browser ini.");
-
-    return;
-  }
-
-
-  navigator.geolocation.getCurrentPosition(
-
-    function(position) {
-
-      const lat =
-        position.coords.latitude;
-
-      const lng =
-        position.coords.longitude;
-
-
-      /* Kalau rumah sudah dipilih */
-
-      if (homeMarker !== null) {
-
-        map.removeLayer(homeMarker);
-
+      if (!navigator.geolocation) {
+        alert("GPS tidak didukung oleh browser ini.");
+        return;
       }
 
+      navigator.geolocation.getCurrentPosition(
 
-      homeLocation =
-        L.latLng(lat, lng);
+        function(position) {
 
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
 
-      homeMarker =
-        L.marker(homeLocation)
-          .addTo(map)
-          .bindPopup("🏠 Lokasi Saya")
-          .openPopup();
+          if (homeMarker !== null) {
+            map.removeLayer(homeMarker);
+          }
 
+          homeLocation = L.latLng(lat, lng);
 
-      document
-        .getElementById("homeStatus")
-        .textContent =
-        lat.toFixed(5) +
-        ", " +
-        lng.toFixed(5);
-      
-      getAddress(
-  lat,
-  lng,
-  "homeAddress"
-);
+          homeMarker = L.marker(homeLocation)
+            .addTo(map)
+            .bindPopup("🏠 Lokasi Saya")
+            .openPopup();
 
+          document
+            .getElementById("homeStatus")
+            .textContent =
+            lat.toFixed(5) + ", " + lng.toFixed(5);
+          
+          getAddress(lat, lng, "homeAddress");
 
-      map.setView(
-        homeLocation,
-        17
+          map.setView(homeLocation, 17);
+
+        },
+
+        function(error) {
+          if (error.code === 1) {
+            alert("Izin lokasi ditolak. Silakan izinkan lokasi untuk website ini.");
+          } else {
+            alert("Lokasi tidak dapat ditemukan.");
+          }
+        },
+
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+
       );
-
-    },
-
-
-    function(error) {
-
-      if (error.code === 1) {
-
-        alert(
-          "Izin lokasi ditolak. Silakan izinkan lokasi untuk website ini."
-        );
-
-      } else {
-
-        alert(
-          "Lokasi tidak dapat ditemukan."
-        );
-
-      }
-
-    },
-
-    {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    }
-
-  );
 
     }
     
@@ -2782,11 +2366,8 @@ function useMyLocation() {
 
     map.on("click", function(e) {
       if (fullscreenActive) {
-
-  fullscreenLocation = e.latlng;
-
-  return;
-
+        fullscreenLocation = e.latlng;
+        return;
       }
 
       const lat = e.latlng.lat;
@@ -2799,20 +2380,15 @@ function useMyLocation() {
 
         homeLocation = e.latlng;
 
-
         homeMarker = L.marker(e.latlng)
           .addTo(map)
           .bindPopup("🏠 Rumah")
           .openPopup();
 
-
         document
           .getElementById("homeStatus")
           .textContent =
-          lat.toFixed(5) +
-          ", " +
-          lng.toFixed(5);
-
+          lat.toFixed(5) + ", " + lng.toFixed(5);
 
         return;
       }
@@ -2824,1121 +2400,705 @@ function useMyLocation() {
 
         schoolLocation = e.latlng;
 
-
         schoolMarker = L.marker(e.latlng)
           .addTo(map)
           .bindPopup("🏫 Sekolah")
           .openPopup();
 
-
         document
-  .getElementById("schoolStatus")
-  .textContent =
-  e.latlng.lat.toFixed(5) +
-  ", " +
-  e.latlng.lng.toFixed(5);
+          .getElementById("schoolStatus")
+          .textContent =
+          e.latlng.lat.toFixed(5) + ", " + e.latlng.lng.toFixed(5);
 
-getAddress(
-  e.latlng.lat,
-  e.latlng.lng,
-  "schoolAddress"
-);
+        getAddress(e.latlng.lat, e.latlng.lng, "schoolAddress");
 
         return;
       }
 
-
-      alert(
-        "Rumah dan sekolah sudah dipilih. Tekan RESET jika ingin memilih lokasi baru."
-      );
+      alert("Rumah dan sekolah sudah dipilih. Tekan RESET jika ingin memilih lokasi baru.");
 
     });
 
     /* =========================
-   INFORMASI ALAMAT
-========================= */
+       INFORMASI ALAMAT
+    ========================= */
 
-async function getAddress(lat, lng, elementId) {
+    async function getAddress(lat, lng, elementId) {
 
-  try {
+      try {
+        const url =
+          "https://nominatim.openstreetmap.org/reverse" +
+          "?format=json&lat=" + lat + "&lon=" + lng;
 
-    const url =
-      "https://nominatim.openstreetmap.org/reverse" +
-      "?format=json&lat=" +
-      lat +
-      "&lon=" +
-      lng;
+        const response = await fetch(url);
+        const data = await response.json();
 
+        const address = data.display_name || "Alamat tidak ditemukan";
 
-    const response =
-      await fetch(url);
+        document.getElementById(elementId).textContent = address;
+        document.getElementById("locationInfo").style.display = "block";
 
-
-    const data =
-      await response.json();
-
-
-    const address =
-      data.display_name ||
-      "Alamat tidak ditemukan";
-
-
-    document
-      .getElementById(elementId)
-      .textContent =
-      address;
-
-
-    document
-      .getElementById("locationInfo")
-      .style.display =
-      "block";
-
-
-  } catch (error) {
-
-    document
-      .getElementById(elementId)
-      .textContent =
-      "Alamat tidak dapat ditemukan.";
-
-  }
-
-}
-
-  /* =========================
-   CARI SEKOLAH
-========================= */
-
-async function searchSchool() {
-
-  const input =
-    document.getElementById("schoolSearch");
-
-  const query =
-    input.value.trim();
-
-  if (!query) {
-
-    alert("Masukkan nama sekolah terlebih dahulu.");
-
-    return;
-  }
-
-
-  try {
-
-    const url =
-      "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
-      encodeURIComponent(query);
-
-
-    const response =
-      await fetch(url);
-
-
-    const data =
-      await response.json();
-
-
-    if (data.length === 0) {
-
-      alert("Sekolah tidak ditemukan.");
-
-      return;
-    }
-
-
-    const lat =
-      parseFloat(data[0].lat);
-
-    const lng =
-      parseFloat(data[0].lon);
-
-
-    /* Hapus marker sekolah lama */
-
-    if (schoolMarker !== null) {
-
-      map.removeLayer(schoolMarker);
-
-    }
-
-
-    schoolLocation =
-      L.latLng(lat, lng);
-
-
-    schoolMarker =
-      L.marker(schoolLocation)
-        .addTo(map)
-        .bindPopup("🏫 Sekolah")
-        .openPopup();
-
-
-    document
-      .getElementById("schoolStatus")
-      .textContent =
-      lat.toFixed(5) +
-      ", " +
-      lng.toFixed(5);
-    
-   getAddress(
-  lat,
-  lng,
-  "schoolAddress"
-);
-
-    map.setView(
-      schoolLocation,
-      16
-    );
-
-
-  } catch (error) {
-
-    alert(
-      "Gagal mencari lokasi sekolah. Periksa koneksi internet."
-    );
-
-  }
-
-}  
-
-/* =========================
-   TRANSPORTASI
-========================= */
-
-function selectTransport(type) {
-
-  selectedTransport = type;
-
-  document.getElementById("walkBtn").style.background = "white";
-document.getElementById("motorBtn").style.background = "white";
-document.getElementById("carBtn").style.background = "white";
-
-document.getElementById("walkBtn").style.transform = "scale(1)";
-document.getElementById("motorBtn").style.transform = "scale(1)";
-document.getElementById("carBtn").style.transform = "scale(1)";
-
-document.getElementById("walkBtn").style.borderColor = "#e5e7eb";
-document.getElementById("motorBtn").style.borderColor = "#e5e7eb";
-document.getElementById("carBtn").style.borderColor = "#e5e7eb";
-
-
-if (type === "foot") {
-
-  const btn = document.getElementById("walkBtn");
-
-  btn.style.background = "#dbeafe";
-  btn.style.borderColor = "#2563eb";
-  btn.style.transform = "scale(1.03)";
-
-}
-
-else if (type === "motor") {
-
-  const btn = document.getElementById("motorBtn");
-
-  btn.style.background = "#dbeafe";
-  btn.style.borderColor = "#2563eb";
-  btn.style.transform = "scale(1.03)";
-
-}
-
-else if (type === "car") {
-
-  const btn = document.getElementById("carBtn");
-
-  btn.style.background = "#dbeafe";
-  btn.style.borderColor = "#2563eb";
-  btn.style.transform = "scale(1.03)";
-
-}
-
-
-  /* =========================
-     UBAH ESTIMASI LANGSUNG
-  ========================== */
-
-  const distanceText =
-    document.getElementById("distanceResult").textContent;
-
-  const distanceKm =
-    parseFloat(distanceText);
-
-
-  if (!isNaN(distanceKm) && distanceKm > 0) {
-
-    let speed = 30;
-
-
-    if (type === "foot") {
-
-      speed = 4.5;
-
-    }
-
-    else if (type === "motor") {
-
-      speed = 30;
-
-    }
-
-    else if (type === "car") {
-
-      speed = 45;
-
-    }
-
-
-    const timeMinutes =
-      Math.ceil((distanceKm / speed) * 60);
-
-
-    document
-      .getElementById("timeResult")
-      .textContent =
-      timeMinutes;
-
-  }
-
-}
-
-/* =========================
-   HITUNG RUTE
-========================= */
-
-async function calculateRoute() {
-
-  if (!homeLocation || !schoolLocation) {
-    alert("Pilih lokasi rumah dan sekolah terlebih dahulu.");
-    return;
-  }
-
-  const start =
-    homeLocation.lng + "," + homeLocation.lat;
-
-  const end =
-    schoolLocation.lng + "," + schoolLocation.lat;
-
-  const url =
-    "https://router.project-osrm.org/route/v1/driving/" +
-    start + ";" + end +
-    "?overview=full&geometries=geojson";
-
-  try {
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (!data.routes || data.routes.length === 0) {
-      alert("Rute tidak ditemukan.");
-      return;
-    }
-
-    const route = data.routes[0];
-
-    if (routeLine !== null) {
-      map.removeLayer(routeLine);
-    }
-
-    routeLine = L.geoJSON(
-      route.geometry,
-      {
-        style: {
-          weight: 6,
-          opacity: 0.8
-        }
+      } catch (error) {
+        document.getElementById(elementId).textContent = "Alamat tidak dapat ditemukan.";
       }
-    ).addTo(map);
 
-    const distanceKm =
-      route.distance / 1000;
-
-    let speed = 30;
-
-    if (selectedTransport === "foot") {
-      speed = 4.5;
     }
 
-    else if (selectedTransport === "motor") {
-      speed = 30;
-    }
-
-    else if (selectedTransport === "car") {
-      speed = 45;
-    }
-
-    const timeMinutes =
-      Math.ceil((distanceKm / speed) * 60);
-
-    document
-      .getElementById("distanceResult")
-      .textContent =
-      distanceKm.toFixed(2);
-
-    document
-      .getElementById("timeResult")
-      .textContent =
-      timeMinutes;
-
-    const resultBox =
-  document.getElementById("result");
-
-resultBox.style.display = "block";
-
-setTimeout(function() {
-  resultBox.classList.add("show");
-}, 10);
-
-    map.fitBounds(
-      routeLine.getBounds(),
-      {
-        padding: [30, 30]
-      }
-    );
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert(
-      "Gagal mengambil rute. Periksa koneksi internet."
-    );
-
-  }
-
-}
-
-    
     /* =========================
-       HITUNG JARAK
-    ========================== */
+       CARI SEKOLAH
+    ========================= */
 
-    function calculateDistance() {
+    async function searchSchool() {
 
-      if (
-        homeLocation === null ||
-        schoolLocation === null
-      ) {
+      const input = document.getElementById("schoolSearch");
+      const query = input.value.trim();
 
-        alert(
-          "Silakan pilih lokasi rumah dan sekolah terlebih dahulu."
-        );
-
+      if (!query) {
+        alert("Masukkan nama sekolah terlebih dahulu.");
         return;
       }
 
+      try {
+        const url =
+          "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" +
+          encodeURIComponent(query);
 
-      const distanceMeters =
-        map.distance(
-          homeLocation,
-          schoolLocation
-        );
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.length === 0) {
+          alert("Sekolah tidak ditemukan.");
+          return;
+        }
+
+        const lat = parseFloat(data[0].lat);
+        const lng = parseFloat(data[0].lon);
+
+        if (schoolMarker !== null) {
+          map.removeLayer(schoolMarker);
+        }
+
+        schoolLocation = L.latLng(lat, lng);
+
+        schoolMarker = L.marker(schoolLocation)
+          .addTo(map)
+          .bindPopup("🏫 Sekolah")
+          .openPopup();
+
+        document
+          .getElementById("schoolStatus")
+          .textContent =
+          lat.toFixed(5) + ", " + lng.toFixed(5);
+        
+        getAddress(lat, lng, "schoolAddress");
+
+        map.setView(schoolLocation, 16);
+
+      } catch (error) {
+        alert("Gagal mencari lokasi sekolah. Periksa koneksi internet.");
+      }
+
+    }  
+
+    /* =========================
+       TRANSPORTASI
+    ========================= */
+
+    function selectTransport(type) {
+
+      selectedTransport = type;
+
+      document.getElementById("walkBtn").style.background = "white";
+      document.getElementById("motorBtn").style.background = "white";
+      document.getElementById("carBtn").style.background = "white";
+
+      document.getElementById("walkBtn").style.transform = "scale(1)";
+      document.getElementById("motorBtn").style.transform = "scale(1)";
+      document.getElementById("carBtn").style.transform = "scale(1)";
+
+      document.getElementById("walkBtn").style.borderColor = "#e5e7eb";
+      document.getElementById("motorBtn").style.borderColor = "#e5e7eb";
+      document.getElementById("carBtn").style.borderColor = "#e5e7eb";
 
 
-      const distanceKm =
-        distanceMeters / 1000;
+      if (type === "foot") {
+        const btn = document.getElementById("walkBtn");
+        btn.style.background = "#dbeafe";
+        btn.style.borderColor = "#2563eb";
+        btn.style.transform = "scale(1.03)";
+      }
+      else if (type === "motor") {
+        const btn = document.getElementById("motorBtn");
+        btn.style.background = "#dbeafe";
+        btn.style.borderColor = "#2563eb";
+        btn.style.transform = "scale(1.03)";
+      }
+      else if (type === "car") {
+        const btn = document.getElementById("carBtn");
+        btn.style.background = "#dbeafe";
+        btn.style.borderColor = "#2563eb";
+        btn.style.transform = "scale(1.03)";
+      }
 
 
-      document
-        .getElementById("distanceResult")
-        .textContent =
-        distanceKm.toFixed(2);
+      const distanceText = document.getElementById("distanceResult").textContent;
+      const distanceKm = parseFloat(distanceText);
 
+      if (!isNaN(distanceKm) && distanceKm > 0) {
+        let speed = 30;
 
-      document
-        .getElementById("result")
-        .style.display = "block";
+        if (type === "foot") {
+          speed = 4.5;
+        }
+        else if (type === "motor") {
+          speed = 30;
+        }
+        else if (type === "car") {
+          speed = 45;
+        }
+
+        const timeMinutes = Math.ceil((distanceKm / speed) * 60);
+
+        document.getElementById("timeResult").textContent = timeMinutes;
+      }
 
     }
 
+    /* =========================
+       HITUNG RUTE
+    ========================= */
+
+    async function calculateRoute() {
+
+      if (!homeLocation || !schoolLocation) {
+        alert("Pilih lokasi rumah dan sekolah terlebih dahulu.");
+        return;
+      }
+
+      const start = homeLocation.lng + "," + homeLocation.lat;
+      const end = schoolLocation.lng + "," + schoolLocation.lat;
+
+      const url =
+        "https://router.project-osrm.org/route/v1/driving/" +
+        start + ";" + end +
+        "?overview=full&geometries=geojson";
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!data.routes || data.routes.length === 0) {
+          alert("Rute tidak ditemukan.");
+          return;
+        }
+
+        const route = data.routes[0];
+
+        if (routeLine !== null) {
+          map.removeLayer(routeLine);
+        }
+
+        routeLine = L.geoJSON(
+          route.geometry,
+          {
+            style: {
+              weight: 6,
+              opacity: 0.8
+            }
+          }
+        ).addTo(map);
+
+        const distanceKm = route.distance / 1000;
+        let speed = 30;
+
+        if (selectedTransport === "foot") {
+          speed = 4.5;
+        }
+        else if (selectedTransport === "motor") {
+          speed = 30;
+        }
+        else if (selectedTransport === "car") {
+          speed = 45;
+        }
+
+        const timeMinutes = Math.ceil((distanceKm / speed) * 60);
+
+        document.getElementById("distanceResult").textContent = distanceKm.toFixed(2);
+        document.getElementById("timeResult").textContent = timeMinutes;
+
+        const resultBox = document.getElementById("result");
+        resultBox.style.display = "block";
+
+        setTimeout(function() {
+          resultBox.classList.add("show");
+        }, 10);
+
+        map.fitBounds(
+          routeLine.getBounds(),
+          {
+            padding: [30, 30]
+          }
+        );
+
+      } catch (error) {
+        console.error(error);
+        alert("Gagal mengambil rute. Periksa koneksi internet.");
+      }
+
+    }
 
     /* =========================
        RESET
-    ========================== */
+    ========================= */
 
     function resetMap() {
 
       if (routeLine !== null) {
-  map.removeLayer(routeLine);
-  routeLine = null;
+        map.removeLayer(routeLine);
+        routeLine = null;
       }
 
       if (homeMarker !== null) {
-
         map.removeLayer(homeMarker);
-
       }
-
 
       if (schoolMarker !== null) {
-
         map.removeLayer(schoolMarker);
-
       }
-
 
       homeMarker = null;
       schoolMarker = null;
-
       homeLocation = null;
       schoolLocation = null;
 
-
-      document
-        .getElementById("homeStatus")
-        .textContent =
-        "Belum dipilih";
-
-
-      document
-        .getElementById("schoolStatus")
-        .textContent =
-        "Belum dipilih";
-
-
-      document
-        .getElementById("result")
-        .style.display =
-        "none";
+      document.getElementById("homeStatus").textContent = "Belum dipilih";
+      document.getElementById("schoolStatus").textContent = "Belum dipilih";
+      document.getElementById("result").style.display = "none";
 
     }
-/* =========================
-   GOOGLE MAPS
-========================= */
-
-function openGoogleMaps() {
-
-  if (!homeLocation || !schoolLocation) {
-
-    alert(
-      "Pilih lokasi rumah dan sekolah terlebih dahulu."
-    );
-
-    return;
-  }
-
-  const googleMapsUrl =
-    "https://www.google.com/maps/dir/?api=1" +
-    "&origin=" +
-    homeLocation.lat + "," + homeLocation.lng +
-    "&destination=" +
-    schoolLocation.lat + "," + schoolLocation.lng;
-
-  window.open(
-    googleMapsUrl,
-    "_blank"
-  );
-
-    }
-
-/* =========================
-   FULLSCREEN MAP
-========================= */
-
-let fullscreenLocation = null;
-let fullscreenTarget = null;
-let fullscreenMapParent = null;
-let fullscreenMapNext = null;
-let fullscreenActive = false;
-
-
-function openFullscreenMap() {
-
-  fullscreenTarget =
-    homeMarker === null ? "home" : "school";
-
-  const mapContainer =
-    map.getContainer();
-
-  fullscreenMapParent =
-    mapContainer.parentNode;
-
-  fullscreenMapNext =
-    mapContainer.nextSibling;
-
-
-  document
-    .getElementById("fullscreenMap")
-    .style.display = "block";
-
-
-  const fullscreenContainer =
-    document.getElementById(
-      "fullscreenMapContainer"
-    );
-
-
-  fullscreenContainer.appendChild(
-    mapContainer
-  );
-
-
-  mapContainer.style.width = "100%";
-  mapContainer.style.height = "100%";
-
-
-  fullscreenActive = true;
-
-
-  setTimeout(function() {
-
-    map.invalidateSize();
-
-  }, 100);
-
-}
-
-
-function closeFullscreenMap() {
-
-  const mapContainer =
-    map.getContainer();
-
-
-  fullscreenActive = false;
-
-
-  if (
-    fullscreenMapParent
-  ) {
-
-    if (
-      fullscreenMapNext &&
-      fullscreenMapNext.parentNode ===
-        fullscreenMapParent
-    ) {
-
-      fullscreenMapParent.insertBefore(
-        mapContainer,
-        fullscreenMapNext
-      );
-
-    }
-
-    else {
-
-      fullscreenMapParent.appendChild(
-        mapContainer
-      );
-
-    }
-
-  }
-
-
-  mapContainer.style.width = "";
-  mapContainer.style.height = "";
-
-
-  document
-    .getElementById("fullscreenMap")
-    .style.display = "none";
-
-
-  setTimeout(function() {
-
-    map.invalidateSize();
-
-  }, 100);
-
-}
-
-
-function confirmFullscreenLocation() {
-
-  if (!fullscreenLocation) {
-
-    alert(
-      "Klik salah satu titik pada peta terlebih dahulu."
-    );
-
-    return;
-
-  }
-
-
-  if (fullscreenTarget === "home") {
-
-    homeLocation =
-      fullscreenLocation;
-
-    if (homeMarker) {
-
-      map.removeLayer(
-        homeMarker
-      );
-
-    }
-
-    homeMarker =
-      L.marker(
-        homeLocation
-      )
-      .addTo(map)
-      .bindPopup("🏠 Rumah")
-      .openPopup();
-
-
-    document
-      .getElementById("homeStatus")
-      .textContent =
-      homeLocation.lat.toFixed(5) +
-      ", " +
-      homeLocation.lng.toFixed(5);
-
-  }
-
-  else {
-
-    schoolLocation =
-      fullscreenLocation;
-
-    if (schoolMarker) {
-
-      map.removeLayer(
-        schoolMarker
-      );
-
-    }
-
-    schoolMarker =
-      L.marker(
-        schoolLocation
-      )
-      .addTo(map)
-      .bindPopup("🏫 Sekolah")
-      .openPopup();
-
-
-    document
-      .getElementById("schoolStatus")
-      .textContent =
-      schoolLocation.lat.toFixed(5) +
-      ", " +
-      schoolLocation.lng.toFixed(5);
-
-  }
-
-
-  fullscreenLocation = null;
-
-  closeFullscreenMap();
-
-}
 
     /* =========================
-   ABSENSI SISWA
-========================= */
+       GOOGLE MAPS
+    ========================= */
 
-function startAttendance() {
+    function openGoogleMaps() {
 
-  const status =
-    document.getElementById(
-      "todayAttendanceStatus"
-    );
-
-  const time =
-    document.getElementById(
-      "todayAttendanceTime"
-    );
-
-
-  const now = new Date();
-
-  const jam =
-    now.toLocaleTimeString(
-      "id-ID",
-      {
-        hour: "2-digit",
-        minute: "2-digit"
+      if (!homeLocation || !schoolLocation) {
+        alert("Pilih lokasi rumah dan sekolah terlebih dahulu.");
+        return;
       }
-    );
 
+      const googleMapsUrl =
+        "https://www.google.com/maps/dir/?api=1" +
+        "&origin=" + homeLocation.lat + "," + homeLocation.lng +
+        "&destination=" + schoolLocation.lat + "," + schoolLocation.lng;
 
-    status.textContent = "Hadir";
-
-  time.textContent =
-    "Absen pada pukul " + jam;
-
-}
-
-
-/* =========================
-   PILIH STATUS ABSENSI
-========================= */
-
-function setAttendanceStatus(status) {
-
-  const statusElement =
-    document.getElementById(
-      "todayAttendanceStatus"
-    );
-
-  const timeElement =
-    document.getElementById(
-      "todayAttendanceTime"
-    );
-
-  const now = new Date();
-
-  const jam =
-    now.toLocaleTimeString(
-      "id-ID",
-      {
-        hour: "2-digit",
-        minute: "2-digit"
-      }
-    );
-
-  statusElement.textContent =
-    status;
-
-  timeElement.textContent =
-    "Status dipilih pada pukul " + jam;
-
-}
-
-/* =========================
-   QR SAYA
-========================= */
-
-function generateStudentQR() {
-
-  const qrBox =
-    document.getElementById("studentQRCode");
-
-  if (!qrBox) return;
-
-  qrBox.innerHTML = "";
-
-  const studentId =
-    localStorage.getItem("studentQRId") ||
-    ("STUDENT-" + Date.now());
-
-  localStorage.setItem(
-    "studentQRId",
-    studentId
-  );
-
-  new QRCode(
-    qrBox,
-    {
-      text: studentId,
-      width: 200,
-      height: 200,
-      correctLevel: QRCode.CorrectLevel.M
-    }
-  );
-
-}
-
-    document.addEventListener(
-  "DOMContentLoaded",
-  function() {
-
-    generateStudentQR();
-
-  }
-);
-
-/* =========================
-   SCAN QR SISWA
-========================= */
-
-let qrScanner = null;
-
-function startQRScanner() {
-
-  const result =
-    document.getElementById("scanResult");
-
-  if (qrScanner) {
-
-    result.textContent =
-      "Scanner sudah berjalan.";
-
-    return;
-  }
-
-  result.textContent =
-    "Meminta izin kamera...";
-
-  qrScanner =
-    new Html5Qrcode("qrScanner");
-
-  qrScanner.start(
-
-    { facingMode: "environment" },
-
-    {
-      fps: 10,
-      qrbox: {
-        width: 220,
-        height: 220
-      }
-    },
-
-    function(decodedText) {
-
-      /* QR BERHASIL DIBACA */
-
-      result.textContent =
-        "QR terdeteksi.";
-
-      qrScanner
-        .stop()
-        .then(function() {
-
-          qrScanner = null;
-
-          /* Konfirmasi siswa */
-
-          confirmScannedStudent(decodedText);
-
-        })
-        .catch(function() {
-
-          qrScanner = null;
-
-          confirmScannedStudent(decodedText);
-
-        });
-
-    },
-
-    function(errorMessage) {
-
-      /* Error scan sementara
-         sengaja diabaikan */
+      window.open(googleMapsUrl, "_blank");
 
     }
 
-  ).catch(function(error) {
+    /* =========================
+       FULLSCREEN MAP
+    ========================= */
 
-    console.error(error);
+    let fullscreenLocation = null;
+    let fullscreenTarget = null;
+    let fullscreenMapParent = null;
+    let fullscreenMapNext = null;
+    let fullscreenActive = false;
 
-    qrScanner = null;
+    function openFullscreenMap() {
 
-    result.textContent =
-      "Kamera tidak dapat digunakan. Pastikan izin kamera diberikan.";
+      fullscreenTarget = homeMarker === null ? "home" : "school";
 
-  });
+      const mapContainer = map.getContainer();
+      fullscreenMapParent = mapContainer.parentNode;
+      fullscreenMapNext = mapContainer.nextSibling;
 
-}
-    
-function confirmScannedStudent(studentId) {
+      document.getElementById("fullscreenMap").style.display = "block";
 
-  const result =
-    document.getElementById("scanResult");
+      const fullscreenContainer = document.getElementById("fullscreenMapContainer");
+      fullscreenContainer.appendChild(mapContainer);
 
-  result.innerHTML = `
-    <div style="
-      font-weight:800;
-      font-size:16px;
-      color:#16a34a;
-    ">
-      ✓ QR Siswa Berhasil Dibaca
-    </div>
+      mapContainer.style.width = "100%";
+      mapContainer.style.height = "100%";
 
-    <div style="
-      margin-top:10px;
-      font-size:13px;
-      color:#374151;
-    ">
-      ID Siswa
-    </div>
+      fullscreenActive = true;
 
-    <div style="
-      margin-top:5px;
-      padding:10px;
-      background:white;
-      border:1px solid #e5e7eb;
-      border-radius:10px;
-      font-weight:800;
-      word-break:break-all;
-    ">
-      ${studentId}
-    </div>
+      setTimeout(function() {
+        map.invalidateSize();
+      }, 100);
 
-    <div style="
-      margin-top:18px;
-      font-size:13px;
-      font-weight:800;
-      color:#374151;
-      text-align:left;
-    ">
-      Pilih Status Kehadiran
-    </div>
+    }
 
-    <div style="
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top:10px;
-    ">
+    function closeFullscreenMap() {
 
-      <button
-        type="button"
-        onclick="recordAttendance('${studentId}', 'Hadir')"
-        style="
-          padding:13px;
-          border:1px solid #bbf7d0;
-          border-radius:12px;
-          background:#f0fdf4;
-          color:#166534;
-          font-weight:800;
-          cursor:pointer;
-        "
-      >
-        ✓ Hadir
-      </button>
+      const mapContainer = map.getContainer();
+      fullscreenActive = false;
 
-      <button
-        type="button"
-        onclick="recordAttendance('${studentId}', 'Terlambat')"
-        style="
-          padding:13px;
-          border:1px solid #fde68a;
-          border-radius:12px;
-          background:#fffbeb;
-          color:#92400e;
-          font-weight:800;
-          cursor:pointer;
-        "
-      >
-        ⏱ Terlambat
-      </button>
-
-      <button
-        type="button"
-        onclick="recordAttendance('${studentId}', 'Sakit')"
-        style="
-          padding:13px;
-          border:1px solid #bfdbfe;
-          border-radius:12px;
-          background:#eff6ff;
-          color:#1d4ed8;
-          font-weight:800;
-          cursor:pointer;
-        "
-      >
-        + Sakit
-      </button>
-
-      <button
-        type="button"
-        onclick="recordAttendance('${studentId}', 'Alpha')"
-        style="
-          padding:13px;
-          border:1px solid #fecaca;
-          border-radius:12px;
-          background:#fef2f2;
-          color:#b91c1c;
-          font-weight:800;
-          cursor:pointer;
-        "
-      >
-        ! Alpha
-      </button>
-
-    </div>
-  `;
-
-}
-
-/* =========================
-   CATAT KEHADIRAN KE FIREBASE
-========================= */
-
-async function recordAttendance(studentId, status) {
-
-  const result =
-    document.getElementById("scanResult");
-
-  if (!window.firebaseDB) {
-
-    result.innerHTML = `
-      <div style="color:#dc2626;font-weight:800;">
-        Firebase belum terhubung.
-      </div>
-    `;
-
-    return;
-  }
-
-  try {
-
-    await window.firebaseAddDoc(
-      window.firebaseCollection(
-        window.firebaseDB,
-        "attendance"
-      ),
-      {
-        studentId: studentId,
-        status: status,
-        timestamp:
-          window.firebaseServerTimestamp()
+      if (fullscreenMapParent) {
+        if (fullscreenMapNext && fullscreenMapNext.parentNode === fullscreenMapParent) {
+          fullscreenMapParent.insertBefore(mapContainer, fullscreenMapNext);
+        } else {
+          fullscreenMapParent.appendChild(mapContainer);
+        }
       }
-    );
 
-    result.innerHTML = `
-      <div style="
-        padding:15px;
-        background:#dcfce7;
-        border-radius:14px;
-        color:#166534;
-        font-weight:800;
-      ">
-        ✓ Kehadiran Berhasil Dicatat
-      </div>
+      mapContainer.style.width = "";
+      mapContainer.style.height = "";
 
-      <div style="
-        margin-top:8px;
-        font-size:13px;
-        color:#374151;
-      ">
-        ID Siswa: <strong>${studentId}</strong>
-      </div>
-    `;
+      document.getElementById("fullscreenMap").style.display = "none";
 
-  } catch (error) {
+      setTimeout(function() {
+        map.invalidateSize();
+      }, 100);
 
-    console.error(error);
+    }
 
-    result.innerHTML = `
-      <div style="
-        padding:15px;
-        background:#fee2e2;
-        border-radius:14px;
-        color:#991b1b;
-        font-weight:800;
-      ">
-        ✕ Gagal mencatat kehadiran
-      </div>
-    `;
+    function confirmFullscreenLocation() {
 
-  }
+      if (!fullscreenLocation) {
+        alert("Klik salah satu titik pada peta terlebih dahulu.");
+        return;
+      }
 
-}
-    </script>
+      if (fullscreenTarget === "home") {
+        homeLocation = fullscreenLocation;
+
+        if (homeMarker) {
+          map.removeLayer(homeMarker);
+        }
+
+        homeMarker = L.marker(homeLocation)
+          .addTo(map)
+          .bindPopup("🏠 Rumah")
+          .openPopup();
+
+        document
+          .getElementById("homeStatus")
+          .textContent =
+          homeLocation.lat.toFixed(5) + ", " + homeLocation.lng.toFixed(5);
+      }
+      else {
+        schoolLocation = fullscreenLocation;
+
+        if (schoolMarker) {
+          map.removeLayer(schoolMarker);
+        }
+
+        schoolMarker = L.marker(schoolLocation)
+          .addTo(map)
+          .bindPopup("🏫 Sekolah")
+          .openPopup();
+
+        document
+          .getElementById("schoolStatus")
+          .textContent =
+          schoolLocation.lat.toFixed(5) + ", " + schoolLocation.lng.toFixed(5);
+      }
+
+      fullscreenLocation = null;
+      closeFullscreenMap();
+
+    }
+
+    /* =========================
+       PILIH STATUS ABSENSI
+    ========================= */
+
+    function setAttendanceStatus(status) {
+
+      const statusElement = document.getElementById("todayAttendanceStatus");
+      const timeElement = document.getElementById("todayAttendanceTime");
+
+      const now = new Date();
+      const jam = now.toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      statusElement.textContent = status;
+      timeElement.textContent = "Status dipilih pada pukul " + jam;
+
+    }
+
+    /* =========================
+       QR SAYA
+    ========================= */
+
+    function generateStudentQR() {
+
+      const qrBox = document.getElementById("studentQRCode");
+      if (!qrBox) return;
+
+      qrBox.innerHTML = "";
+
+      const studentId =
+        localStorage.getItem("studentQRId") ||
+        ("STUDENT-" + Date.now());
+
+      localStorage.setItem("studentQRId", studentId);
+
+      new QRCode(qrBox, {
+        text: studentId,
+        width: 200,
+        height: 200,
+        correctLevel: QRCode.CorrectLevel.M
+      });
+
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      generateStudentQR();
+    });
+
+    /* =========================
+       SCAN QR SISWA
+    ========================= */
+
+    let qrScanner = null;
+
+    function startQRScanner() {
+
+      const result = document.getElementById("scanResult");
+
+      if (qrScanner) {
+        result.textContent = "Scanner sudah berjalan.";
+        return;
+      }
+
+      result.textContent = "Meminta izin kamera...";
+
+      qrScanner = new Html5Qrcode("qrScanner");
+
+      qrScanner.start(
+        { facingMode: "environment" },
+        {
+          fps: 10,
+          qrbox: {
+            width: 220,
+            height: 220
+          }
+        },
+        function(decodedText) {
+          result.textContent = "QR terdeteksi.";
+
+          qrScanner.stop().then(function() {
+            qrScanner = null;
+            confirmScannedStudent(decodedText);
+          }).catch(function() {
+            qrScanner = null;
+            confirmScannedStudent(decodedText);
+          });
+        },
+        function(errorMessage) {
+          // Error scan sementara diabaikan
+        }
+      ).catch(function(error) {
+        console.error(error);
+        qrScanner = null;
+        result.textContent = "Kamera tidak dapat digunakan. Pastikan izin kamera diberikan.";
+      });
+
+    }
     
-<!-- =========================
-     FIREBASE
-========================= -->
+    function confirmScannedStudent(studentId) {
 
+      const result = document.getElementById("scanResult");
+
+      result.innerHTML = `
+        <div style="
+          font-weight:800;
+          font-size:16px;
+          color:#16a34a;
+        ">
+          ✓ QR Siswa Berhasil Dibaca
+        </div>
+
+        <div style="
+          margin-top:10px;
+          font-size:13px;
+          color:#374151;
+        ">
+          ID Siswa
+        </div>
+
+        <div style="
+          margin-top:5px;
+          padding:10px;
+          background:white;
+          border:1px solid #e5e7eb;
+          border-radius:10px;
+          font-weight:800;
+          word-break:break-all;
+        ">
+          ${studentId}
+        </div>
+
+        <div style="
+          margin-top:18px;
+          font-size:13px;
+          font-weight:800;
+          color:#374151;
+          text-align:left;
+        ">
+          Pilih Status Kehadiran
+        </div>
+
+        <div style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:10px;
+          margin-top:10px;
+        ">
+
+          <button
+            type="button"
+            onclick="recordAttendance('${studentId}', 'Hadir')"
+            style="
+              padding:13px;
+              border:1px solid #bbf7d0;
+              border-radius:12px;
+              background:#f0fdf4;
+              color:#166534;
+              font-weight:800;
+              cursor:pointer;
+            "
+          >
+            ✓ Hadir
+          </button>
+
+          <button
+            type="button"
+            onclick="recordAttendance('${studentId}', 'Terlambat')"
+            style="
+              padding:13px;
+              border:1px solid #fde68a;
+              border-radius:12px;
+              background:#fffbeb;
+              color:#92400e;
+              font-weight:800;
+              cursor:pointer;
+            "
+          >
+            ⏱ Terlambat
+          </button>
+
+          <button
+            type="button"
+            onclick="recordAttendance('${studentId}', 'Sakit')"
+            style="
+              padding:13px;
+              border:1px solid #bfdbfe;
+              border-radius:12px;
+              background:#eff6ff;
+              color:#1d4ed8;
+              font-weight:800;
+              cursor:pointer;
+            "
+          >
+            + Sakit
+          </button>
+
+          <button
+            type="button"
+            onclick="recordAttendance('${studentId}', 'Alpha')"
+            style="
+              padding:13px;
+              border:1px solid #fecaca;
+              border-radius:12px;
+              background:#fef2f2;
+              color:#b91c1c;
+              font-weight:800;
+              cursor:pointer;
+            "
+          >
+            ! Alpha
+          </button>
+
+        </div>
+      `;
+
+    }
+
+    /* =========================
+       CATAT KEHADIRAN KE FIREBASE
+    ========================= */
+
+    async function recordAttendance(studentId, status) {
+
+      const result = document.getElementById("scanResult");
+
+      if (!window.firebaseDB) {
+        result.innerHTML = `
+          <div style="color:#dc2626;font-weight:800;">
+            Firebase belum terhubung.
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        await window.firebaseAddDoc(
+          window.firebaseCollection(
+            window.firebaseDB,
+            "attendance"
+          ),
+          {
+            studentId: studentId,
+            status: status,
+            timestamp: window.firebaseServerTimestamp()
+          }
+        );
+
+        result.innerHTML = `
+          <div style="
+            padding:15px;
+            background:#dcfce7;
+            border-radius:14px;
+            color:#166534;
+            font-weight:800;
+          ">
+            ✓ Kehadiran Berhasil Dicatat
+          </div>
+
+          <div style="
+            margin-top:8px;
+            font-size:13px;
+            color:#374151;
+          ">
+            ID Siswa: <strong>${studentId}</strong>
+          </div>
+        `;
+
+      } catch (error) {
+        console.error(error);
+        result.innerHTML = `
+          <div style="
+            padding:15px;
+            background:#fee2e2;
+            border-radius:14px;
+            color:#991b1b;
+            font-weight:800;
+          ">
+            ✕ Gagal mencatat kehadiran
+          </div>
+        `;
+      }
+
+    }
+  </script>
+    
 <script type="module">
 
   import { initializeApp }
     from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
   import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
   import {
     getFirestore,
@@ -3950,79 +3110,47 @@ async function recordAttendance(studentId, status) {
 
 
   const firebaseConfig = {
-
     apiKey: "AIzaSyDUASGhLLOOH4SGFNTqvqFC9H1ym7Ry9S0",
-
-    authDomain:
-      "aplikasi-kelas-xi-final.firebaseapp.com",
-
-    projectId:
-      "aplikasi-kelas-xi-final",
-
-    storageBucket:
-      "aplikasi-kelas-xi-final.firebasestorage.app",
-
-    messagingSenderId:
-      "586744561278",
-
-    appId:
-      "1:586744561278:web:ab5f13341eedba93dde22f"
-
+    authDomain: "aplikasi-kelas-xi-final.firebaseapp.com",
+    projectId: "aplikasi-kelas-xi-final",
+    storageBucket: "aplikasi-kelas-xi-final.firebasestorage.app",
+    messagingSenderId: "586744561278",
+    appId: "1:586744561278:web:ab5f13341eedba93dde22f"
   };
 
 
-  // FIREBASE APP
   const app = initializeApp(firebaseConfig);
-
-
-  // AUTHENTICATION
   const auth = getAuth(app);
-
-
-  // FIRESTORE
   const db = getFirestore(app);
 
 
-  // DIPAKAI OLEH FILE LAIN
   window.firebaseAuth = auth;
-
-  window.firebaseSignIn =
-  signInWithEmailAndPassword;
-
-window.firebaseOnAuthStateChanged =
-  onAuthStateChanged;
-  
+  window.firebaseSignIn = signInWithEmailAndPassword;
+  window.firebaseOnAuthStateChanged = onAuthStateChanged;
   window.firebaseDB = db;
-
   window.firebaseCollection = collection;
-
   window.firebaseAddDoc = addDoc;
+  window.firebaseServerTimestamp = serverTimestamp;
 
-  window.firebaseServerTimestamp =
-    serverTimestamp;
 
+  // PENGATUR TAMPILAN BERDASARKAN STATUS LOGIN FIREBASE
+  onAuthStateChanged(auth, function(user) {
+    const loginPage = document.getElementById("loginPage");
+    const homePage = document.getElementById("homePage");
+
+    if (!loginPage) return;
+
+    if (user) {
+      loginPage.style.display = "none";
+      if (homePage) homePage.classList.add("active");
+    } else {
+      loginPage.style.display = "flex";
+      if (homePage) homePage.classList.remove("active");
+    }
+  });
 
   console.log("Firebase Auth + Firestore berhasil terhubung.");
 
-
-  </script>
-
-<script>
-document.getElementById("loginButton").addEventListener("click", function () {
-
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value;
-  const message = document.getElementById("loginMessage");
-
-  if (!email || !password) {
-    message.textContent = "Email dan password wajib diisi.";
-    return;
-  }
-
-  message.style.color = "#2563eb";
-  message.textContent = "Tombol login berhasil ditekan.";
-
-});
 </script>
   
 </body>

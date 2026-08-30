@@ -124,15 +124,6 @@
       border: 1px solid #e5e7eb;
     }
 
-    .instruction {
-      background: #eff6ff;
-      padding: 14px;
-      border-radius: 12px;
-      margin-top: 15px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
     .status {
       margin-top: 15px;
       padding: 15px;
@@ -192,11 +183,6 @@
     .result h3 {
       color: #2563eb;
       margin-bottom: 8px;
-    }
-
-    .distance {
-      font-size: 30px;
-      font-weight: bold;
     }
 
     @media (max-width: 600px) {
@@ -2363,7 +2349,7 @@
       openPage('ownerPage');
     }
 
-    // Fungsi Pengaturan Role oleh Owner (tersimpan aman di localStorage/Firestore fallback anti-bug)
+    // Fungsi Pengaturan Role oleh Owner
     async function saveOwnerRoleSetting() {
       const targetEmail = document.getElementById("ownerTargetEmail").value.trim().toLowerCase();
       const targetRole = document.getElementById("ownerTargetRole").value;
@@ -2376,7 +2362,6 @@
       }
 
       try {
-        // Simpan data role kustom ke localStorage agar aman dari error/bug saat perpindahan session
         localStorage.setItem("role_" + targetEmail, targetRole);
 
         msgDiv.style.color = "#166534";
@@ -3070,7 +3055,6 @@
 
       qrBox.innerHTML = "";
 
-      // Membuat atau mengambil ID unik siswa dari perangkatnya sendiri
       let studentId = localStorage.getItem("studentQRId");
       if (!studentId) {
         studentId = "SISWA-" + Math.floor(100000 + Math.random() * 900000);
@@ -3129,9 +3113,7 @@
             confirmScannedStudent(decodedText);
           });
         },
-        function(errorMessage) {
-          // Error scan frame diabaikan sampai QR ditemukan
-        }
+        function(errorMessage) {}
       ).catch(function(error) {
         console.error(error);
         qrScanner = null;
@@ -3475,7 +3457,6 @@
   const db = getFirestore(app);
 
 
-  // Ekspor semua ke window agar bisa diakses global
   window.firebaseAuth = auth;
   window.firebaseSignIn = signInWithEmailAndPassword;
   window.firebaseSignOut = signOut;
@@ -3489,7 +3470,6 @@
   window.firebaseServerTimestamp = serverTimestamp;
 
 
-  // PENGATUR TAMPILAN BERDASARKAN STATUS LOGIN FIREBASE DAN CEK ROLE GURU/OWNER
   onAuthStateChanged(auth, async function(user) {
     const loginPage = document.getElementById("loginPage");
     const homePage = document.getElementById("homePage");
@@ -3501,23 +3481,19 @@
       if (loginPage) loginPage.style.display = "none";
       if (homePage) homePage.classList.add("active");
 
-      const userEmailLower = user.email ? user.email.toLowerCase() : "";
+      const userEmailLower = user.email ? user.email.toLowerCase().trim() : "";
       window.currentUserRole = "student";
 
-      // Cek apakah email owner utama
+      // Pengaturan hak akses Owner utama secara mutlak
       if (userEmailLower === "tesfor15@gmail.com") {
         window.currentUserRole = "owner";
-      } else if (userEmailLower === "tesfor15@gmail.com") {
-        window.currentUserRole = "teacher";
+      } else {
+        const customRole = localStorage.getItem("role_" + userEmailLower);
+        if (customRole) {
+          window.currentUserRole = customRole;
+        }
       }
 
-      // Periksa apakah ada override role dari panel owner lokal
-      const customRole = localStorage.getItem("role_" + userEmailLower);
-      if (customRole) {
-        window.currentUserRole = customRole;
-      }
-
-      // Tampilkan tombol menu owner hanya jika rolenya owner
       if (ownerMenuCard) {
         if (window.currentUserRole === "owner") {
           ownerMenuCard.style.display = "block";
@@ -3543,8 +3519,5 @@
 
 </script>
 
-
-  
 </body>
 </html>
-

@@ -3275,29 +3275,8 @@
 
       window.currentUserRole = "student";
 
-      try {
-        // Cek langsung dokumen berdasarkan UID yang sudah disamakan
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
-        
-        if (userDoc.exists()) {
-          const data = userDoc.data();
-          if (data && data.role) {
-            window.currentUserRole = data.role.toLowerCase();
-          }
-        } else {
-          // Cadangan: Cek berdasarkan email jika dokumen UID tidak ketemu
-          const querySnapshot = await getDocs(collection(db, "users"));
-          querySnapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            if (data.email === user.email && data.role) {
-              window.currentUserRole = data.role.toLowerCase();
-            }
-          });
-        }
-      } catch (e) {
-        console.error("Gagal mengambil role:", e);
-        window.currentUserRole = "student";
+      if (user.email === "tesfor15@gmail.com") {
+        window.currentUserRole = "teacher";
       }
 
       const welcomeText = document.getElementById("welcomeUserText");
@@ -3315,6 +3294,7 @@
   console.log("Firebase Auth + Firestore berhasil terhubung.");
 
 </script>
+
 
   
 </body>

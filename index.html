@@ -287,6 +287,21 @@
           </p>
 
                 </div>
+        
+        <div
+  class="card"
+  onclick="openPage('scanQRPage')"
+>
+
+  <div class="icon">▣</div>
+
+  <h3>Scan QR</h3>
+
+  <p>
+    Scan QR siswa untuk melakukan absensi.
+  </p>
+
+        </div>
       </div>
 
     </section>
@@ -1902,6 +1917,128 @@
   <!-- QR CODE LIBRARY -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
+  
+<!-- =========================
+     SCAN QR SISWA
+========================== -->
+
+<section id="scanQRPage" class="page">
+
+  <button
+    class="back"
+    onclick="openPage('homePage')"
+  >
+    ← Kembali
+  </button>
+
+  <div class="card">
+
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        gap:14px;
+        margin-bottom:20px;
+      "
+    >
+
+      <div
+        style="
+          width:48px;
+          height:48px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background:#eff6ff;
+          border-radius:14px;
+          font-size:24px;
+        "
+      >
+        ▣
+      </div>
+
+      <div>
+
+        <h2
+          style="
+            margin:0;
+            font-size:22px;
+            font-weight:800;
+          "
+        >
+          Scan QR Siswa
+        </h2>
+
+        <p
+          style="
+            margin:4px 0 0;
+            color:#6b7280;
+            font-size:13px;
+          "
+        >
+          Arahkan kamera ke QR Code siswa
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- AREA SCANNER -->
+
+    <div
+      id="qrScanner"
+      style="
+        width:100%;
+        min-height:280px;
+        border-radius:18px;
+        overflow:hidden;
+        background:#111827;
+      "
+    >
+    </div>
+
+
+    <div
+      id="scanResult"
+      style="
+        margin-top:16px;
+        padding:14px;
+        border-radius:14px;
+        background:#f8fafc;
+        border:1px solid #e5e7eb;
+        text-align:center;
+        font-size:13px;
+        color:#6b7280;
+      "
+    >
+      Scanner belum dimulai.
+    </div>
+
+
+    <button
+      type="button"
+      onclick="startQRScanner()"
+      style="
+        width:100%;
+        margin-top:14px;
+        padding:15px;
+        border:none;
+        border-radius:14px;
+        background:#2563eb;
+        color:white;
+        font-size:14px;
+        font-weight:800;
+        cursor:pointer;
+      "
+    >
+      📷 Mulai Scan
+    </button>
+
+  </div>
+
+</section>
   
   <!-- LEAFLET JS -->
 
@@ -3068,6 +3205,70 @@ function generateStudentQR() {
 
   }
 );
+
+/* =========================
+   SCAN QR SISWA
+========================= */
+
+let qrScanner = null;
+
+function startQRScanner() {
+
+  const result =
+    document.getElementById("scanResult");
+
+  if (qrScanner) {
+    result.textContent =
+      "Scanner sudah berjalan.";
+    return;
+  }
+
+  result.textContent =
+    "Meminta izin kamera...";
+
+  qrScanner =
+    new Html5Qrcode("qrScanner");
+
+  qrScanner.start(
+    { facingMode: "environment" },
+
+    {
+      fps: 10,
+      qrbox: {
+        width: 220,
+        height: 220
+      }
+    },
+
+    function(decodedText) {
+
+      result.textContent =
+        "QR terdeteksi: " + decodedText;
+
+      qrScanner
+        .stop()
+        .then(function() {
+          qrScanner = null;
+        })
+        .catch(function() {
+          qrScanner = null;
+        });
+
+    },
+
+    function(errorMessage) {
+      // Abaikan error scan sementara
+    }
+
+  ).catch(function(error) {
+
+    qrScanner = null;
+
+    result.textContent =
+      "Kamera tidak dapat digunakan.";
+  });
+
+}
     
   </script>
 
